@@ -20,3 +20,6 @@ Fill me in please! Don’t forget code examples:
 ```
 
     2
+
+Using nbdev: https://nbdev.fast.ai/tutorials/tutorial.html Prior to
+comitting run: nbdev_prepare

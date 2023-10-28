@@ -5,4 +5,4 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://jwmatthews.github.io',
                 'git_url': 'https://github.com/jwmatthews/kyma_poc',
                 'lib_path': 'kyma_poc'},
-  'syms': {'kyma_poc.core': {'kyma_poc.core.foo': ('core.html#foo', 'kyma_poc/core.py')}}}
+  'syms': {'kyma_poc.core': {'kyma_poc.core._sanitize_output': ('core.html#_sanitize_output', 'kyma_poc/core.py')}}}
