@@ -5,4 +5,9 @@ d = { 'settings': { 'branch': 'main',
                 'doc_host': 'https://jwmatthews.github.io',
                 'git_url': 'https://github.com/jwmatthews/kyma_poc',
                 'lib_path': 'kyma_poc'},
-  'syms': {'kyma_poc.core': {'kyma_poc.core._sanitize_output': ('core.html#_sanitize_output', 'kyma_poc/core.py')}}}
+  'syms': { 'kyma_poc.core': {'kyma_poc.core._sanitize_output': ('core.html#_sanitize_output', 'kyma_poc/core.py')},
+            'kyma_poc.scm': { 'kyma_poc.scm.GitDiff': ('scm_git_diff.html#gitdiff', 'kyma_poc/scm.py'),
+                              'kyma_poc.scm.GitDiff.__init__': ('scm_git_diff.html#gitdiff.__init__', 'kyma_poc/scm.py'),
+                              'kyma_poc.scm.GitDiff.get_patch': ('scm_git_diff.html#gitdiff.get_patch', 'kyma_poc/scm.py'),
+                              'kyma_poc.scm.GitDiff.get_patch_for_file': ( 'scm_git_diff.html#gitdiff.get_patch_for_file',
+                                                                           'kyma_poc/scm.py')}}}
