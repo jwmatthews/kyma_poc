@@ -22,10 +22,22 @@ class GitDiff:
         # We need to search through the indexes to find the diff for our file_path
         patch = None
         for diff in diff_indexes:
-            print(f"'{file_path}' '{diff.a_path}' '{diff.b_path}' ")
+            #print(f"'{file_path}' '{diff.a_path}' '{diff.b_path}' ")
             if diff.a_path == file_path or diff.b_path == file_path:
-                print("Found match")
+                #print("Found match")
                 patch = diff.diff
+                patch = patch.decode('utf-8')
                 break
         return patch
+    
+    def get_file_contents(self, file_path, commit_id="HEAD"):
+        commit = self.repo.commit(commit_id)
+        tree = self.repo.tree(commit)
+        blob = tree[file_path]
+        return blob.data_stream.read().decode()
+    
+    def get_commits_for_file(self, file_path, max_count=10):
+        commits_for_file_generator = self.repo.iter_commits(all=True, max_count=max_count, paths=file_path)
+        commits_for_file = list(commits_for_file_generator)
+        return commits_for_file
 

@@ -9,23 +9,53 @@ from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, H
 from langchain.schema.output_parser import StrOutputParser
 from langchain_experimental.utilities.python import PythonREPL
 
+template = """You are an excellent enterprise architect who has an extensive
+background in helping companies rewrite their legacy Java EE applications to Quarkus.
 
-def _sanitize_output(text: str):
-    _, after = text.split("```python")
-    return after.split("```")[0]
+You will read a user's problem along with examples of how they have solved a problem in the past.
+The past examples will be presented in format of a summary of the issue along with source code of 
+that point in time along with the updated source code when the problem is fixed
 
-template = """Write some python code to solve the user's problem. 
+You will then write Quarkus code to solve their current problem.
+You will output the results in the form a diff which can be applied via 'git apply'.
 
-Return only python code in Markdown format, e.g.:
+Example #1 Issue: {example1_issue}
 
-```python
+Example #1 Original Source Code:
+{example1_original_code}
+
+Example #1 Solved Source Code:
+{example1_solved_code}
+
+Current Issue: 
+{current_issue}
+
+Current Issue Original Source Code: 
+{current_issue_original_code}
+
+Your job is to look at the 'Current Issue' and the 'Current Issue Original Source Code' 
+and rewrite the 'Current Issue Original Source Code' so the 'Current Issue' is solved 
+in a manner similar to how 'Example #1 Original Source Code' was rewritten to 
+'Example #1 Solved Source Code' 
+
+Think through the changes you will make and explain each step of the process.
+If you are unsure of what changes is needed please state you are unsure and ask 
+for clarification to help you.
+
+When you are done explaining the reasoning for each change, write the updated 
+Quarkus source code in the form of a diff which can be applied via 'git apply' 
+in Markdown format, e.g.:
+
+```java
 ....
 ```"""
-prompt = ChatPromptTemplate.from_messages(
-    [("system", template), ("human", "{input}")]
-)
 
+def _sanitize_output(text: str):
+    _, after = text.split("```java")
+    return after.split("```")[0]
+
+prompt = ChatPromptTemplate.from_template(template)
 model = ChatOpenAI()
 
-chain = prompt | model | StrOutputParser() | _sanitize_output | PythonREPL().run
+chain = prompt | model | StrOutputParser() | _sanitize_output 
 
