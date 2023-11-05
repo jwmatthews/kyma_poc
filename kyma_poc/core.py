@@ -51,11 +51,12 @@ in Markdown format, e.g.:
 ```"""
 
 def _sanitize_output(text: str):
-    _, after = text.split("```java")
-    return after.split("```")[0]
+    return text
+    #_, after = text.split("```java")
+    #return after.split("```")[0]
 
 prompt = ChatPromptTemplate.from_template(template)
-model = ChatOpenAI()
+model = ChatOpenAI(temperature=0.1, model_name="gpt-3.5-turbo-16k")
 
 chain = prompt | model | StrOutputParser() | _sanitize_output 
 
