@@ -2,7 +2,7 @@
 
 # Default variables can be overriden from environment
 : ${VM_NAME="kantra"}
-: ${MEM=4096}
+: ${MEM=8192}
 : ${CPUS=4}
 : ${DISK_SIZE=100}
 
