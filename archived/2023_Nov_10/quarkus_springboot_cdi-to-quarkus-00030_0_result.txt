@@ -1,0 +1,19 @@
+## Result:
+Based on the problem description, it seems that the `beans.xml` descriptor content is being ignored in the current Java EE application and it could be removed from the application when migrating to Quarkus. 
+
+In Quarkus, the `beans.xml` descriptor is not required as it uses a different approach for managing CDI (Contexts and Dependency Injection) features. Quarkus uses annotations and configuration properties to define and configure CDI beans.
+
+To update the current source code to work correctly with Quarkus, we need to remove the `beans.xml` file. 
+
+Here is the updated Quarkus source code for the `Current Source Code`:
+
+```diff
+- src/main/webapp/WEB-INF/beans.xml
+- None
+```
+
+Explanation: 
+- The `beans.xml` file is not required in Quarkus as it uses annotations and configuration properties for CDI.
+- By removing the `beans.xml` file, we ensure that the descriptor content is not ignored and the application can fully utilize Quarkus' CDI features.
+
+Please note that if there are any specific CDI configurations or features defined in the `beans.xml` file, they will need to be migrated to the appropriate annotations or configuration properties in the Quarkus application.

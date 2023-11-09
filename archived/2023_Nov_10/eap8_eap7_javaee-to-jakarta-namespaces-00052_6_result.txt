@@ -1,0 +1,26 @@
+## Result:
+The issue here is that the `persistence.xml` file is using the Java EE version of the XML schema, which is not compatible with Quarkus. We need to update the XML schema to the Jakarta version.
+
+To solve this problem, we can follow a similar pattern as the example problem. In the example, the `version` attribute in the root tag was updated from `2.1` to `3.0`. We can apply the same change to the `Current Source Code` to update it to work correctly with Quarkus.
+
+Here is the updated Quarkus source code for the `Current Source Code`:
+
+```diff
+  1  <?xml version="1.0" encoding="UTF-8"?>
+- 2  <persistence version="2.1"
++ 2  <persistence version="3.0"
+               xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="
+          http://xmlns.jcp.org/xml/ns/persistence
+          http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+      <persistence-unit name="primary">
+          <jta-data-source>java:jboss/datasources/CoolstoreDS</jta-data-source>
+          <properties>
+              <property name="javax.persistence.schema-generation.database.action" value="none"/>
+              <property name="hibernate.show_sql" value="false" />
+          </properties>
+      </persistence-unit>
+  </persistence>
+```
+
+In the diff above, we can see that the `version` attribute in the root tag has been updated from `2.1` to `3.0`. This change ensures that the XML schema used in the `persistence.xml` file is compatible with Quarkus.

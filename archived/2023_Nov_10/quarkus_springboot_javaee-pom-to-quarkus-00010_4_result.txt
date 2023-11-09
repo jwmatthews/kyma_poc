@@ -1,0 +1,64 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to add the Quarkus BOM (Bill of Materials) to the `pom.xml` file. The BOM will provide the version information for all the Quarkus dependencies.
+
+Here are the steps to update the 'Current Source Code':
+
+1. Open the `pom.xml` file.
+
+2. Add the following sections to the `pom.xml` file:
+
+```xml
+<properties>
+  <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
+  <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+  <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>
+</properties>
+
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>${quarkus.platform.group-id}</groupId>
+      <artifactId>${quarkus.platform.artifact-id}</artifactId>
+      <version>${quarkus.platform.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+```
+
+3. Save the `pom.xml` file.
+
+The added sections define the Quarkus BOM and import it as a dependency. This allows us to omit the version of the different Quarkus dependencies and rely on the BOM to provide the correct versions.
+
+Here is the updated 'Current Source Code' in the form of a diff:
+
+```diff
+--- pom.xml (original)
++++ pom.xml (updated)
+@@ -1,3 +1,14 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project xmlns="http://maven.apache.org/POM/4.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 
++    <properties>
++        <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
++        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
++        <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>
++    </properties>
++
++    <dependencyManagement>
++        <dependencies>
++            <dependency>
++                <groupId>${quarkus.platform.group-id}</groupId>
++                <artifactId>${quarkus.platform.artifact-id}</artifactId>
++                <version>${quarkus.platform.version}</version>
++                <type>pom</type>
++                <scope>import</scope>
++            </dependency>
++        </dependencies>
++    </dependencyManagement>
+ 
+ </project>
+```

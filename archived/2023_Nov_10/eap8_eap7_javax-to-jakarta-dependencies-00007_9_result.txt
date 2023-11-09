@@ -1,0 +1,44 @@
+## Result:
+The issue in the current source code is that it is using the `javaee-api` artifactId, which is not compatible with Quarkus. To update the artifact dependency, we need to replace the `javaee-api` artifactId with `jakarta.jakartaee-api`.
+
+Here are the steps to update the code:
+
+1. Update the `pom.xml` file.
+2. Replace the `javaee-api` artifactId with `jakarta.jakartaee-api`.
+3. Update the version of the `jakarta.jakartaee-api` dependency to the latest version compatible with Quarkus.
+
+The updated code will look like this:
+
+```diff
+  <dependencies>
+      <dependency>
+          <groupId>javax</groupId>
+-         <artifactId>javaee-web-api</artifactId>
++         <artifactId>jakarta.jakartaee-web-api</artifactId>
+          <version>7.0</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>javax</groupId>
+-         <artifactId>javaee-api</artifactId>
++         <artifactId>jakarta.jakartaee-api</artifactId>
+-         <version>7.0</version>
++         <version>8.0.0</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.flywaydb</groupId>
+          <artifactId>flyway-core</artifactId>
+          <version>4.1.2</version>
+      </dependency>
+      <dependency>
+          <groupId>org.jboss.spec.javax.rmi</groupId>
+          <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+          <version>1.0.2.Final</version>
+      </dependency>
+  </dependencies>
+```
+
+In the updated code, we have replaced the `javaee-web-api` artifactId with `jakarta.jakartaee-web-api` and the `javaee-api` artifactId with `jakarta.jakartaee-api`. We have also updated the version of the `jakarta.jakartaee-api` dependency to `8.0.0`, which is the latest version compatible with Quarkus.
+
+Please note that the version `8.0.0` is just an example and you should use the latest version available at the time of the update.

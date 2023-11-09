@@ -220,31 +220,37 @@ The current issue is that the `InventoryNotificationMDB` class is using Java EE 
 
 Here are the steps to solve the current issue:
 
-1. Remove the Java EE imports (`javax.jms`, `javax.naming`, `javax.rmi`) and replace them with the corresponding Quarkus imports (`io.smallrye.reactive.messaging.annotations`, `jakarta.inject`, `jakarta.transaction.Transactional`).
+1. Remove the Java EE imports:
+   - `javax.jms.*`
+   - `javax.naming.*`
+   - `javax.rmi.PortableRemoteObject`
+   - `java.util.Hashtable`
+   - `java.util.logging.Logger`
 
-2. Remove the `implements MessageListener` from the class declaration and replace it with the `@Incoming` annotation on the `onMessage` method. This annotation specifies the incoming channel name.
+2. Replace the `MessageListener` interface with the `io.smallrye.reactive.messaging.annotations.Incoming` annotation from Quarkus.
 
-3. Remove the `init` and `close` methods as they are not needed in Quarkus. Quarkus will handle the initialization and closing of resources automatically.
+3. Remove the `@Inject` annotations for `CatalogService` and `Logger` since Quarkus will handle the injection automatically.
 
-4. Replace the `System.out.println` statements with the `log` field provided by Quarkus. This will use the Quarkus logging system instead of printing to the console.
+4. Replace the `onMessage` method signature to accept a `String` parameter instead of `Message`.
 
-5. Update the `OrderService` and `CatalogService` injections to use the `@Inject` annotation from `jakarta.inject`.
+5. Remove the `init` and `close` methods since Quarkus will handle the lifecycle of the bean.
 
-6. Replace the `Transformers.jsonToOrder` method call with the appropriate code to deserialize the JSON string to an `Order` object. This will depend on the JSON library you are using in your Quarkus project.
-
-7. Update the logic inside the `onMessage` method to handle the inventory update. Instead of directly updating the quantity, you can use the `CatalogService` to update the inventory items.
+6. Update the logic inside the `onMessage` method to use the `CatalogService` and `Logger` beans directly.
 
 Here is the updated Quarkus source code in the form of a diff:
 
 ```diff
 --- a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 +++ b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
-@@ -1,6 +1,7 @@
- package com.redhat.coolstore.service;
+@@ -1,23 +1,20 @@
+-package com.redhat.coolstore.service;
++package com.redhat.coolstore.service;
  
 -import com.redhat.coolstore.model.Order;
-+import com.redhat.coolstore.utils.Transformers;
-+import com.redhat.coolstore.model.Order;
+-import com.redhat.coolstore.utils.Transformers;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.inject.Inject;
++import java.util.logging.Logger;
  
 -import javax.inject.Inject;
 -import javax.jms.*;
@@ -254,13 +260,10 @@ Here is the updated Quarkus source code in the form of a diff:
 -import javax.rmi.PortableRemoteObject;
 -import java.util.Hashtable;
 -import java.util.logging.Logger;
-+import jakarta.inject.Inject;
-+import jakarta.transaction.Transactional;
-+
-+import org.eclipse.microprofile.reactive.messaging.Incoming;
++import com.redhat.coolstore.model.Order;
++import com.redhat.coolstore.utils.Transformers;
 +import io.smallrye.reactive.messaging.annotations.Blocking;
-+import jakarta.enterprise.context.ApplicationScoped;
-+import java.util.logging.Logger;
++import io.smallrye.reactive.messaging.annotations.Incoming;
  
 -public class InventoryNotificationMDB implements MessageListener {
 +@ApplicationScoped
@@ -269,8 +272,10 @@ Here is the updated Quarkus source code in the form of a diff:
 -    private static final int LOW_THRESHOLD = 50;
 +    private static final int LOW_THRESHOLD = 50;
  
-     @Inject
-     private CatalogService catalogService;
+-    @Inject
+-    private CatalogService catalogService;
++    @Inject
++    private CatalogService catalogService;
  
      @Inject
      private Logger log;
@@ -334,15 +339,14 @@ Here is the updated Quarkus source code in the form of a diff:
 -        return new InitialContext(env);
 +    @Incoming("orders-incoming")
 +    @Blocking
-+    @Transactional
 +    public void onMessage(String orderStr) {
-+        log.info("Received message inventory");
-+        Order order = // Deserialize the JSON string to an Order object
++        System.out.println("received message inventory");
++        Order order = Transformers.jsonToOrder(orderStr);
 +        order.getItemList().forEach(orderItem -> {
 +            int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
 +            int new_quantity = old_quantity - orderItem.getQuantity();
 +            if (new_quantity < LOW_THRESHOLD) {
-+                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
++                System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
 +            } else {
 +                orderItem.setQuantity(new_quantity);
 +            }
@@ -351,18 +355,21 @@ Here is the updated Quarkus source code in the form of a diff:
  }
 ```
 
-Please note that the code for deserializing the JSON string to an `Order` object is missing and needs to be implemented based on the JSON library you are using in your Quarkus project.
+Please let me know if you need any further assistance.
 ### Actual Diff:
 ```
 
 --- a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 +++ b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
-@@ -1,6 +1,7 @@
- package com.redhat.coolstore.service;
+@@ -1,23 +1,20 @@
+-package com.redhat.coolstore.service;
++package com.redhat.coolstore.service;
  
 -import com.redhat.coolstore.model.Order;
-+import com.redhat.coolstore.utils.Transformers;
-+import com.redhat.coolstore.model.Order;
+-import com.redhat.coolstore.utils.Transformers;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.inject.Inject;
++import java.util.logging.Logger;
  
 -import javax.inject.Inject;
 -import javax.jms.*;
@@ -372,13 +379,10 @@ Please note that the code for deserializing the JSON string to an `Order` object
 -import javax.rmi.PortableRemoteObject;
 -import java.util.Hashtable;
 -import java.util.logging.Logger;
-+import jakarta.inject.Inject;
-+import jakarta.transaction.Transactional;
-+
-+import org.eclipse.microprofile.reactive.messaging.Incoming;
++import com.redhat.coolstore.model.Order;
++import com.redhat.coolstore.utils.Transformers;
 +import io.smallrye.reactive.messaging.annotations.Blocking;
-+import jakarta.enterprise.context.ApplicationScoped;
-+import java.util.logging.Logger;
++import io.smallrye.reactive.messaging.annotations.Incoming;
  
 -public class InventoryNotificationMDB implements MessageListener {
 +@ApplicationScoped
@@ -387,8 +391,10 @@ Please note that the code for deserializing the JSON string to an `Order` object
 -    private static final int LOW_THRESHOLD = 50;
 +    private static final int LOW_THRESHOLD = 50;
  
-     @Inject
-     private CatalogService catalogService;
+-    @Inject
+-    private CatalogService catalogService;
++    @Inject
++    private CatalogService catalogService;
  
      @Inject
      private Logger log;
@@ -452,15 +458,14 @@ Please note that the code for deserializing the JSON string to an `Order` object
 -        return new InitialContext(env);
 +    @Incoming("orders-incoming")
 +    @Blocking
-+    @Transactional
 +    public void onMessage(String orderStr) {
-+        log.info("Received message inventory");
-+        Order order = // Deserialize the JSON string to an Order object
++        System.out.println("received message inventory");
++        Order order = Transformers.jsonToOrder(orderStr);
 +        order.getItemList().forEach(orderItem -> {
 +            int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
 +            int new_quantity = old_quantity - orderItem.getQuantity();
 +            if (new_quantity < LOW_THRESHOLD) {
-+                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
++                System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
 +            } else {
 +                orderItem.setQuantity(new_quantity);
 +            }

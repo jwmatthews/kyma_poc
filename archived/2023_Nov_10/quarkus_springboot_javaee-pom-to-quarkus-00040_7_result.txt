@@ -1,0 +1,73 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to add the Maven Surefire plugin to the `pom.xml` file. 
+
+Here are the steps to update the code:
+
+1. Open the `pom.xml` file.
+
+2. Add the following sections to the `pom.xml` file:
+
+```xml
+<properties>
+    <surefire-plugin.version>3.0.0</surefire-plugin.version>
+</properties>
+
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${surefire-plugin.version}</version>
+            <configuration>
+                <systemPropertyVariables>
+                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                    <maven.home>${maven.home}</maven.home>
+                </systemPropertyVariables>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+Explanation:
+- The `<properties>` section is used to define the version of the Maven Surefire plugin.
+- The `<build>` section is used to configure the build process.
+- The `<plugins>` section is used to define the plugins used in the build process.
+- The `<plugin>` section is used to define the Maven Surefire plugin.
+- The `<artifactId>` element specifies the artifact ID of the plugin.
+- The `<version>` element specifies the version of the plugin.
+- The `<configuration>` section is used to configure the plugin.
+- The `<systemPropertyVariables>` section is used to define system properties for the plugin.
+- The `<java.util.logging.manager>` property specifies the Java Util Logging manager.
+- The `<maven.home>` property specifies the Maven home directory.
+
+Now, let's write the updated Quarkus source code for the 'Current Source Code' in the form of a 'diff':
+
+```diff
+--- pom.xml (original)
++++ pom.xml (updated)
+@@ -1,5 +1,19 @@
+ <project>
+   <modelVersion>4.0.0</modelVersion>
+ 
++  <properties>
++    <surefire-plugin.version>3.0.0</surefire-plugin.version>
++  </properties>
++
++  <build>
++    <plugins>
++      <plugin>
++        <artifactId>maven-surefire-plugin</artifactId>
++        <version>${surefire-plugin.version}</version>
++        <configuration>
++          <systemPropertyVariables>
++            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
++            <maven.home>${maven.home}</maven.home>
++          </systemPropertyVariables>
++        </configuration>
++      </plugin>
++    </plugins>
++  </build>
+ </project>
+```
+
+Please note that the above 'diff' assumes that the 'Current Source Code' does not contain any existing `<properties>`, `<build>`, or `<plugins>` sections. If these sections already exist, you can merge the changes accordingly.

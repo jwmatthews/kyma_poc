@@ -1,0 +1,88 @@
+## Result:
+The issue in the current source code is that it is using the `javax.persistence` package, which has been replaced by `jakarta.persistence` in Quarkus. To update the code to work correctly with Quarkus, we need to replace the import statement for `javax.persistence` with `jakarta.persistence`.
+
+Here is the updated Quarkus source code for the 'Current Source Code':
+
+```diff
+  1  package com.redhat.coolstore.model;
+  2  
+  3  import java.io.Serializable;
+  4  
+- 5  import javax.persistence.Column;
+- 6  import javax.persistence.Entity;
+- 7  import javax.persistence.Id;
+- 8  import javax.persistence.Table;
+- 9  import javax.persistence.UniqueConstraint;
++ 5  import jakarta.persistence.Column;
++ 6  import jakarta.persistence.Entity;
++ 7  import jakarta.persistence.Id;
++ 8  import jakarta.persistence.Table;
++ 9  import jakarta.persistence.UniqueConstraint;
+ 10  import javax.xml.bind.annotation.XmlRootElement;
+  
+ 12  @Entity
+ 13  @XmlRootElement
+ 14  @Table(name = "INVENTORY", uniqueConstraints = @UniqueConstraint(columnNames = "itemId"))
+ 15  public class InventoryEntity implements Serializable {
+ 16  
+ 17  	private static final long serialVersionUID = 7526472295622776147L; 
+ 18  
+ 19      @Id
+ 20      private String itemId;
+ 21  
+ 22  
+ 23      @Column
+ 24      private String location;
+ 25  
+ 26  
+ 27      @Column
+ 28      private int quantity;
+ 29  
+ 30  
+ 31      @Column
+ 32      private String link;
+ 33  
+ 34      public InventoryEntity() {
+ 35  
+ 36      }
+ 37  
+ 38      public String getItemId() {
+ 39  		return itemId;
+ 40  	}
+ 41  
+ 42  	public void setItemId(String itemId) {
+ 43  		this.itemId = itemId;
+ 44  	}
+ 45  
+ 46  	public String getLocation() {
+ 47  		return location;
+ 48  	}
+ 49  
+ 50  	public void setLocation(String location) {
+ 51  		this.location = location;
+ 52  	}
+ 53  
+ 54  	public int getQuantity() {
+ 55  		return quantity;
+ 56  	}
+ 57  
+ 58  	public void setQuantity(int quantity) {
+ 59  		this.quantity = quantity;
+ 60  	}
+ 61  
+ 62  	public String getLink() {
+ 63  		return link;
+ 64  	}
+ 65  
+ 66  	public void setLink(String link) {
+ 67  		this.link = link;
+ 68  	}
+ 69  
+ 70  	@Override
+ 71      public String toString() {
+ 72          return "InventoryEntity [itemId=" + itemId + ", availability=" + quantity + "/" + location + " link=" + link + "]";
+ 73      }
+ 74  }
+```
+
+In the updated code, the import statements for `javax.persistence` have been replaced with `jakarta.persistence`. This change ensures that the code is using the correct package for persistence operations in Quarkus.

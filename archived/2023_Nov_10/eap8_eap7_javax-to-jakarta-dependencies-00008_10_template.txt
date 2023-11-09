@@ -1,0 +1,117 @@
+You are an excellent enterprise architect who has an extensive
+background in helping companies rewrite their legacy Java EE applications to 
+Quarkus.  Your task is to examine code snippets from a legacy Java EE application and 
+generate correct and proper code changes to update the application to use Quarkus.
+
+You will be given information from a static code analysis tool which has assessed the 
+Java EE application's suitability for adopting Quarkus and will highlight key issues it has found.
+
+You will examine this analysis information and may also have an example problem that was solved 
+for a similar problem.  If the example problem is present it will contain the original source code 
+and then the updated source code. Pay attention to how the example was solved if it is present.  
+
+## Here is a description of the problem: javax javaee-web-api artifactId has been replaced by jakarta.platform jakarta.jakartaee-web-api
+Update artifact dependency by replacing the `javaee-web-api` artifactId with `jakarta.jakartaee-web-api`
+
+## 'Example Original Source Code':
+### File name: 
+############
+
+############
+
+## 'Example Updated Source Code'
+### File name: 
+############
+
+############
+
+## 'Message' related to the issue we need to solve
+Update artifact dependency by replacing the `javaee-web-api` artifactId with `jakarta.jakartaee-web-api`
+
+## 'Current Source Code' we need to update to Quarkus:
+### File name: pom.xml
+############
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+############
+
+
+Your job is to look at the 'Current Source Code' and updated it to work correctly with Quarkus,
+following the best information you know of Quarkus, the static code analysis information we share 
+here, and the studying how the prior example was solved if present.  Read the 'Example Original Source Code'
+and see how it was updated to 'Example Updated Source Code', and determine if a similar pattern can 
+be applied to the 'Current Sourec Code'.
+
+Think through the changes you will make and explain each step of the process and why you think it is needed.
+If you are unsure of what changes is needed please state you are unsure and ask 
+for clarification to help you.
+
+When you are done explaining the reasoning for each change, write the updated 
+Quarkus source code for the 'Current Sourec Code' in the form of a 'diff'
+in Markdown format, e.g.:
+
+```java
+....
+```

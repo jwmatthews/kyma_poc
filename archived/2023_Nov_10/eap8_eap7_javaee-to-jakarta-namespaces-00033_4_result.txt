@@ -1,0 +1,23 @@
+## Result:
+Based on the problem description, we need to replace the `version` attribute value `2.1` with `3.0` in the root tag of the `persistence.xml` file.
+
+To update the `Current Source Code` to work correctly with Quarkus, we can follow the same pattern as the example problem. 
+
+Here is the updated Quarkus source code for the `Current Source Code`:
+
+```diff
+--- a/src/main/resources/META-INF/persistence.xml
++++ b/src/main/resources/META-INF/persistence.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+-             version="2.1">
++             version="3.0">
+     <persistence-unit name="myPersistenceUnit" transaction-type="JTA">
+         <jta-data-source>java:jboss/datasources/myDataSource</jta-data-source>
+         <properties>
+```
+
+Explanation:
+- In the `persistence.xml` file, we need to update the `version` attribute value in the root tag from `2.1` to `3.0`.
+- The diff shows the changes made to the `Current Source Code` to update the `version` attribute value. The `-` symbol indicates the lines removed, and the `+` symbol indicates the lines added.

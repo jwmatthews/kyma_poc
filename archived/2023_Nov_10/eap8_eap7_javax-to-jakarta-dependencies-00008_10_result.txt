@@ -1,0 +1,41 @@
+## Result:
+The issue in the current source code is that it is using the `javax` namespace for the Java EE dependencies, which is not compatible with Quarkus. Quarkus uses the `jakarta` namespace for Jakarta EE dependencies.
+
+To update the artifact dependency, we need to replace the `javax` namespace with `jakarta` in the `pom.xml` file.
+
+Here are the steps to update the code:
+
+1. Update the `javax` namespace to `jakarta` for the `javaee-web-api` dependency:
+```diff
+  <dependencies>
+-     <dependency>
+-         <groupId>javax</groupId>
++         <groupId>jakarta</groupId>
+-         <artifactId>javaee-web-api</artifactId>
++         <artifactId>jakartaee-web-api</artifactId>
+          <version>7.0</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+-         <groupId>javax</groupId>
++         <groupId>jakarta</groupId>
+          <artifactId>javaee-api</artifactId>
+          <version>7.0</version>
+          <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.flywaydb</groupId>
+          <artifactId>flyway-core</artifactId>
+          <version>4.1.2</version>
+      </dependency>
+      <dependency>
+          <groupId>org.jboss.spec.javax.rmi</groupId>
+          <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+          <version>1.0.2.Final</version>
+      </dependency>
+  </dependencies>
+```
+
+By updating the `javax` namespace to `jakarta`, we have replaced the `javaee-web-api` artifactId with `jakartaee-web-api`, which is the correct dependency for Quarkus.
+
+This change ensures that the application uses the Jakarta EE dependencies compatible with Quarkus.

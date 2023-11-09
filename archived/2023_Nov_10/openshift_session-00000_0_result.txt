@@ -1,0 +1,26 @@
+## Result:
+Based on the provided information, it seems that the issue is related to session replication in a Java EE application. The recommendation is to re-architect the application so that sessions are stored in a cache backing service or a remote data grid. This will make the application more scalable, elastic, and able to survive node failures without losing session data.
+
+To update the current source code to work correctly with Quarkus, we need to make the following changes:
+
+1. Remove the web.xml file: Quarkus does not use web.xml for configuration. Instead, it relies on annotations and properties files for configuration.
+
+2. Configure session storage in a cache backing service or a remote data grid: Quarkus provides support for various session storage options, such as in-memory, JDBC, and distributed caches. We need to choose the appropriate session storage option based on the application's requirements and configure it in the Quarkus configuration file.
+
+Here is the updated Quarkus source code for the current source code:
+
+```diff
+- src/main/webapp/WEB-INF/web.xml
+```
+
+```java
+// src/main/resources/application.properties
+quarkus.http.session.storage=cache
+quarkus.cache.enabled=true
+quarkus.cache.caffeine.enabled=true
+quarkus.cache.caffeine.spec=maximumSize=10000,expireAfterAccess=10m
+```
+
+In the updated code, we have removed the web.xml file as it is not needed in Quarkus. Instead, we configure the session storage in the Quarkus configuration file (application.properties). We set the `quarkus.http.session.storage` property to `cache` to enable session storage in a cache backing service. We also enable the cache and configure it using the Caffeine cache implementation.
+
+Please note that the specific configuration may vary depending on the chosen session storage option and the requirements of the application. The provided example assumes the use of a cache backing service with the Caffeine cache implementation.

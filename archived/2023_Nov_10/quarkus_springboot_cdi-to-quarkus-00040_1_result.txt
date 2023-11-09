@@ -1,0 +1,40 @@
+## Result:
+The current source code is a Java class named `Producers` in the package `com.redhat.coolstore.utils`. This class is responsible for producing a `Logger` instance using the `@Produces` annotation.
+
+To update this code to work correctly with Quarkus, we need to remove the `@Produces` annotation and replace it with a `@Named` annotation on the getter method. Here are the steps to make the necessary changes:
+
+1. Remove the `@Produces` annotation from the `produceLog` method.
+2. Add the `@Named` annotation to the `produceLog` method.
+3. Rename the `produceLog` method to `getLogger`.
+4. Update the return type of the `getLogger` method to `Logger`.
+5. Remove the `InjectionPoint` parameter from the `getLogger` method.
+
+Here is the updated Quarkus source code for the `Producers` class:
+
+```diff
+ 1  package com.redhat.coolstore.utils;
+ 2  
+ 3  import javax.enterprise.inject.spi.InjectionPoint;
+ 4  import javax.inject.Named;
+ 5  import java.util.logging.Logger;
+ 6  
+ 7  
+ 8  public class Producers {
+ 9  
+10      Logger log = Logger.getLogger(Producers.class.getName());
+11  
+12-     @Produces
+13-     public Logger produceLog(InjectionPoint injectionPoint) {
+14-         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+15-     }
++     @Named
++     public Logger getLogger() {
++         return Logger.getLogger(Producers.class.getName());
++     }
+16  
+17  }
+```
+
+In the updated code, we have removed the `@Produces` annotation from the `produceLog` method and added the `@Named` annotation to the `getLogger` method. We have also renamed the method to `getLogger`, updated the return type to `Logger`, and removed the `InjectionPoint` parameter since it is no longer needed.
+
+By making these changes, the code will work correctly with Quarkus and follow the best practices for producing a `Logger` instance without using the `@Produces` annotation.

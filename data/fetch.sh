@@ -12,5 +12,13 @@ cd ..
 ### Simpler example app
 git clone https://github.com/konveyor/example-applications.git konveyor-examples
 
+
+### Spring to Quarkus
+#  Spring Music isn't able to be analyzed by Kantra as of today
+#  See: https://github.com/konveyor/kantra/issues/116
+#
+#git clone https://github.com/anurag-saran/spring-music.git spring-music-quarkus
+#git clone https://github.com/cloudfoundry-samples/spring-music.git spring-music-original
+
 popd
 

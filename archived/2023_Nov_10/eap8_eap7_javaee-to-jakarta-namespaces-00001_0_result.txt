@@ -1,0 +1,39 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to replace the Java EE namespace, schemaLocation, and version with the Jakarta equivalent.
+
+The original namespace is `http://xmlns.jcp.org/xml/ns/javaee` and the Jakarta equivalent is `https://jakarta.ee/xml/ns/jakartaee`. We also need to change the schema version number.
+
+Here are the steps to update the code:
+
+1. Replace the namespace `http://xmlns.jcp.org/xml/ns/javaee` with `https://jakarta.ee/xml/ns/jakartaee`.
+2. Change the schema version number from `beans_1_1.xsd` to the appropriate Jakarta version.
+
+The updated code will look like this:
+
+```diff
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <!--
+  3      JBoss, Home of Professional Open Source
+  4      Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
+  5      contributors by the @authors tag. See the copyright.txt in the
+  6      distribution for a full listing of individual contributors.
+  7      Licensed under the Apache License, Version 2.0 (the "License");
+  8      you may not use this file except in compliance with the License.
+  9      You may obtain a copy of the License at
+ 10      http://www.apache.org/licenses/LICENSE-2.0
+ 11      Unless required by applicable law or agreed to in writing, software
+ 12      distributed under the License is distributed on an "AS IS" BASIS,
+ 13      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ 14      See the License for the specific language governing permissions and
+ 15      limitations under the License.
+ 16  -->
+ 17  <!-- Marker file indicating CDI should be enabled -->
+ 18  <beans xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 19  	   xsi:schemaLocation="
+ 20        https://jakarta.ee/xml/ns/jakartaee
+ 21        https://jakarta.ee/xml/ns/jakartaee/beans_3_0.xsd"
+ 22  	   bean-discovery-mode="all">
+ 23  </beans>
+```
+
+In the updated code, we have replaced the Java EE namespace with the Jakarta equivalent and changed the schema version number to `beans_3_0.xsd`. This ensures that the code is compatible with Quarkus and follows the Jakarta EE standards.

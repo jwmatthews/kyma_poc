@@ -1,0 +1,24 @@
+## Result:
+The issue in the current source code is that it is using the `javax.ws.rs` package for JAX-RS annotations, which is not compatible with Quarkus. Quarkus uses the `jakarta.ws.rs` package for JAX-RS annotations.
+
+To update the code to work correctly with Quarkus, we need to replace the `javax.ws.rs` package with `jakarta.ws.rs` in the import statement.
+
+Here is the updated code:
+
+```diff
+ 1  package com.redhat.coolstore.rest;
+ 2  
+-3  import javax.ws.rs.ApplicationPath;
+-4  import javax.ws.rs.core.Application;
++3  import jakarta.ws.rs.ApplicationPath;
++4  import jakarta.ws.rs.core.Application;
+  
+ 7  @ApplicationPath("/services")
+ 8  public class RestApplication extends Application {
+ 9  
+10  }
+```
+
+In this diff, we can see that the import statements on lines 3 and 4 have been updated to use `jakarta.ws.rs` instead of `javax.ws.rs`. This change ensures that the JAX-RS annotations are compatible with Quarkus.
+
+By making this change, the code will be updated to work correctly with Quarkus.

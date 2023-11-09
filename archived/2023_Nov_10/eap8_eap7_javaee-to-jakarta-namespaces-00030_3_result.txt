@@ -1,0 +1,29 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to replace the Java EE XSD with the Jakarta equivalent and update the version attribute to "3.0". 
+
+Here are the steps to make the necessary changes:
+
+1. Replace the XSD URL in the `xsi:schemaLocation` attribute with the Jakarta Persistence XSD URL for version 3.0.
+2. Update the `version` attribute of the `persistence` element to "3.0".
+
+The updated Quarkus source code for the 'Current Source Code' would be as follows:
+
+```diff
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <persistence version="3.0"
+  3               xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  4               xsi:schemaLocation="
+  5          http://xmlns.jcp.org/xml/ns/persistence
+- 6          http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
++ 6          http://xmlns.jcp.org/xml/ns/persistence/persistence_3_0.xsd">
+  7      <persistence-unit name="primary">
+  8          <jta-data-source>java:jboss/datasources/CoolstoreDS</jta-data-source>
+  9          <properties>
+ 10              <property name="javax.persistence.schema-generation.database.action" value="none"/>
+ 11              <property name="hibernate.show_sql" value="false" />
+ 12          </properties>
+ 13      </persistence-unit>
+ 14  </persistence>
+```
+
+By updating the XSD URL and the version attribute, we ensure that the persistence.xml file is using the Jakarta Persistence XSD for version 3.0, which is compatible with Quarkus.

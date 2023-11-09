@@ -1,0 +1,41 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to replace the 'flyway-core' dependency with the Quarkus 'quarkus-flyway' extension.
+
+The 'flyway-core' dependency is typically used in Java EE applications for database migration. Quarkus provides its own extension called 'quarkus-flyway' which integrates Flyway database migration functionality into Quarkus.
+
+To update the 'Current Source Code', we need to make the following changes in the pom.xml file:
+
+1. Remove the 'flyway-core' dependency:
+```diff
+- <dependency>
+-   <groupId>org.flywaydb</groupId>
+-   <artifactId>flyway-core</artifactId>
+- </dependency>
+```
+
+2. Add the 'quarkus-flyway' extension:
+```diff
++ <dependency>
++   <groupId>io.quarkus</groupId>
++   <artifactId>quarkus-flyway</artifactId>
++ </dependency>
+```
+
+The updated pom.xml file should look like this:
+
+```xml
+<project>
+  ...
+  <dependencies>
+    ...
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-flyway</artifactId>
+    </dependency>
+    ...
+  </dependencies>
+  ...
+</project>
+```
+
+By replacing the 'flyway-core' dependency with the 'quarkus-flyway' extension, we ensure that the application uses the Quarkus-specific Flyway integration, which is optimized for Quarkus and provides seamless database migration capabilities.

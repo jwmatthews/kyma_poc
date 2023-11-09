@@ -1,0 +1,79 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to add the Maven Failsafe plugin to the `pom.xml` file. 
+
+Based on the provided information, we need to add the following sections to the `pom.xml` file:
+
+```xml
+<properties>
+    <surefire-plugin.version>3.0.0</surefire-plugin.version>
+</properties>
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${surefire-plugin.version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                    </goals>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
+                            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                            <maven.home>${maven.home}</maven.home>
+                        </systemPropertyVariables>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+This configuration adds the Maven Failsafe plugin with the specified version and defines the execution goals for integration testing and verification. It also includes the necessary configuration for system property variables related to native image path, logging manager, and Maven home.
+
+To update the 'Current Source Code' to include the Maven Failsafe plugin, we need to add the above XML code snippet to the existing `pom.xml` file.
+
+Here is the updated 'Current Source Code' in the form of a diff:
+
+```diff
+--- a/pom.xml
++++ b/pom.xml
+@@ -1,3 +1,26 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project xmlns="http://maven.apache.org/POM/4.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 
+     <!-- Existing project configuration -->
+ 
++    <properties>
++        <surefire-plugin.version>3.0.0</surefire-plugin.version>
++    </properties>
++    <build>
++        <plugins>
++            <plugin>
++                <artifactId>maven-failsafe-plugin</artifactId>
++                <version>${surefire-plugin.version}</version>
++                <executions>
++                    <execution>
++                        <goals>
++                            <goal>integration-test</goal>
++                            <goal>verify</goal>
++                        </goals>
++                        <configuration>
++                            <systemPropertyVariables>
++                                <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
++                                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
++                                <maven.home>${maven.home}</maven.home>
++                            </systemPropertyVariables>
++                        </configuration>
++                    </execution>
++                </executions>
++            </plugin>
++        </plugins>
++    </build>
+ </project>
+```

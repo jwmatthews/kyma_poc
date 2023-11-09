@@ -1,0 +1,36 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to replace the Java EE persistence namespace, schemaLocation, and version with the Jakarta equivalent.
+
+Here are the steps to update the code:
+
+1. Replace the namespace `http://xmlns.jcp.org/xml/ns/persistence` with `https://jakarta.ee/xml/ns/persistence`. This is necessary because Quarkus uses the Jakarta namespace for persistence.
+
+2. Change the schema version number from `2.1` to the appropriate Jakarta version. The exact version number will depend on the version of Jakarta Persistence being used by Quarkus.
+
+3. Remove the `xmlns:xsi` attribute as it is not required in the Jakarta namespace.
+
+4. Update the `xsi:schemaLocation` attribute to point to the correct Jakarta schema location. The schema location should be `https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_X_X.xsd`, where `X_X` represents the Jakarta version.
+
+Here is the updated code:
+
+```diff
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <persistence version="2.2"
+  3               xmlns="https://jakarta.ee/xml/ns/persistence"
+- 4               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++ 4               xsi:schemaLocation="
+- 5          http://xmlns.jcp.org/xml/ns/persistence
+- 6          http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
++ 5          https://jakarta.ee/xml/ns/persistence
++ 6          https://jakarta.ee/xml/ns/persistence/persistence_2_2.xsd">
+  7      <persistence-unit name="primary">
+  8          <jta-data-source>java:jboss/datasources/CoolstoreDS</jta-data-source>
+  9          <properties>
+ 10              <property name="javax.persistence.schema-generation.database.action" value="none"/>
+ 11              <property name="hibernate.show_sql" value="false" />
+ 12          </properties>
+ 13      </persistence-unit>
+ 14  </persistence>
+```
+
+In the updated code, we have replaced the namespace, updated the version to `2.2`, and changed the schema location to the Jakarta equivalent.

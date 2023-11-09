@@ -1,0 +1,41 @@
+## Result:
+The issue in the current source code is that it is using the `javax` groupId for the dependencies, which is not compatible with Quarkus. Quarkus uses the `jakarta.platform` groupId for Java EE dependencies.
+
+To update the code to use Quarkus, we need to replace the `javax` groupId with `jakarta.platform` for the Java EE dependencies.
+
+Here is the updated code:
+
+```diff
+  17      <dependencies>
+- 18          <dependency>
+- 19              <groupId>javax</groupId>
++ 18          <dependency>
++ 19              <groupId>jakarta.platform</groupId>
+    20              <artifactId>javaee-web-api</artifactId>
+    21              <version>7.0</version>
+    22              <scope>provided</scope>
+    23          </dependency>
+- 24          <dependency>
+- 25              <groupId>javax</groupId>
++ 24          <dependency>
++ 25              <groupId>jakarta.platform</groupId>
+    26              <artifactId>javaee-api</artifactId>
+    27              <version>7.0</version>
+    28              <scope>provided</scope>
+    29          </dependency>
+    30          <dependency>
+    31              <groupId>org.flywaydb</groupId>
+    32              <artifactId>flyway-core</artifactId>
+    33              <version>4.1.2</version>
+    34          </dependency>
+    35          <dependency>
+    36              <groupId>org.jboss.spec.javax.rmi</groupId>
+    37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+    38              <version>1.0.2.Final</version>
+    39          </dependency>
+    40      </dependencies>
+```
+
+In the updated code, we have replaced the `javax` groupId with `jakarta.platform` for the `javaee-web-api` and `javaee-api` dependencies.
+
+This change ensures that the code is compatible with Quarkus and uses the correct groupId for Java EE dependencies.

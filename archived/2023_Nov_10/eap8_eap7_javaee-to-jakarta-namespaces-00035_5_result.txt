@@ -1,0 +1,36 @@
+## Result:
+The given problem is to replace the `version` attribute value with `3.0` in the `beans_1_1.xsd` file.
+
+Looking at the provided example, it seems that we need to update the value of the `version` attribute in the root tag of the XML file.
+
+To solve this problem, we can follow a similar approach as the example:
+
+1. Open the `beans_1_1.xsd` file.
+2. Locate the root tag in the XML file.
+3. Update the value of the `version` attribute to `3.0`.
+
+Here is the updated Quarkus source code for the `beans_1_1.xsd` file:
+
+```diff
+- <?xml version="1.0" encoding="utf-8"?>
++ <?xml version="3.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="svg4242" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 200 199.7"
+	 style="enable-background:new 0 0 200 199.7;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#C32034;}
+	.st1{fill:#DB212F;}
+	.st2{fill:#EA2227;}
+	.st3{fill:#AD213A;}
+	.st4{fill:#BA2034;}
+	.st5{fill:#231F20;}
+</style>
+...
+</svg>
+```
+
+In the updated code, we have replaced the `version` attribute value with `3.0` in the root tag of the XML file.
+
+Please note that the provided example is for an SVG file, and the given problem statement mentions an XSD file. If the given problem statement is for an XSD file, the same approach can be applied to update the `version` attribute value in the root tag of the XSD file.

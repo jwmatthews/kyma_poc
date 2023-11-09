@@ -1,0 +1,71 @@
+## Result:
+To update the 'Current Source Code' to work correctly with Quarkus, we need to add the Maven Compiler plugin to the `pom.xml` file. The plugin will be responsible for compiling the Java source code and setting the compiler arguments.
+
+Here are the steps to update the 'Current Source Code':
+
+1. Open the `pom.xml` file.
+
+2. Add the following sections to the `pom.xml` file:
+
+```xml
+<properties>
+  <compiler-plugin.version>3.10.1</compiler-plugin.version>
+  <maven.compiler.release>11</maven.compiler.release>
+</properties>
+
+<build>
+  <plugins>
+    <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>${compiler-plugin.version}</version>
+      <configuration>
+        <compilerArgs>
+          <arg>-parameters</arg>
+        </compilerArgs>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
+Explanation:
+- The `<properties>` section is used to define properties that can be referenced later in the `pom.xml` file. In this case, we define the version of the compiler plugin and the Java release version.
+- The `<build>` section is used to configure the build process.
+- The `<plugins>` section contains the list of plugins to be used during the build process.
+- The `<plugin>` section defines the Maven Compiler plugin.
+- The `<artifactId>` element specifies the artifact ID of the plugin.
+- The `<version>` element references the version defined in the properties section.
+- The `<configuration>` section is used to configure the plugin.
+- The `<compilerArgs>` section is used to specify additional arguments to be passed to the compiler. In this case, we add the `-parameters` argument to enable parameter name information in the compiled bytecode.
+
+Now, let's write the updated Quarkus source code for the 'Current Source Code' in the form of a 'diff':
+
+```diff
+--- pom.xml (original)
++++ pom.xml (updated)
+@@ -1,5 +1,19 @@
+ <project>
+   <!-- project details -->
+ 
++  <properties>
++    <compiler-plugin.version>3.10.1</compiler-plugin.version>
++    <maven.compiler.release>11</maven.compiler.release>
++  </properties>
++
++  <build>
++    <plugins>
++      <plugin>
++        <artifactId>maven-compiler-plugin</artifactId>
++        <version>${compiler-plugin.version}</version>
++        <configuration>
++          <compilerArgs>
++            <arg>-parameters</arg>
++          </compilerArgs>
++        </configuration>
++      </plugin>
++    </plugins>
++  </build>
+ </project>
+```
+
+Please note that the above 'diff' assumes that the 'Current Source Code' does not contain any other relevant changes specific to Quarkus. If there are any other changes required, please provide more information or clarify the specific issues to address them accordingly.

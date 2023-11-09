@@ -1,0 +1,81 @@
+You are an excellent enterprise architect who has an extensive
+background in helping companies rewrite their legacy Java EE applications to 
+Quarkus.  Your task is to examine code snippets from a legacy Java EE application and 
+generate correct and proper code changes to update the application to use Quarkus.
+
+You will be given information from a static code analysis tool which has assessed the 
+Java EE application's suitability for adopting Quarkus and will highlight key issues it has found.
+
+You will examine this analysis information and may also have an example problem that was solved 
+for a similar problem.  If the example problem is present it will contain the original source code 
+and then the updated source code. Pay attention to how the example was solved if it is present.  
+
+## Here is a description of the problem: Rename properties prefixed by javax with jakarta 
+Rename properties prefixed by `javax` with `jakarta`
+
+## 'Example Original Source Code':
+### File name: src/main/resources/META-INF/persistence.xml
+############
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+        http://xmlns.jcp.org/xml/ns/persistence
+        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="primary">
+        <jta-data-source>java:jboss/datasources/CoolstoreDS</jta-data-source>
+        <properties>
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="hibernate.show_sql" value="false" />
+        </properties>
+    </persistence-unit>
+</persistence>
+############
+
+## 'Example Updated Source Code'
+### File name: src/main/resources/META-INF/persistence.xml
+############
+
+############
+
+## 'Message' related to the issue we need to solve
+Rename properties prefixed by `javax` with `jakarta`
+
+## 'Current Source Code' we need to update to Quarkus:
+### File name: target/classes/META-INF/persistence.xml
+############
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <persistence version="2.1"
+  3               xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  4               xsi:schemaLocation="
+  5          http://xmlns.jcp.org/xml/ns/persistence
+  6          http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  7      <persistence-unit name="primary">
+  8          <jta-data-source>java:jboss/datasources/CoolstoreDS</jta-data-source>
+  9          <properties>
+ 10              <property name="javax.persistence.schema-generation.database.action" value="none"/>
+ 11              <property name="hibernate.show_sql" value="false" />
+ 12          </properties>
+ 13      </persistence-unit>
+ 14  </persistence>
+
+############
+
+
+Your job is to look at the 'Current Source Code' and updated it to work correctly with Quarkus,
+following the best information you know of Quarkus, the static code analysis information we share 
+here, and the studying how the prior example was solved if present.  Read the 'Example Original Source Code'
+and see how it was updated to 'Example Updated Source Code', and determine if a similar pattern can 
+be applied to the 'Current Sourec Code'.
+
+Think through the changes you will make and explain each step of the process and why you think it is needed.
+If you are unsure of what changes is needed please state you are unsure and ask 
+for clarification to help you.
+
+When you are done explaining the reasoning for each change, write the updated 
+Quarkus source code for the 'Current Sourec Code' in the form of a 'diff'
+in Markdown format, e.g.:
+
+```java
+....
+```

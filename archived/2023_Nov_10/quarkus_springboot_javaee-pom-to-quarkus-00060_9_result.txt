@@ -1,0 +1,58 @@
+## Result:
+To update the `pom.xml` file to add a Maven profile for running the Quarkus native build, we need to add the following section:
+
+```xml
+<profiles>
+    <profile>
+        <id>native</id>
+        <activation>
+            <property>
+                <name>native</name>
+            </property>
+        </activation>
+        <properties>
+            <skipITs>false</skipITs>
+            <quarkus.package.type>native</quarkus.package.type>
+        </properties>
+    </profile>
+</profiles>
+```
+
+To do this, we can follow these steps:
+
+1. Open the `pom.xml` file.
+2. Locate the `<project>` tag.
+3. Inside the `<project>` tag, add the `<profiles>` section.
+4. Inside the `<profiles>` section, add the `<profile>` section.
+5. Inside the `<profile>` section, add the `<id>` tag with the value "native".
+6. Inside the `<profile>` section, add the `<activation>` section.
+7. Inside the `<activation>` section, add the `<property>` section.
+8. Inside the `<property>` section, add the `<name>` tag with the value "native".
+9. Inside the `<profile>` section, add the `<properties>` section.
+10. Inside the `<properties>` section, add the `<skipITs>` tag with the value "false".
+11. Inside the `<properties>` section, add the `<quarkus.package.type>` tag with the value "native".
+
+Here is the updated `pom.xml` file:
+
+```diff
+<project>
+    ...
++   <profiles>
++       <profile>
++           <id>native</id>
++           <activation>
++               <property>
++                   <name>native</name>
++               </property>
++           </activation>
++           <properties>
++               <skipITs>false</skipITs>
++               <quarkus.package.type>native</quarkus.package.type>
++           </properties>
++       </profile>
++   </profiles>
+    ...
+</project>
+```
+
+This will add the necessary Maven profile to run the Quarkus native build.
