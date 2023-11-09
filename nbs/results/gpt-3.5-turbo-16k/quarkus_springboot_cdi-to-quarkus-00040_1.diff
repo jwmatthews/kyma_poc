@@ -1,0 +1,22 @@
+
+ 1  package com.redhat.coolstore.utils;
+ 2  
+ 3  import javax.enterprise.inject.spi.InjectionPoint;
+ 4  import javax.inject.Named;
+ 5  import java.util.logging.Logger;
+ 6  
+ 7  
+ 8  public class Producers {
+ 9  
+10      Logger log = Logger.getLogger(Producers.class.getName());
+11  
+12-     @Produces
+13-     public Logger produceLog(InjectionPoint injectionPoint) {
+14-         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+15-     }
+16+     @Named
+17+     public Logger getLog() {
+18+         return Logger.getLogger(Producers.class.getName());
+19+     }
+20  
+21  }
