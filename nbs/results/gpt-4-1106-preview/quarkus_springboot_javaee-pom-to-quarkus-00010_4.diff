@@ -1,0 +1,18 @@
+
++ <properties>
++     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
++     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
++     <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>
++ </properties>
++ 
++ <dependencyManagement>
++     <dependencies>
++         <dependency>
++             <groupId>${quarkus.platform.group-id}</groupId>
++             <artifactId>${quarkus.platform.artifact-id}</artifactId>
++             <version>${quarkus.platform.version}</version>
++             <type>pom</type>
++             <scope>import</scope>
++         </dependency>
++     </dependencies>
++ </dependencyManagement>

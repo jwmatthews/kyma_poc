@@ -171,78 +171,78 @@ in Markdown format, e.g.:
 
 
 ## Result:
-To update the `CatalogService` class to work correctly with Quarkus, we need to follow the same pattern that was applied in the example provided. The key change is to replace the `@Stateless` annotation with a CDI scope annotation. In this case, we will use `@ApplicationScoped` to indicate that there should be only one instance of `CatalogService` for the entire application's lifecycle.
+To update the 'Current Source Code' to work correctly with Quarkus, we need to follow the pattern established in the 'Example Updated Source Code'. The key changes involve replacing the `@Stateless` annotation with a CDI scope annotation, such as `@ApplicationScoped`, and ensuring that we are using the correct imports from the `jakarta` namespace instead of the `javax` namespace, as Quarkus has adopted the Jakarta EE standards.
 
-Additionally, we should update the import statements to use the Jakarta EE 8 package names (`jakarta.*`) instead of the old Java EE package names (`javax.*`). This is because Quarkus is aligned with Jakarta EE standards.
+Here are the steps we will take to update the code:
 
-Here are the steps we will take:
+1. Replace the `@Stateless` annotation with `@ApplicationScoped` to define the bean as a CDI managed bean with application scope. This means that there will be a single instance of this bean for the duration of the application's lifecycle.
 
-1. Replace the `@Stateless` annotation with `@ApplicationScoped`.
-2. Update the import statements from `javax.*` to `jakarta.*`.
-3. Since we are using CDI, we can also replace `@Inject` with `@PersistenceContext` for the `EntityManager`. However, in Quarkus, `@Inject` is preferred for consistency and because it's more idiomatic to CDI.
+2. Update the imports from `javax` to `jakarta` for the `EntityManager`, `PersistenceContext`, and the criteria API classes. This is necessary because Quarkus uses the Jakarta EE APIs.
 
-Now, let's write the updated Quarkus source code for the 'Current Source Code':
+3. Since we are injecting a `Logger` instance, we should also update the import for `Inject` from `javax.inject.Inject` to `jakarta.inject.Inject`.
+
+Now, let's write the updated Quarkus source code for the 'Current Source Code' in the form of a diff in Markdown format:
 
 ```diff
   1  package com.redhat.coolstore.service;
   2  
   3  import java.util.List;
-  4  import java.util.logging.Logger;
-  5  
-- 6  import javax.inject.Inject;
-+ 6  import javax.inject.Inject; // This can remain as is, or be replaced with jakarta.inject.Inject if desired
-  7  
-- 8  import javax.persistence.criteria.CriteriaBuilder;
-- 9  import javax.persistence.criteria.CriteriaQuery;
--10  import javax.persistence.criteria.Root;
-+ 8  import jakarta.persistence.criteria.CriteriaBuilder;
-+ 9  import jakarta.persistence.criteria.CriteriaQuery;
-+10  import jakarta.persistence.criteria.Root;
- 11  
--12  import javax.ejb.Stateless;
--13  import javax.persistence.EntityManager;
--14  import javax.persistence.PersistenceContext;
-+12  // import javax.ejb.Stateless; // Removed as we no longer use EJB annotations
-+13  import jakarta.persistence.EntityManager;
-+14  import jakarta.enterprise.context.ApplicationScoped; // Added for CDI
- 15  
- 16  import com.redhat.coolstore.model.*;
- 17  
--18  @Stateless
-+18  @ApplicationScoped
- 19  public class CatalogService {
- 20  
- 21      @Inject
- 22      Logger log;
+  4  -import java.util.logging.Logger;
+  5  +import org.jboss.logging.Logger;
+  6  
+  7  -import javax.inject.Inject;
+  8  +import jakarta.inject.Inject;
+  9  
+ 10  -import javax.persistence.criteria.CriteriaBuilder;
+ 11  -import javax.persistence.criteria.CriteriaQuery;
+ 12  -import javax.persistence.criteria.Root;
+ 13  +import jakarta.persistence.criteria.CriteriaBuilder;
+ 14  +import jakarta.persistence.criteria.CriteriaQuery;
+ 15  +import jakarta.persistence.criteria.Root;
+ 16  
+ 17  -import javax.ejb.Stateless;
+ 18  -import javax.persistence.EntityManager;
+ 19  -import javax.persistence.PersistenceContext;
+ 20  +import jakarta.ejb.Stateless;
+ 21  +import jakarta.persistence.EntityManager;
+ 22  +import jakarta.persistence.PersistenceContext;
  23  
--24      @PersistenceContext
-+24      @Inject // Changed to @Inject for consistency with CDI in Quarkus
- 25      private EntityManager em;
- 26  
- 27      public CatalogService() {
- 28      }
+ 24  import com.redhat.coolstore.model.*;
+ 25  
+ 26  -@Stateless
+ 27  +@ApplicationScoped
+ 28  public class CatalogService {
  29  
- 30      public List<CatalogItemEntity> getCatalogItems() {
- 31          CriteriaBuilder cb = em.getCriteriaBuilder();
- 32          CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
- 33          Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
- 34          criteria.select(member);
- 35          return em.createQuery(criteria).getResultList();
- 36      }
- 37  
- 38      public CatalogItemEntity getCatalogItemById(String itemId) {
- 39          return em.find(CatalogItemEntity.class, itemId);
- 40      }
- 41  
- 42      public void updateInventoryItems(String itemId, int deducts) {
- 43          InventoryEntity inventoryEntity = getCatalogItemById(itemId).getInventory();
- 44          int currentQuantity = inventoryEntity.getQuantity();
- 45          inventoryEntity.setQuantity(currentQuantity-deducts);
- 46          em.merge(inventoryEntity);
- 47      }
- 48  
- 49  }
+ 30      @Inject
+ 31      Logger log;
+ 32  
+ 33      @PersistenceContext
+ 34      private EntityManager em;
+ 35  
+ 36      public CatalogService() {
+ 37      }
+ 38  
+ 39      public List<CatalogItemEntity> getCatalogItems() {
+ 40          CriteriaBuilder cb = em.getCriteriaBuilder();
+ 41          CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
+ 42          Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
+ 43          criteria.select(member);
+ 44          return em.createQuery(criteria).getResultList();
+ 45      }
+ 46  
+ 47      public CatalogItemEntity getCatalogItemById(String itemId) {
+ 48          return em.find(CatalogItemEntity.class, itemId);
+ 49      }
+ 50  
+ 51      public void updateInventoryItems(String itemId, int deducts) {
+ 52          InventoryEntity inventoryEntity = getCatalogItemById(itemId).getInventory();
+ 53          int currentQuantity = inventoryEntity.getQuantity();
+ 54          inventoryEntity.setQuantity(currentQuantity-deducts);
+ 55          em.merge(inventoryEntity);
+ 56      }
+ 57  
+ 58  }
 ```
 
-These changes should make the `CatalogService` class compatible with Quarkus. The `@ApplicationScoped` annotation ensures that the bean is created once for the application's lifecycle, similar to the behavior of a stateless EJB. The updated import statements ensure compatibility with Jakarta EE standards, which Quarkus follows.
+Please note that I have also updated the import for `Logger` to use `org.jboss.logging.Logger` instead of `java.util.logging.Logger`. This is because Quarkus recommends using JBoss Logging which integrates better with its runtime and provides consistent logging behavior across different environments.
 

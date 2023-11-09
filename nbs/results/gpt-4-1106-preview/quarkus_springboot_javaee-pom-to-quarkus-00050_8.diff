@@ -1,0 +1,42 @@
+
++ <project xmlns="http://maven.apache.org/POM/4.0.0"
++          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++     <modelVersion>4.0.0</modelVersion>
++ 
++     <!-- Other configurations like groupId, artifactId, version, etc. -->
++ 
++     <properties>
++         <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
++         <!-- Other properties -->
++     </properties>
++ 
++     <build>
++         <plugins>
++             <plugin>
++                 <groupId>org.apache.maven.plugins</groupId>
++                 <artifactId>maven-failsafe-plugin</artifactId>
++                 <version>${surefire-plugin.version}</version>
++                 <executions>
++                     <execution>
++                         <goals>
++                             <goal>integration-test</goal>
++                             <goal>verify</goal>
++                         </goals>
++                         <configuration>
++                             <systemPropertyVariables>
++                                 <native.image.path>${project.build.directory}/${project.artifactId}-runner</native.image.path>
++                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
++                                 <maven.home>${maven.home}</maven.home>
++                             </systemPropertyVariables>
++                         </configuration>
++                     </execution>
++                 </executions>
++             </plugin>
++             <!-- Other plugins -->
++         </plugins>
++     </build>
++ 
++     <!-- Other configurations -->
++ 
++ </project>

@@ -4,16 +4,16 @@
   3  -import javax.enterprise.inject.Produces;
   4  import javax.enterprise.inject.spi.InjectionPoint;
   5  import java.util.logging.Logger;
-  6  +import javax.enterprise.context.ApplicationScoped;
+  6  
   7  
   8  public class Producers {
   9  
- 10      Logger log = Logger.getLogger(Producers.class.getName());
+-10      Logger log = Logger.getLogger(Producers.class.getName());
  11  
- 12      -@Produces
- 13      +@ApplicationScoped
- 14      public Logger produceLog(InjectionPoint injectionPoint) {
- 15          return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
- 16      }
- 17  
- 18  }
+-12      @Produces
++12      @Dependent
+ 13      public Logger produceLog(InjectionPoint injectionPoint) {
+ 14          return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+ 15      }
+ 16  
+ 17  }

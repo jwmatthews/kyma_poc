@@ -1,0 +1,14 @@
+
+<dependencies>
+-   <!-- Remove the old Flyway core dependency -->
+-   <dependency>
+-       <groupId>org.flywaydb</groupId>
+-       <artifactId>flyway-core</artifactId>
+-       <version>YOUR_FLYWAY_VERSION</version>
+-   </dependency>
++   <!-- Add the Quarkus Flyway extension -->
++   <dependency>
++       <groupId>io.quarkus</groupId>
++       <artifactId>quarkus-flyway</artifactId>
++   </dependency>
+</dependencies>
