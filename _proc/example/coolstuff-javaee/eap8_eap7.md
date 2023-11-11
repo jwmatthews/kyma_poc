@@ -1,7 +1,7 @@
 # eap8/eap7
 ## Description
 This ruleset provides rules to support the migration to hibernate search 6.0. Developed under WINDUPRULE-900
-* Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated/quarkus
+* Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated
 * Sample application: https://github.com/deewhyweb/eap-coolstore-monolith
 ## Violations
 Number of Violations: 13

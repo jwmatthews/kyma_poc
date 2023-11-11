@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['GitDiff']
 
-# %% ../nbs/02_scm_git_diff.ipynb 12
+# %% ../nbs/02_scm_git_diff.ipynb 13
 from git import BadName, Repo
 
 class GitDiff:
@@ -40,4 +40,7 @@ class GitDiff:
         commits_for_file_generator = self.repo.iter_commits(all=True, max_count=max_count, paths=file_path)
         commits_for_file = list(commits_for_file_generator)
         return commits_for_file
+    
+    def get_commit_from_branch(self, branch_name):
+        return self.repo.heads[branch_name].commit
 

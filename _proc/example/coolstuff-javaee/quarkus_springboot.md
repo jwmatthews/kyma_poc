@@ -1,7 +1,7 @@
 # quarkus/springboot
 ## Description
 This ruleset gives hints to migrate from Spring Scheduled to Quarkus spring-scheduled extension
-* Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated/quarkus
+* Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated
 * Sample application: https://github.com/deewhyweb/eap-coolstore-monolith
 ## Violations
 Number of Violations: 13

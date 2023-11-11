@@ -1,0 +1,19 @@
+
+<project>
+  ...
+  <dependencies>
+    ...
+-   <dependency>
+-     <groupId>org.flywaydb</groupId>
+-     <artifactId>flyway-core</artifactId>
+-     <version>...</version>
+-   </dependency>
++   <dependency>
++     <groupId>io.quarkus</groupId>
++     <artifactId>quarkus-flyway</artifactId>
++     <version>...</version>
++   </dependency>
+    ...
+  </dependencies>
+  ...
+</project>

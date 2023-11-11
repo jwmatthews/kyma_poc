@@ -215,15 +215,15 @@ Quarkus source code in the form of a diff from the original file in the Markdown
 ....
 ```
 ## Result:
-To rewrite the `InventoryNotificationMDB` class to use Quarkus, we need to follow a similar approach to the one used in Example #1. The steps are as follows:
+To rewrite the `InventoryNotificationMDB` class to use Quarkus, we need to follow a similar approach to the one used in Example #1. Here are the steps we will take:
 
 1. Replace the JMS `MessageListener` interface with a method annotated with `@Incoming` to consume messages from a reactive messaging channel.
-2. Remove the JNDI and JMS setup code, as Quarkus will handle the connection to the messaging system.
-3. Use CDI (`@Inject`) to inject any required services.
-4. Add the `@ApplicationScoped` annotation to define the bean as managed by the CDI container.
-5. Use `@Blocking` to indicate that the processing is blocking and should not be done on the I/O thread.
-6. Add `@Transactional` if we want to ensure that the message processing happens within a transaction.
-7. Update any logging to use a CDI-injected `Logger` or a Quarkus logging framework.
+2. Remove the JNDI and JMS setup code, as Quarkus will manage the message consumption.
+3. Use `@ApplicationScoped` to define the bean's lifecycle.
+4. Use `@Blocking` to indicate that the processing is not non-blocking and should be executed on a worker thread.
+5. Inject a `Logger` using CDI instead of using `java.util.logging.Logger` directly.
+6. Remove the `init` and `close` methods as they are no longer needed.
+7. Update the package imports to use Jakarta EE 8 APIs and Quarkus-specific annotations.
 
 Here is the diff of the changes:
 
@@ -241,10 +241,11 @@ import com.redhat.coolstore.utils.Transformers;
 -import javax.rmi.PortableRemoteObject;
 +import jakarta.inject.Inject;
 +import org.eclipse.microprofile.reactive.messaging.Incoming;
+-import java.util.Hashtable;
+-import java.util.logging.Logger;
++import org.jboss.logging.Logger;
 +import io.smallrye.reactive.messaging.annotations.Blocking;
 +import jakarta.enterprise.context.ApplicationScoped;
-+import jakarta.transaction.Transactional;
-import java.util.logging.Logger;
 
 -public class InventoryNotificationMDB implements MessageListener {
 +@ApplicationScoped
@@ -266,9 +267,8 @@ import java.util.logging.Logger;
 -    private TopicSubscriber tsubscriber;
 
 -    public void onMessage(Message rcvMessage) {
-+    @Incoming("inventory-incoming")
++    @Incoming("orders-incoming")
 +    @Blocking
-+    @Transactional
 +    public void onMessage(String orderStr) {
 -        TextMessage msg;
          try {
@@ -287,8 +287,10 @@ import java.util.logging.Logger;
                      }
                  });
 -            }
-         } catch (Exception e) {
-             log.severe("An exception occurred: " + e.getMessage());
+-        } catch (JMSException jmse) {
+-            System.err.println("An exception occurred: " + jmse.getMessage());
++        } catch (Exception e) {
++            log.error("An exception occurred: ", e);
          }
      }
 
@@ -319,15 +321,9 @@ import java.util.logging.Logger;
 }
 ```
 
-Please note that the `@Incoming` value (`"inventory-incoming"`) should match the name of the channel configured in your `application.properties` file for the incoming messages. Also, the exception handling has been simplified to catch all exceptions and log them, which you might want to customize based on your specific error handling policies.
+Please note that the `@Incoming` annotation value `"orders-incoming"` should match the name of the channel configured in your `application.properties` file for the incoming messages. Adjust this value according to your actual configuration.
 
-The `@Transactional` annotation is optional and should be included only if you want the method to be executed within a transaction context. If your message processing does not require a transaction, you can omit this annotation.
-
-The `@Blocking` annotation is used to indicate that the method contains blocking I/O operations and should not be executed on the event loop (I/O) thread. Quarkus will offload the execution to a worker thread pool.
-
-The `@ApplicationScoped` annotation indicates that the bean is application-scoped, which means that it is created once for the duration of the application and shared across all requests.
-
-The `Logger` should be injected using CDI or created using a Quarkus logging framework, such as JBoss Logging. The `System.out.println` and `System.err.println` statements have been replaced with proper logging statements using the injected `Logger`.
+Also, the exception handling has been simplified to catch a generic `Exception` and log it using the injected `Logger`. This is because we no longer deal with `JMSException` specifically, as the Quarkus framework abstracts away the underlying messaging system details.
 ### Actual Diff:
 ```
 
@@ -344,10 +340,11 @@ import com.redhat.coolstore.utils.Transformers;
 -import javax.rmi.PortableRemoteObject;
 +import jakarta.inject.Inject;
 +import org.eclipse.microprofile.reactive.messaging.Incoming;
+-import java.util.Hashtable;
+-import java.util.logging.Logger;
++import org.jboss.logging.Logger;
 +import io.smallrye.reactive.messaging.annotations.Blocking;
 +import jakarta.enterprise.context.ApplicationScoped;
-+import jakarta.transaction.Transactional;
-import java.util.logging.Logger;
 
 -public class InventoryNotificationMDB implements MessageListener {
 +@ApplicationScoped
@@ -369,9 +366,8 @@ import java.util.logging.Logger;
 -    private TopicSubscriber tsubscriber;
 
 -    public void onMessage(Message rcvMessage) {
-+    @Incoming("inventory-incoming")
++    @Incoming("orders-incoming")
 +    @Blocking
-+    @Transactional
 +    public void onMessage(String orderStr) {
 -        TextMessage msg;
          try {
@@ -390,8 +386,10 @@ import java.util.logging.Logger;
                      }
                  });
 -            }
-         } catch (Exception e) {
-             log.severe("An exception occurred: " + e.getMessage());
+-        } catch (JMSException jmse) {
+-            System.err.println("An exception occurred: " + jmse.getMessage());
++        } catch (Exception e) {
++            log.error("An exception occurred: ", e);
          }
      }
 

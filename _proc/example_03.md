@@ -227,30 +227,55 @@ Here are the steps to solve the current issue:
    - `java.util.Hashtable`
    - `java.util.logging.Logger`
 
-2. Replace the `MessageListener` interface with the `io.smallrye.reactive.messaging.annotations.Incoming` annotation from Quarkus.
+2. Add the necessary Quarkus imports:
+   - `jakarta.inject.Inject`
+   - `jakarta.enterprise.context.ApplicationScoped`
+   - `jakarta.jms.Message`
+   - `jakarta.jms.MessageListener`
+   - `jakarta.jms.TextMessage`
+   - `jakarta.transaction.Transactional`
+   - `org.eclipse.microprofile.reactive.messaging.Incoming`
+   - `io.smallrye.reactive.messaging.annotations.Blocking`
 
-3. Remove the `@Inject` annotations for `CatalogService` and `Logger` since Quarkus will handle the injection automatically.
+3. Annotate the class with `@ApplicationScoped` to make it a CDI bean.
 
-4. Replace the `onMessage` method signature to accept a `String` parameter instead of `Message`.
+4. Remove the `init()` and `close()` methods as they are not needed in Quarkus.
 
-5. Remove the `init` and `close` methods since Quarkus will handle the lifecycle of the bean.
+5. Replace the `onMessage()` method signature to accept a `String` parameter instead of a `Message` parameter.
 
-6. Update the logic inside the `onMessage` method to use the `CatalogService` and `Logger` beans directly.
+6. Replace the `System.out.println()` statements with `log.info()` statements to use the injected `Logger` instance.
+
+7. Replace the `Transformers.jsonToOrder()` method call with the appropriate code to deserialize the JSON string to an `Order` object.
+
+8. Replace the `catalogService.getCatalogItemById()` method call with the appropriate code to retrieve the catalog item by ID.
+
+9. Replace the `orderItem.setQuantity()` statement with the appropriate code to update the quantity of the catalog item.
+
+10. Annotate the `onMessage()` method with `@Incoming("orders-incoming")` to specify the incoming channel.
+
+11. Annotate the `onMessage()` method with `@Blocking` to indicate that the method should be executed in a blocking manner.
+
+12. Annotate the `onMessage()` method with `@Transactional` to ensure that the method is executed within a transaction.
 
 Here is the updated Quarkus source code in the form of a diff:
 
 ```diff
+diff --git a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
+index 1234567..abcdefg 100644
 --- a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 +++ b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
-@@ -1,23 +1,20 @@
+@@ -1,30 +1,29 @@
 -package com.redhat.coolstore.service;
 +package com.redhat.coolstore.service;
  
 -import com.redhat.coolstore.model.Order;
 -import com.redhat.coolstore.utils.Transformers;
-+import jakarta.enterprise.context.ApplicationScoped;
 +import jakarta.inject.Inject;
-+import java.util.logging.Logger;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.jms.Message;
++import jakarta.jms.MessageListener;
++import jakarta.jms.TextMessage;
++import jakarta.transaction.Transactional;
  
 -import javax.inject.Inject;
 -import javax.jms.*;
@@ -262,23 +287,20 @@ Here is the updated Quarkus source code in the form of a diff:
 -import java.util.logging.Logger;
 +import com.redhat.coolstore.model.Order;
 +import com.redhat.coolstore.utils.Transformers;
-+import io.smallrye.reactive.messaging.annotations.Blocking;
-+import io.smallrye.reactive.messaging.annotations.Incoming;
  
 -public class InventoryNotificationMDB implements MessageListener {
 +@ApplicationScoped
-+public class InventoryNotificationMDB {
++public class InventoryNotificationMDB implements MessageListener {
  
 -    private static final int LOW_THRESHOLD = 50;
 +    private static final int LOW_THRESHOLD = 50;
  
--    @Inject
--    private CatalogService catalogService;
-+    @Inject
-+    private CatalogService catalogService;
+     @Inject
+     private CatalogService catalogService;
  
      @Inject
-     private Logger log;
+-    private Logger log;
++    private org.jboss.logging.Logger log;
  
 -    private final static String JNDI_FACTORY = "weblogic.jndi.WLInitialContextFactory";
 -    private final static String JMS_FACTORY = "TCF";
@@ -286,90 +308,45 @@ Here is the updated Quarkus source code in the form of a diff:
 -    private TopicConnection tcon;
 -    private TopicSession tsession;
 -    private TopicSubscriber tsubscriber;
--
--    public void onMessage(Message rcvMessage) {
--        TextMessage msg;
--        {
--            try {
--                System.out.println("received message inventory");
--                if (rcvMessage instanceof TextMessage) {
--                    msg = (TextMessage) rcvMessage;
--                    String orderStr = msg.getBody(String.class);
--                    Order order = Transformers.jsonToOrder(orderStr);
--                    order.getItemList().forEach(orderItem -> {
--                        int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
--                        int new_quantity = old_quantity - orderItem.getQuantity();
--                        if (new_quantity < LOW_THRESHOLD) {
--                            System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
--                        } else {
--                            orderItem.setQuantity(new_quantity);
--                        }
--                    });
--                }
--
--
--            } catch (JMSException jmse) {
--                System.err.println("An exception occurred: " + jmse.getMessage());
--            }
--        }
--    }
--
--    public void init() throws NamingException, JMSException {
--        Context ctx = getInitialContext();
--        TopicConnectionFactory tconFactory = (TopicConnectionFactory) PortableRemoteObject.narrow(ctx.lookup(JMS_FACTORY), TopicConnectionFactory.class);
--        tcon = tconFactory.createTopicConnection();
--        tsession = tcon.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
--        Topic topic = (Topic) PortableRemoteObject.narrow(ctx.lookup(TOPIC), Topic.class);
--        tsubscriber = tsession.createSubscriber(topic);
--        tsubscriber.setMessageListener(this);
--        tcon.start();
--    }
--
--    public void close() throws JMSException {
--        tsubscriber.close();
--        tsession.close();
--        tcon.close();
--    }
--
--    private static InitialContext getInitialContext() throws NamingException {
--        Hashtable<String, String> env = new Hashtable<>();
--        env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
--        env.put(Context.PROVIDER_URL, "t3://localhost:7001");
--        env.put("weblogic.jndi.createIntermediateContexts", "true");
--        return new InitialContext(env);
 +    @Incoming("orders-incoming")
 +    @Blocking
++    @Transactional
 +    public void onMessage(String orderStr) {
-+        System.out.println("received message inventory");
++        log.info("Received message inventory");
 +        Order order = Transformers.jsonToOrder(orderStr);
 +        order.getItemList().forEach(orderItem -> {
 +            int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
 +            int new_quantity = old_quantity - orderItem.getQuantity();
 +            if (new_quantity < LOW_THRESHOLD) {
-+                System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
++                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
 +            } else {
 +                orderItem.setQuantity(new_quantity);
 +            }
 +        });
-     }
++    }
  }
 ```
 
-Please let me know if you need any further assistance.
+Please note that the `org.jboss.logging.Logger` import may need to be adjusted based on the actual logger implementation used in your Quarkus project.
 ### Actual Diff:
 ```
 
+diff --git a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
+index 1234567..abcdefg 100644
 --- a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 +++ b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
-@@ -1,23 +1,20 @@
+@@ -1,30 +1,29 @@
 -package com.redhat.coolstore.service;
 +package com.redhat.coolstore.service;
  
 -import com.redhat.coolstore.model.Order;
 -import com.redhat.coolstore.utils.Transformers;
-+import jakarta.enterprise.context.ApplicationScoped;
 +import jakarta.inject.Inject;
-+import java.util.logging.Logger;
++import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.jms.Message;
++import jakarta.jms.MessageListener;
++import jakarta.jms.TextMessage;
++import jakarta.transaction.Transactional;
  
 -import javax.inject.Inject;
 -import javax.jms.*;
@@ -381,23 +358,20 @@ Please let me know if you need any further assistance.
 -import java.util.logging.Logger;
 +import com.redhat.coolstore.model.Order;
 +import com.redhat.coolstore.utils.Transformers;
-+import io.smallrye.reactive.messaging.annotations.Blocking;
-+import io.smallrye.reactive.messaging.annotations.Incoming;
  
 -public class InventoryNotificationMDB implements MessageListener {
 +@ApplicationScoped
-+public class InventoryNotificationMDB {
++public class InventoryNotificationMDB implements MessageListener {
  
 -    private static final int LOW_THRESHOLD = 50;
 +    private static final int LOW_THRESHOLD = 50;
  
--    @Inject
--    private CatalogService catalogService;
-+    @Inject
-+    private CatalogService catalogService;
+     @Inject
+     private CatalogService catalogService;
  
      @Inject
-     private Logger log;
+-    private Logger log;
++    private org.jboss.logging.Logger log;
  
 -    private final static String JNDI_FACTORY = "weblogic.jndi.WLInitialContextFactory";
 -    private final static String JMS_FACTORY = "TCF";
@@ -405,72 +379,22 @@ Please let me know if you need any further assistance.
 -    private TopicConnection tcon;
 -    private TopicSession tsession;
 -    private TopicSubscriber tsubscriber;
--
--    public void onMessage(Message rcvMessage) {
--        TextMessage msg;
--        {
--            try {
--                System.out.println("received message inventory");
--                if (rcvMessage instanceof TextMessage) {
--                    msg = (TextMessage) rcvMessage;
--                    String orderStr = msg.getBody(String.class);
--                    Order order = Transformers.jsonToOrder(orderStr);
--                    order.getItemList().forEach(orderItem -> {
--                        int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
--                        int new_quantity = old_quantity - orderItem.getQuantity();
--                        if (new_quantity < LOW_THRESHOLD) {
--                            System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
--                        } else {
--                            orderItem.setQuantity(new_quantity);
--                        }
--                    });
--                }
--
--
--            } catch (JMSException jmse) {
--                System.err.println("An exception occurred: " + jmse.getMessage());
--            }
--        }
--    }
--
--    public void init() throws NamingException, JMSException {
--        Context ctx = getInitialContext();
--        TopicConnectionFactory tconFactory = (TopicConnectionFactory) PortableRemoteObject.narrow(ctx.lookup(JMS_FACTORY), TopicConnectionFactory.class);
--        tcon = tconFactory.createTopicConnection();
--        tsession = tcon.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
--        Topic topic = (Topic) PortableRemoteObject.narrow(ctx.lookup(TOPIC), Topic.class);
--        tsubscriber = tsession.createSubscriber(topic);
--        tsubscriber.setMessageListener(this);
--        tcon.start();
--    }
--
--    public void close() throws JMSException {
--        tsubscriber.close();
--        tsession.close();
--        tcon.close();
--    }
--
--    private static InitialContext getInitialContext() throws NamingException {
--        Hashtable<String, String> env = new Hashtable<>();
--        env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
--        env.put(Context.PROVIDER_URL, "t3://localhost:7001");
--        env.put("weblogic.jndi.createIntermediateContexts", "true");
--        return new InitialContext(env);
 +    @Incoming("orders-incoming")
 +    @Blocking
++    @Transactional
 +    public void onMessage(String orderStr) {
-+        System.out.println("received message inventory");
++        log.info("Received message inventory");
 +        Order order = Transformers.jsonToOrder(orderStr);
 +        order.getItemList().forEach(orderItem -> {
 +            int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
 +            int new_quantity = old_quantity - orderItem.getQuantity();
 +            if (new_quantity < LOW_THRESHOLD) {
-+                System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
++                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
 +            } else {
 +                orderItem.setQuantity(new_quantity);
 +            }
 +        });
-     }
++    }
  }
 
 ```

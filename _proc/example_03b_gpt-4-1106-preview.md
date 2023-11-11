@@ -218,12 +218,12 @@ Quarkus source code in the form of a diff from the original file in the Markdown
 To rewrite the `InventoryNotificationMDB` class to use Quarkus, we need to follow a similar approach to the one used in Example #1. Here are the steps we will take:
 
 1. Replace the JMS `MessageListener` interface with a method annotated with `@Incoming` to consume messages from a reactive messaging channel.
-2. Remove the JNDI and JMS setup code, as Quarkus will handle the connection to the messaging system.
-3. Use CDI (`@Inject`) to inject any required services.
-4. Add `@ApplicationScoped` to define the bean as application-scoped.
-5. Use `@Blocking` to indicate that the processing is blocking and should not be done on the I/O thread.
+2. Remove the JNDI and JMS setup code, as Quarkus will manage the message consumption.
+3. Use `@ApplicationScoped` to define the bean's lifecycle.
+4. Use `@Blocking` to indicate that the processing is not non-blocking and should be executed on a worker thread.
+5. Inject a `Logger` using CDI instead of using `java.util.logging.Logger` directly.
 6. Remove the `init` and `close` methods as they are no longer needed.
-7. Update the logging to use a Quarkus-compatible logger.
+7. Update the package imports to use Jakarta EE 8 APIs and Quarkus-specific annotations.
 
 Here is the diff of the changes:
 
@@ -267,35 +267,31 @@ import com.redhat.coolstore.utils.Transformers;
 -    private TopicSubscriber tsubscriber;
 
 -    public void onMessage(Message rcvMessage) {
-+    @Incoming("inventory-incoming")
++    @Incoming("orders-incoming")
 +    @Blocking
 +    public void onMessage(String orderStr) {
 -        TextMessage msg;
--        {
--            try {
--                System.out.println("received message inventory");
--                if (rcvMessage instanceof TextMessage) {
--                    msg = (TextMessage) rcvMessage;
--                    String orderStr = msg.getBody(String.class);
-+        log.info("received message inventory");
-         Order order = Transformers.jsonToOrder(orderStr);
-         order.getItemList().forEach(orderItem -> {
-             int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
-             int new_quantity = old_quantity - orderItem.getQuantity();
-             if (new_quantity < LOW_THRESHOLD) {
--                System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-+                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-             } else {
-                 orderItem.setQuantity(new_quantity);
-             }
-         });
--                }
--
--
--            } catch (JMSException jmse) {
--                System.err.println("An exception occurred: " + jmse.getMessage());
+         try {
+             System.out.println("received message inventory");
+-            if (rcvMessage instanceof TextMessage) {
+-                msg = (TextMessage) rcvMessage;
+-                String orderStr = msg.getBody(String.class);
+                 Order order = Transformers.jsonToOrder(orderStr);
+                 order.getItemList().forEach(orderItem -> {
+                     int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
+                     int new_quantity = old_quantity - orderItem.getQuantity();
+                     if (new_quantity < LOW_THRESHOLD) {
+                         System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
+                     } else {
+                         orderItem.setQuantity(new_quantity);
+                     }
+                 });
 -            }
--        }
+-        } catch (JMSException jmse) {
+-            System.err.println("An exception occurred: " + jmse.getMessage());
++        } catch (Exception e) {
++            log.error("An exception occurred: ", e);
+         }
      }
 
 -    public void init() throws NamingException, JMSException {
@@ -325,9 +321,9 @@ import com.redhat.coolstore.utils.Transformers;
 }
 ```
 
-Please note that the `@Incoming` value (`"inventory-incoming"`) should match the channel name configured in your `application.properties` file for the incoming messages. Adjust the channel name as necessary to fit your configuration.
+Please note that the `@Incoming` annotation value `"orders-incoming"` should match the name of the channel configured in your `application.properties` file for the incoming messages. Adjust this value according to your actual configuration.
 
-Also, ensure that the `Logger` is injected correctly and that the `CatalogService` is available in the Quarkus context. If `CatalogService` is not a CDI bean, you will need to make it one by adding the appropriate scope annotation (e.g., `@ApplicationScoped`) to its class definition.
+Also, the exception handling has been simplified to catch a generic `Exception` and log it using the injected `Logger`. This is because we no longer deal with `JMSException` specifically, as the Quarkus framework abstracts away the underlying messaging system details.
 ### Actual Diff:
 ```
 
@@ -370,35 +366,31 @@ import com.redhat.coolstore.utils.Transformers;
 -    private TopicSubscriber tsubscriber;
 
 -    public void onMessage(Message rcvMessage) {
-+    @Incoming("inventory-incoming")
++    @Incoming("orders-incoming")
 +    @Blocking
 +    public void onMessage(String orderStr) {
 -        TextMessage msg;
--        {
--            try {
--                System.out.println("received message inventory");
--                if (rcvMessage instanceof TextMessage) {
--                    msg = (TextMessage) rcvMessage;
--                    String orderStr = msg.getBody(String.class);
-+        log.info("received message inventory");
-         Order order = Transformers.jsonToOrder(orderStr);
-         order.getItemList().forEach(orderItem -> {
-             int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
-             int new_quantity = old_quantity - orderItem.getQuantity();
-             if (new_quantity < LOW_THRESHOLD) {
--                System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-+                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-             } else {
-                 orderItem.setQuantity(new_quantity);
-             }
-         });
--                }
--
--
--            } catch (JMSException jmse) {
--                System.err.println("An exception occurred: " + jmse.getMessage());
+         try {
+             System.out.println("received message inventory");
+-            if (rcvMessage instanceof TextMessage) {
+-                msg = (TextMessage) rcvMessage;
+-                String orderStr = msg.getBody(String.class);
+                 Order order = Transformers.jsonToOrder(orderStr);
+                 order.getItemList().forEach(orderItem -> {
+                     int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
+                     int new_quantity = old_quantity - orderItem.getQuantity();
+                     if (new_quantity < LOW_THRESHOLD) {
+                         System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
+                     } else {
+                         orderItem.setQuantity(new_quantity);
+                     }
+                 });
 -            }
--        }
+-        } catch (JMSException jmse) {
+-            System.err.println("An exception occurred: " + jmse.getMessage());
++        } catch (Exception e) {
++            log.error("An exception occurred: ", e);
+         }
      }
 
 -    public void init() throws NamingException, JMSException {

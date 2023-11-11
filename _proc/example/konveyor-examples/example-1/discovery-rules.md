@@ -1,7 +1,7 @@
 # discovery-rules
 ## Description
 
-* Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated/quarkus
+* Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated
 * Sample application: https://github.com/deewhyweb/eap-coolstore-monolith
 ## Violations
 Number of Violations: 1
