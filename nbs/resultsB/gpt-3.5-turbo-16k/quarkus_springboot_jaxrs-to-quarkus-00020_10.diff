@@ -1,1 +1,12 @@
-Error: Unable to extract diff
+
+ package com.redhat.coolstore.rest;
+ 
+-import javax.ws.rs.ApplicationPath;
+-import javax.ws.rs.core.Application;
++import io.quarkus.runtime.annotations.RegisterForReflection;
++import javax.ws.rs.core.Application;
+ 
++@RegisterForReflection
+ public class RestApplication extends Application {
+ 
+ }

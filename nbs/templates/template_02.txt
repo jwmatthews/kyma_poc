@@ -62,8 +62,11 @@ for clarification to help you.
 
 When you are done explaining the reasoning for each change, write the updated 
 Quarkus source code for the 'Source Code to Update' in the form of a diff
-in Markdown format, e.g.:
+in Markdown format as the below:
 
+## Result
 ```diff
  ...
 ```
+
+Ensure that you begin the result with the markdown header of: ## Result

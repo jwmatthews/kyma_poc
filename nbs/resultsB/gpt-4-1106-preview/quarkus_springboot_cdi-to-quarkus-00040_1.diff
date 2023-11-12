@@ -1,17 +1,19 @@
 
 package com.redhat.coolstore.utils;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
+-import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.logging.Logger;
 
-@ApplicationScoped
 public class Producers {
 
-    @Produces
-    @Named
+    Logger log = Logger.getLogger(Producers.class.getName());
+
+-   @Produces
++   @Singleton
++   @Named("logger")
     public Logger produceLog(InjectionPoint injectionPoint) {
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }

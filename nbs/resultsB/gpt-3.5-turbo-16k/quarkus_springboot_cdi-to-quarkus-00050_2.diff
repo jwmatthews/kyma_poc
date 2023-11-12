@@ -1,1 +1,30 @@
-Error: Unable to extract diff
+
+-import javax.ejb.Stateless;
++import javax.enterprise.context.ApplicationScoped;
+-import javax.persistence.EntityManager;
+-import javax.persistence.PersistenceContext;
+-import javax.persistence.criteria.CriteriaBuilder;
+-import javax.persistence.criteria.CriteriaQuery;
+-import javax.persistence.criteria.Root;
++import javax.inject.Inject;
++import javax.persistence.EntityManager;
++import javax.persistence.criteria.CriteriaBuilder;
++import javax.persistence.criteria.CriteriaQuery;
++import javax.persistence.criteria.Root;
+
+@ApplicationScoped
+public class CatalogService {
+
+    @Inject
+    Logger log;
+
+    @Inject
+    private EntityManager em;
+
+    public CatalogService() {
+    }
+
+    public List<CatalogItemEntity> getCatalogItems() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
+        Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);

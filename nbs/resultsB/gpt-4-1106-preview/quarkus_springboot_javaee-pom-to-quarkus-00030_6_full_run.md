@@ -1,4 +1,4 @@
-# Ruleset Violation: 'quarkus/springboot' 'quarkus-flyway-00010'
+# Ruleset Violation: 'quarkus/springboot' 'javaee-pom-to-quarkus-00030'
 ## Prompt:
 You are an excellent enterprise architect who has an extensive
 background in helping companies rewrite their legacy Java EE applications to 
@@ -55,13 +55,13 @@ issue we need to address when we rewrite the source code to Quarkus
 
 ### 'Description' of the problem: 
 ```
-Replace the 'flyway-core' dependency with Quarkus 'quarkus-flyway' extension
-Replace the `org.flywaydb:flyway-core` dependency with the Quarkus dependency `io.quarkus:quarkus-flyway`. Further information in the link below.
+Adopt Maven Compiler plugin
+
 ```
 
 ### 'Message' related to the issue we need to solve
 ```
-Replace the `org.flywaydb:flyway-core` dependency with the Quarkus dependency `io.quarkus:quarkus-flyway`. Further information in the link below.
+Use the Maven Compiler plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <compiler-plugin.version>3.10.1</compiler-plugin.version>. <maven.compiler.release>11</maven.compiler.release>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-compiler-plugin</artifactId>. <version>$</version>. <configuration>. <compilerArgs>. <arg>-parameters</arg>. </compilerArgs>. </configuration>. </plugin>. </plugins>. </build>. ```
 ```
 
 ### 'Solved Problem'
@@ -105,6 +105,20 @@ Ensure that you begin the result with the markdown header of: ## Result
 
 
 ## Result:
+To update the legacy Java EE application to use Quarkus, we need to make several changes to the `pom.xml` file. The static code analysis information indicates that we should adopt the Maven Compiler plugin with specific configurations. This is important because Quarkus requires Java 11 or later, and we need to ensure that the Maven build is set up to compile the application using the correct Java version and with the necessary compiler arguments.
+
+Since there is no 'Solved Example Problem Diff' provided, I will proceed with the information given in the 'Description' and 'Message' to update the `pom.xml` file.
+
+Here are the steps we need to take:
+
+1. Change the packaging type from `war` to `jar` because Quarkus applications are typically packaged as JARs.
+2. Remove the Java EE dependencies as Quarkus provides its own set of APIs and dependencies.
+3. Add the Quarkus BOM (Bill of Materials) to manage the versions of Quarkus dependencies.
+4. Add the Maven Compiler plugin with the specified version and configuration to ensure the application is compiled with Java 11 and supports method parameter reflection.
+5. Add the Quarkus Maven plugin to build and package the application.
+
+Let's write the updated `pom.xml` in the form of a diff:
+
 ## Result
 ```diff
 <?xml version="1.0" encoding="UTF-8"?>
@@ -115,46 +129,66 @@ Ensure that you begin the result with the markdown header of: ## Result
     <groupId>com.redhat.coolstore</groupId>
     <artifactId>monolith</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+-   <packaging>war</packaging>
++   <packaging>jar</packaging>
     <name>coolstore-monolith</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
         <project.encoding>UTF-8</project.encoding>
         <maven.test.skip>true</maven.test.skip>
++       <compiler-plugin.version>3.10.1</compiler-plugin.version>
++       <maven.compiler.release>11</maven.compiler.release>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
--        <dependency>
--            <groupId>org.flywaydb</groupId>
--            <artifactId>flyway-core</artifactId>
--            <version>6.0.8</version>
--        </dependency>
-+        <dependency>
-+            <groupId>io.quarkus</groupId>
-+            <artifactId>quarkus-flyway</artifactId>
-+            <version>1.13.2.Final</version>
-+        </dependency>
-        <dependency>
+-       <dependency>
+-           <groupId>javax</groupId>
+-           <artifactId>javaee-web-api</artifactId>
+-           <version>7.0</version>
+-           <scope>provided</scope>
+-       </dependency>
+-       <dependency>
+-           <groupId>javax</groupId>
+-           <artifactId>javaee-api</artifactId>
+-           <version>7.0</version>
+-           <scope>provided</scope>
+-       </dependency>
++       <dependency>
++           <groupId>io.quarkus</groupId>
++           <artifactId>quarkus-bom</artifactId>
++           <version>${quarkus.version}</version>
++           <type>pom</type>
++           <scope>import</scope>
++       </dependency>
+    </dependencies>
++   <build>
++       <plugins>
++           <plugin>
++               <artifactId>maven-compiler-plugin</artifactId>
++               <version>${compiler-plugin.version}</version>
++               <configuration>
++                   <release>${maven.compiler.release}</release>
++                   <compilerArgs>
++                       <arg>-parameters</arg>
++                   </compilerArgs>
++               </configuration>
++           </plugin>
++           <plugin>
++               <groupId>io.quarkus</groupId>
++               <artifactId>quarkus-maven-plugin</artifactId>
++               <version>${quarkus.version}</version>
++               <executions>
++                   <execution>
++                       <goals>
++                           <goal>build</goal>
++                       </goals>
++                   </execution>
++               </executions>
++           </plugin>
++       </plugins>
++   </build>
+</project>
 ```
 
-## Reasoning
-The static code analysis tool has identified that the 'flyway-core' dependency needs to be replaced with the Quarkus 'quarkus-flyway' extension. 
-
-In the original code, the 'flyway-core' dependency is included in the 'dependencies' section of the 'pom.xml' file. To update it to use Quarkus, we need to replace the 'flyway-core' dependency with the 'quarkus-flyway' dependency.
-
-In the updated code, the 'flyway-core' dependency is removed and the 'quarkus-flyway' dependency is added. The groupId is changed to 'io.quarkus' and the artifactId is changed to 'quarkus-flyway'. The version is set to '1.13.2.Final', which is the latest version of the Quarkus Flyway extension at the time of writing.
-
-By making this change, the application will use the Quarkus Flyway extension instead of the Flyway Core library, allowing it to take advantage of the features and optimizations provided by Quarkus.
+Please note that the `${quarkus.version}` placeholder should be replaced with the actual version of Quarkus you intend to use. You can find the latest version of Quarkus on their website or Maven Central.
 
