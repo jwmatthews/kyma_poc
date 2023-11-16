@@ -13,6 +13,16 @@ cd ..
 git clone https://github.com/konveyor/example-applications.git konveyor-examples
 
 
+### KitchenSink
+##### https://github.com/konveyor/example-applications/issues/19
+########## https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.4.x/kitchensink
+git clone https://github.com/jboss-developer/jboss-eap-quickstarts.git jboss-eap-quickstarts-javaee
+
+########## https://github.com/tqvarnst/jboss-eap-quickstarts/tree/quarkus-3.2/kitchensink
+## https://github.com/tqvarnst/jboss-eap-quickstarts/tree/quarkus-3.2
+git clone https://github.com/tqvarnst/jboss-eap-quickstarts.git jboss-eap-quickstarts-quarkus
+
+
 ### Spring to Quarkus
 #  Spring Music isn't able to be analyzed by Kantra as of today
 #  See: https://github.com/konveyor/kantra/issues/116

@@ -241,21 +241,17 @@ Here are the steps to solve the current issue:
 
 4. Remove the `init()` and `close()` methods as they are not needed in Quarkus.
 
-5. Replace the `onMessage()` method signature to accept a `String` parameter instead of a `Message` parameter.
+5. Replace the `onMessage()` method signature to accept a `String` parameter instead of `Message`.
 
-6. Replace the `System.out.println()` statements with `log.info()` statements to use the injected `Logger` instance.
+6. Replace the `System.out.println()` statements with `log.info()` statements.
 
-7. Replace the `Transformers.jsonToOrder()` method call with the appropriate code to deserialize the JSON string to an `Order` object.
+7. Replace the usage of `catalogService.getCatalogItemById()` with a new method `catalogService.updateInventoryItems()`.
 
-8. Replace the `catalogService.getCatalogItemById()` method call with the appropriate code to retrieve the catalog item by ID.
+8. Annotate the `onMessage()` method with `@Incoming("orders-incoming")` to specify the incoming channel.
 
-9. Replace the `orderItem.setQuantity()` statement with the appropriate code to update the quantity of the catalog item.
+9. Annotate the `onMessage()` method with `@Blocking` to indicate that the method should be executed in a blocking manner.
 
-10. Annotate the `onMessage()` method with `@Incoming("orders-incoming")` to specify the incoming channel.
-
-11. Annotate the `onMessage()` method with `@Blocking` to indicate that the method should be executed in a blocking manner.
-
-12. Annotate the `onMessage()` method with `@Transactional` to ensure that the method is executed within a transaction.
+10. Annotate the `onMessage()` method with `@Transactional` to ensure that the method is executed within a transaction.
 
 Here is the updated Quarkus source code in the form of a diff:
 
@@ -264,17 +260,16 @@ diff --git a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB
 index 1234567..abcdefg 100644
 --- a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 +++ b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
-@@ -1,30 +1,29 @@
+@@ -1,32 +1,29 @@
 -package com.redhat.coolstore.service;
 +package com.redhat.coolstore.service;
  
 -import com.redhat.coolstore.model.Order;
 -import com.redhat.coolstore.utils.Transformers;
 +import jakarta.inject.Inject;
-+import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.jms.TextMessage;
 +import jakarta.jms.Message;
 +import jakarta.jms.MessageListener;
-+import jakarta.jms.TextMessage;
 +import jakarta.transaction.Transactional;
  
 -import javax.inject.Inject;
@@ -289,18 +284,22 @@ index 1234567..abcdefg 100644
 +import com.redhat.coolstore.utils.Transformers;
  
 -public class InventoryNotificationMDB implements MessageListener {
++import org.eclipse.microprofile.reactive.messaging.Incoming;
++import io.smallrye.reactive.messaging.annotations.Blocking;
++import jakarta.enterprise.context.ApplicationScoped;
+ 
+-    private static final int LOW_THRESHOLD = 50;
 +@ApplicationScoped
 +public class InventoryNotificationMDB implements MessageListener {
  
--    private static final int LOW_THRESHOLD = 50;
+-    @Inject
+-    private CatalogService catalogService;
 +    private static final int LOW_THRESHOLD = 50;
  
-     @Inject
-     private CatalogService catalogService;
- 
-     @Inject
+-    @Inject
 -    private Logger log;
-+    private org.jboss.logging.Logger log;
++    @Inject
++    private CatalogService catalogService;
  
 -    private final static String JNDI_FACTORY = "weblogic.jndi.WLInitialContextFactory";
 -    private final static String JMS_FACTORY = "TCF";
@@ -308,26 +307,42 @@ index 1234567..abcdefg 100644
 -    private TopicConnection tcon;
 -    private TopicSession tsession;
 -    private TopicSubscriber tsubscriber;
++    @Inject
++    private Logger log;
+ 
+-    public void onMessage(Message rcvMessage) {
 +    @Incoming("orders-incoming")
 +    @Blocking
 +    @Transactional
 +    public void onMessage(String orderStr) {
-+        log.info("Received message inventory");
-+        Order order = Transformers.jsonToOrder(orderStr);
-+        order.getItemList().forEach(orderItem -> {
-+            int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
-+            int new_quantity = old_quantity - orderItem.getQuantity();
-+            if (new_quantity < LOW_THRESHOLD) {
-+                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-+            } else {
-+                orderItem.setQuantity(new_quantity);
-+            }
-+        });
-+    }
- }
+         TextMessage msg;
+         {
+             try {
+@@ -37,7 +34,7 @@ public class InventoryNotificationMDB implements MessageListener {
+                     msg = (TextMessage) rcvMessage;
+                     String orderStr = msg.getBody(String.class);
+                     Order order = Transformers.jsonToOrder(orderStr);
+-                    order.getItemList().forEach(orderItem -> {
+-                        int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
+-                        int new_quantity = old_quantity - orderItem.getQuantity();
+-                        if (new_quantity < LOW_THRESHOLD) {
+-                            System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
+-                        } else {
+-                            orderItem.setQuantity(new_quantity);
+-                        }
+-                    });
++                    order.getItemList().forEach(orderItem -> catalogService.updateInventoryItems(orderItem.getProductId(), orderItem.getQuantity()));
+                 }
+ 
+             } catch (JMSException jmse) {
+                 System.err.println("An exception occurred: " + jmse.getMessage());
+             }
+         }
+     }
+-}
+\ No newline at end of file
++}
 ```
-
-Please note that the `org.jboss.logging.Logger` import may need to be adjusted based on the actual logger implementation used in your Quarkus project.
 ### Actual Diff:
 ```
 
@@ -335,17 +350,16 @@ diff --git a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB
 index 1234567..abcdefg 100644
 --- a/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
 +++ b/src/main/java/com/redhat/coolstore/service/InventoryNotificationMDB.java
-@@ -1,30 +1,29 @@
+@@ -1,32 +1,29 @@
 -package com.redhat.coolstore.service;
 +package com.redhat.coolstore.service;
  
 -import com.redhat.coolstore.model.Order;
 -import com.redhat.coolstore.utils.Transformers;
 +import jakarta.inject.Inject;
-+import jakarta.enterprise.context.ApplicationScoped;
++import jakarta.jms.TextMessage;
 +import jakarta.jms.Message;
 +import jakarta.jms.MessageListener;
-+import jakarta.jms.TextMessage;
 +import jakarta.transaction.Transactional;
  
 -import javax.inject.Inject;
@@ -360,18 +374,22 @@ index 1234567..abcdefg 100644
 +import com.redhat.coolstore.utils.Transformers;
  
 -public class InventoryNotificationMDB implements MessageListener {
++import org.eclipse.microprofile.reactive.messaging.Incoming;
++import io.smallrye.reactive.messaging.annotations.Blocking;
++import jakarta.enterprise.context.ApplicationScoped;
+ 
+-    private static final int LOW_THRESHOLD = 50;
 +@ApplicationScoped
 +public class InventoryNotificationMDB implements MessageListener {
  
--    private static final int LOW_THRESHOLD = 50;
+-    @Inject
+-    private CatalogService catalogService;
 +    private static final int LOW_THRESHOLD = 50;
  
-     @Inject
-     private CatalogService catalogService;
- 
-     @Inject
+-    @Inject
 -    private Logger log;
-+    private org.jboss.logging.Logger log;
++    @Inject
++    private CatalogService catalogService;
  
 -    private final static String JNDI_FACTORY = "weblogic.jndi.WLInitialContextFactory";
 -    private final static String JMS_FACTORY = "TCF";
@@ -379,23 +397,41 @@ index 1234567..abcdefg 100644
 -    private TopicConnection tcon;
 -    private TopicSession tsession;
 -    private TopicSubscriber tsubscriber;
++    @Inject
++    private Logger log;
+ 
+-    public void onMessage(Message rcvMessage) {
 +    @Incoming("orders-incoming")
 +    @Blocking
 +    @Transactional
 +    public void onMessage(String orderStr) {
-+        log.info("Received message inventory");
-+        Order order = Transformers.jsonToOrder(orderStr);
-+        order.getItemList().forEach(orderItem -> {
-+            int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
-+            int new_quantity = old_quantity - orderItem.getQuantity();
-+            if (new_quantity < LOW_THRESHOLD) {
-+                log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-+            } else {
-+                orderItem.setQuantity(new_quantity);
-+            }
-+        });
-+    }
- }
+         TextMessage msg;
+         {
+             try {
+@@ -37,7 +34,7 @@ public class InventoryNotificationMDB implements MessageListener {
+                     msg = (TextMessage) rcvMessage;
+                     String orderStr = msg.getBody(String.class);
+                     Order order = Transformers.jsonToOrder(orderStr);
+-                    order.getItemList().forEach(orderItem -> {
+-                        int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
+-                        int new_quantity = old_quantity - orderItem.getQuantity();
+-                        if (new_quantity < LOW_THRESHOLD) {
+-                            System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
+-                        } else {
+-                            orderItem.setQuantity(new_quantity);
+-                        }
+-                    });
++                    order.getItemList().forEach(orderItem -> catalogService.updateInventoryItems(orderItem.getProductId(), orderItem.getQuantity()));
+                 }
+ 
+             } catch (JMSException jmse) {
+                 System.err.println("An exception occurred: " + jmse.getMessage());
+             }
+         }
+     }
+-}
+\ No newline at end of file
++}
 
 ```
 ### Expected Diff:

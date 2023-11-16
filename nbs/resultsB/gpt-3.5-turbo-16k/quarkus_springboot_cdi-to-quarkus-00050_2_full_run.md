@@ -1,4 +1,3 @@
-# Ruleset Violation: 'quarkus/springboot' 'cdi-to-quarkus-00050'
 ## Prompt:
 You are an excellent enterprise architect who has an extensive
 background in helping companies rewrite their legacy Java EE applications to 
@@ -13,36 +12,56 @@ You will be give:
 ## 'Source Code to Update'
 Source code filename ``` src/main/java/com/redhat/coolstore/service/CatalogService.java ``` is:
 ```
-import java.util.logging.Logger;
+  1  package com.redhat.coolstore.service;
+  2  
+  3  import java.util.List;
+  4  import java.util.logging.Logger;
+  5  
+  6  import javax.inject.Inject;
+  7  
+  8  import javax.persistence.criteria.CriteriaBuilder;
+  9  import javax.persistence.criteria.CriteriaQuery;
+ 10  import javax.persistence.criteria.Root;
+ 11  
+ 12  import javax.ejb.Stateless;
+ 13  import javax.persistence.EntityManager;
+ 14  import javax.persistence.PersistenceContext;
+ 15  
+ 16  import com.redhat.coolstore.model.*;
+ 17  
+ 18  @Stateless
+ 19  public class CatalogService {
+ 20  
+ 21      @Inject
+ 22      Logger log;
+ 23  
+ 24      @PersistenceContext
+ 25      private EntityManager em;
+ 26  
+ 27      public CatalogService() {
+ 28      }
+ 29  
+ 30      public List<CatalogItemEntity> getCatalogItems() {
+ 31          CriteriaBuilder cb = em.getCriteriaBuilder();
+ 32          CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
+ 33          Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
+ 34          criteria.select(member);
+ 35          return em.createQuery(criteria).getResultList();
+ 36      }
+ 37  
+ 38      public CatalogItemEntity getCatalogItemById(String itemId) {
+ 39          return em.find(CatalogItemEntity.class, itemId);
+ 40      }
+ 41  
+ 42      public void updateInventoryItems(String itemId, int deducts) {
+ 43          InventoryEntity inventoryEntity = getCatalogItemById(itemId).getInventory();
+ 44          int currentQuantity = inventoryEntity.getQuantity();
+ 45          inventoryEntity.setQuantity(currentQuantity-deducts);
+ 46          em.merge(inventoryEntity);
+ 47      }
+ 48  
+ 49  }
 
-import javax.inject.Inject;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import com.redhat.coolstore.model.*;
-
-@Stateless
-public class CatalogService {
-
-    @Inject
-    Logger log;
-
-    @PersistenceContext
-    private EntityManager em;
-
-    public CatalogService() {
-    }
-
-    public List<CatalogItemEntity> getCatalogItems() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
-        Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
 ```
 
 ## Static Code Analysis Information:
@@ -130,44 +149,61 @@ Ensure that you begin the result with the markdown header of: ## Result
 ## Result:
 ## Result
 ```diff
--import javax.ejb.Stateless;
-+import javax.enterprise.context.ApplicationScoped;
--import javax.persistence.EntityManager;
--import javax.persistence.PersistenceContext;
--import javax.persistence.criteria.CriteriaBuilder;
--import javax.persistence.criteria.CriteriaQuery;
--import javax.persistence.criteria.Root;
-+import javax.inject.Inject;
-+import javax.persistence.EntityManager;
-+import javax.persistence.criteria.CriteriaBuilder;
-+import javax.persistence.criteria.CriteriaQuery;
-+import javax.persistence.criteria.Root;
-
-@ApplicationScoped
-public class CatalogService {
-
-    @Inject
-    Logger log;
-
-    @Inject
-    private EntityManager em;
-
-    public CatalogService() {
-    }
-
-    public List<CatalogItemEntity> getCatalogItems() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
-        Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
+ 1  package com.redhat.coolstore.service;
+ 2  
+ 3  import java.util.List;
+ 4  import java.util.logging.Logger;
+ 5  
+ 6  import javax.inject.Inject;
+ 7  
+ 8  import javax.persistence.criteria.CriteriaBuilder;
+ 9  import javax.persistence.criteria.CriteriaQuery;
+10  import javax.persistence.criteria.Root;
+11  
+-12  import javax.ejb.Stateless;
++12  import javax.enterprise.context.ApplicationScoped;
+13  import javax.persistence.EntityManager;
+14  import javax.persistence.PersistenceContext;
+15  
+16  import com.redhat.coolstore.model.*;
+  
+-18  @Stateless
++18  @ApplicationScoped
+19  public class CatalogService {
+  
+20      @Inject
+21      Logger log;
+  
+22      @PersistenceContext
+23      private EntityManager em;
+  
+24      public CatalogService() {
+25      }
+  
+26      public List<CatalogItemEntity> getCatalogItems() {
+27          CriteriaBuilder cb = em.getCriteriaBuilder();
+28          CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
+29          Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
+30          criteria.select(member);
+31          return em.createQuery(criteria).getResultList();
+32      }
+  
+33      public CatalogItemEntity getCatalogItemById(String itemId) {
+34          return em.find(CatalogItemEntity.class, itemId);
+35      }
+  
+36      public void updateInventoryItems(String itemId, int deducts) {
+37          InventoryEntity inventoryEntity = getCatalogItemById(itemId).getInventory();
+38          int currentQuantity = inventoryEntity.getQuantity();
+39          inventoryEntity.setQuantity(currentQuantity-deducts);
+40          em.merge(inventoryEntity);
+41      }
+42  
+43  }
 ```
 
-
-## Explanation
-The first change we need to make is to replace the `@Stateless` annotation with `@ApplicationScoped`. In Quarkus, CDI beans are used instead of EJBs, and `@ApplicationScoped` is the equivalent of `@Stateless` in CDI.
-
-Next, we need to remove the `@PersistenceContext` annotation as it is not needed in Quarkus. Instead, we can inject the `EntityManager` using the `@Inject` annotation.
-
-Finally, we need to update the import statements to use the correct package names for Quarkus. The package names for CDI annotations and JPA classes have changed in Quarkus, so we need to update them accordingly.
-
-Overall, these changes will update the legacy Java EE application to use Quarkus and its CDI and JPA features.
+## Reasoning
+- Line 12: The `@Stateless` annotation is used in Java EE applications to define a stateless session bean. In Quarkus, we can replace it with the `@ApplicationScoped` annotation to define a CDI bean with application scope.
+- Line 18: Replace `@Stateless` with `@ApplicationScoped` to define the `CatalogService` as a CDI bean with application scope. This ensures that the bean is created once per application and can be injected into other components.
+- No other changes are required as the remaining code is already compatible with Quarkus.
 

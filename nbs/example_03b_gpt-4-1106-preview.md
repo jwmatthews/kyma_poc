@@ -215,15 +215,15 @@ Quarkus source code in the form of a diff from the original file in the Markdown
 ....
 ```
 ## Result:
-To rewrite the `InventoryNotificationMDB` class to use Quarkus, we need to follow a similar approach to the one used in Example #1. Here are the steps we will take:
+To rewrite the `InventoryNotificationMDB` class to use Quarkus, we will follow a similar approach to the one used in Example #1. We will replace the legacy JMS MessageListener with a Quarkus-based reactive messaging approach. Here are the steps we will take:
 
-1. Replace the JMS `MessageListener` interface with a method annotated with `@Incoming` to consume messages from a reactive messaging channel.
-2. Remove the JNDI and JMS setup code, as Quarkus will manage the message consumption.
-3. Use `@ApplicationScoped` to define the bean's lifecycle.
-4. Use `@Blocking` to indicate that the processing is not non-blocking and should be executed on a worker thread.
-5. Inject a `Logger` using CDI instead of using `java.util.logging.Logger` directly.
-6. Remove the `init` and `close` methods as they are no longer needed.
-7. Update the package imports to use Jakarta EE 8 APIs and Quarkus-specific annotations.
+1. Remove the JMS and WebLogic-specific code, including the `MessageListener` interface, the `init` and `close` methods, and the JNDI lookup code.
+2. Replace the `@Inject` annotation with `jakarta.inject.Inject` to align with Jakarta EE standards.
+3. Use MicroProfile Reactive Messaging to consume messages from a topic. We will use the `@Incoming` annotation to specify the channel that will be configured in the `application.properties` file.
+4. Use the `@ApplicationScoped` annotation to define the bean as managed by the CDI container.
+5. Use the `@Blocking` annotation to indicate that the processing is blocking and should not be executed on the event loop (I/O thread).
+6. Add logging using a Quarkus-compatible logger instead of `System.out.println` or `System.err.println`.
+7. Remove the unused imports and any other code that is no longer necessary.
 
 Here is the diff of the changes:
 
@@ -240,10 +240,8 @@ import com.redhat.coolstore.utils.Transformers;
 -import javax.naming.NamingException;
 -import javax.rmi.PortableRemoteObject;
 +import jakarta.inject.Inject;
+import java.util.logging.Logger;
 +import org.eclipse.microprofile.reactive.messaging.Incoming;
--import java.util.Hashtable;
--import java.util.logging.Logger;
-+import org.jboss.logging.Logger;
 +import io.smallrye.reactive.messaging.annotations.Blocking;
 +import jakarta.enterprise.context.ApplicationScoped;
 
@@ -271,27 +269,30 @@ import com.redhat.coolstore.utils.Transformers;
 +    @Blocking
 +    public void onMessage(String orderStr) {
 -        TextMessage msg;
-         try {
-             System.out.println("received message inventory");
--            if (rcvMessage instanceof TextMessage) {
--                msg = (TextMessage) rcvMessage;
--                String orderStr = msg.getBody(String.class);
-                 Order order = Transformers.jsonToOrder(orderStr);
-                 order.getItemList().forEach(orderItem -> {
-                     int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
-                     int new_quantity = old_quantity - orderItem.getQuantity();
-                     if (new_quantity < LOW_THRESHOLD) {
-                         System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-                     } else {
-                         orderItem.setQuantity(new_quantity);
-                     }
-                 });
+-        {
+-            try {
+-                System.out.println("received message inventory");
+-                if (rcvMessage instanceof TextMessage) {
+-                    msg = (TextMessage) rcvMessage;
+-                    String orderStr = msg.getBody(String.class);
+                     Order order = Transformers.jsonToOrder(orderStr);
+                     order.getItemList().forEach(orderItem -> {
+                         int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
+                         int new_quantity = old_quantity - orderItem.getQuantity();
+                         if (new_quantity < LOW_THRESHOLD) {
+-                            System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
++                            log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
+                         } else {
+                             orderItem.setQuantity(new_quantity);
+                         }
+                     });
+-                }
+-
+-
+-            } catch (JMSException jmse) {
+-                System.err.println("An exception occurred: " + jmse.getMessage());
 -            }
--        } catch (JMSException jmse) {
--            System.err.println("An exception occurred: " + jmse.getMessage());
-+        } catch (Exception e) {
-+            log.error("An exception occurred: ", e);
-         }
+-        }
      }
 
 -    public void init() throws NamingException, JMSException {
@@ -321,9 +322,7 @@ import com.redhat.coolstore.utils.Transformers;
 }
 ```
 
-Please note that the `@Incoming` annotation value `"orders-incoming"` should match the name of the channel configured in your `application.properties` file for the incoming messages. Adjust this value according to your actual configuration.
-
-Also, the exception handling has been simplified to catch a generic `Exception` and log it using the injected `Logger`. This is because we no longer deal with `JMSException` specifically, as the Quarkus framework abstracts away the underlying messaging system details.
+Please note that the `@Incoming` value "orders-incoming" is an example and should be replaced with the actual channel name configured in your `application.properties` file. Also, the `Logger` should be initialized using a Quarkus-compatible logger factory. The `CatalogService` and `Transformers` classes should be adapted if necessary to fit the Quarkus framework and CDI standards.
 ### Actual Diff:
 ```
 
@@ -339,10 +338,8 @@ import com.redhat.coolstore.utils.Transformers;
 -import javax.naming.NamingException;
 -import javax.rmi.PortableRemoteObject;
 +import jakarta.inject.Inject;
+import java.util.logging.Logger;
 +import org.eclipse.microprofile.reactive.messaging.Incoming;
--import java.util.Hashtable;
--import java.util.logging.Logger;
-+import org.jboss.logging.Logger;
 +import io.smallrye.reactive.messaging.annotations.Blocking;
 +import jakarta.enterprise.context.ApplicationScoped;
 
@@ -370,27 +367,30 @@ import com.redhat.coolstore.utils.Transformers;
 +    @Blocking
 +    public void onMessage(String orderStr) {
 -        TextMessage msg;
-         try {
-             System.out.println("received message inventory");
--            if (rcvMessage instanceof TextMessage) {
--                msg = (TextMessage) rcvMessage;
--                String orderStr = msg.getBody(String.class);
-                 Order order = Transformers.jsonToOrder(orderStr);
-                 order.getItemList().forEach(orderItem -> {
-                     int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
-                     int new_quantity = old_quantity - orderItem.getQuantity();
-                     if (new_quantity < LOW_THRESHOLD) {
-                         System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
-                     } else {
-                         orderItem.setQuantity(new_quantity);
-                     }
-                 });
+-        {
+-            try {
+-                System.out.println("received message inventory");
+-                if (rcvMessage instanceof TextMessage) {
+-                    msg = (TextMessage) rcvMessage;
+-                    String orderStr = msg.getBody(String.class);
+                     Order order = Transformers.jsonToOrder(orderStr);
+                     order.getItemList().forEach(orderItem -> {
+                         int old_quantity = catalogService.getCatalogItemById(orderItem.getProductId()).getInventory().getQuantity();
+                         int new_quantity = old_quantity - orderItem.getQuantity();
+                         if (new_quantity < LOW_THRESHOLD) {
+-                            System.out.println("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
++                            log.info("Inventory for item " + orderItem.getProductId() + " is below threshold (" + LOW_THRESHOLD + "), contact supplier!");
+                         } else {
+                             orderItem.setQuantity(new_quantity);
+                         }
+                     });
+-                }
+-
+-
+-            } catch (JMSException jmse) {
+-                System.err.println("An exception occurred: " + jmse.getMessage());
 -            }
--        } catch (JMSException jmse) {
--            System.err.println("An exception occurred: " + jmse.getMessage());
-+        } catch (Exception e) {
-+            log.error("An exception occurred: ", e);
-         }
+-        }
      }
 
 -    public void init() throws NamingException, JMSException {

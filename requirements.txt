@@ -19,6 +19,7 @@ bleach==6.1.0
 certifi==2023.7.22
 cffi==1.16.0
 charset-normalizer==3.3.1
+click==8.1.7
 comm==0.1.4
 dataclasses-json==0.6.1
 debugpy==1.8.0
@@ -59,7 +60,7 @@ jupyterlab-pygments==0.2.2
 jupyterlab-quarto==0.2.8
 jupyterlab-widgets==3.0.9
 jupyterlab_server==2.25.0
--e git+https://github.com/jwmatthews/kyma_poc.git@b2f3d99e9d632e87ad12bd30bae0723fa5a24d1c#egg=kyma_poc
+-e git+https://github.com/jwmatthews/kyma_poc.git@4274d8e52dab6adc82ba44a60baad781726ac8a9#egg=kyma_poc
 langchain==0.0.324
 langchain-experimental==0.0.35
 langsmith==0.0.52
@@ -119,6 +120,7 @@ tinycss2==1.2.1
 tornado==6.3.3
 tqdm==4.66.1
 traitlets==5.12.0
+typer==0.9.0
 types-python-dateutil==2.8.19.14
 typing-inspect==0.9.0
 typing_extensions==4.8.0

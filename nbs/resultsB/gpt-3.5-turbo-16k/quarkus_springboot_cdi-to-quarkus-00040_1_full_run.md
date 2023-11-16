@@ -1,4 +1,3 @@
-# Ruleset Violation: 'quarkus/springboot' 'cdi-to-quarkus-00040'
 ## Prompt:
 You are an excellent enterprise architect who has an extensive
 background in helping companies rewrite their legacy Java EE applications to 
@@ -13,23 +12,24 @@ You will be give:
 ## 'Source Code to Update'
 Source code filename ``` src/main/java/com/redhat/coolstore/utils/Producers.java ``` is:
 ```
-package com.redhat.coolstore.utils;
+  1  package com.redhat.coolstore.utils;
+  2  
+  3  import javax.enterprise.inject.Produces;
+  4  import javax.enterprise.inject.spi.InjectionPoint;
+  5  import java.util.logging.Logger;
+  6  
+  7  
+  8  public class Producers {
+  9  
+ 10      Logger log = Logger.getLogger(Producers.class.getName());
+ 11  
+ 12      @Produces
+ 13      public Logger produceLog(InjectionPoint injectionPoint) {
+ 14          return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+ 15      }
+ 16  
+ 17  }
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import java.util.logging.Logger;
-
-
-public class Producers {
-
-    Logger log = Logger.getLogger(Producers.class.getName());
-
-    @Produces
-    public Logger produceLog(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-    }
-
-}
 ```
 
 ## Static Code Analysis Information:
@@ -94,28 +94,36 @@ Ensure that you begin the result with the markdown header of: ## Result
 ## Result:
 ## Result
 ```diff
-package com.redhat.coolstore.utils;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Named;
-import java.util.logging.Logger;
-
-@ApplicationScoped
-public class Producers {
-
-    @Produces
-    @Named
-    public Logger produceLog(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-    }
-
-}
+ 1  package com.redhat.coolstore.utils;
+ 2  
+ 3  import javax.enterprise.context.ApplicationScoped;
+ 4  import javax.inject.Named;
+ 5  import java.util.logging.Logger;
+ 6  
+ 7  
+ 8  @ApplicationScoped
+ 9  public class Producers {
+10  
+11      @Named("logger")
+12      public Logger produceLog() {
+13          return Logger.getLogger(Producers.class.getName());
+14      }
+15  
+16  }
 ```
 
 ## Explanation
-1. Add the `@ApplicationScoped` annotation to the class to specify the scope of the bean.
-2. Add the `@Named` annotation to the `produceLog` method to indicate that it is a named producer method.
-3. Remove the `Logger log` field as it is no longer needed.
+The static code analysis information states that in Quarkus, the `@Produces` annotation is no longer required if the producer method is annotated with a scope annotation, a stereotype, or a qualifier. It suggests using a `@Named` getter method instead.
+
+Based on this information, here are the changes made to the original code:
+
+1. Removed the `import javax.enterprise.inject.Produces;` statement as the `@Produces` annotation is no longer required.
+2. Added `import javax.enterprise.context.ApplicationScoped;` to provide a scope annotation for the producer method.
+3. Added `import javax.inject.Named;` to use the `@Named` qualifier for the getter method.
+4. Annotated the class with `@ApplicationScoped` to provide a scope annotation for the class.
+5. Removed the `InjectionPoint` parameter from the `produceLog` method as it is no longer needed.
+6. Renamed the `produceLog` method to `produceLog` and removed the `InjectionPoint` parameter.
+7. Added the `@Named("logger")` annotation to the `produceLog` method to provide a qualifier for the logger bean.
+
+These changes ensure that the code is updated to use Quarkus and follows the best practices suggested by the static code analysis information.
 

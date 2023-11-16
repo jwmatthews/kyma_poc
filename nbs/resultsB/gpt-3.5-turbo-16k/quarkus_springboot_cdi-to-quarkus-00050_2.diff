@@ -1,30 +1,52 @@
 
--import javax.ejb.Stateless;
-+import javax.enterprise.context.ApplicationScoped;
--import javax.persistence.EntityManager;
--import javax.persistence.PersistenceContext;
--import javax.persistence.criteria.CriteriaBuilder;
--import javax.persistence.criteria.CriteriaQuery;
--import javax.persistence.criteria.Root;
-+import javax.inject.Inject;
-+import javax.persistence.EntityManager;
-+import javax.persistence.criteria.CriteriaBuilder;
-+import javax.persistence.criteria.CriteriaQuery;
-+import javax.persistence.criteria.Root;
-
-@ApplicationScoped
-public class CatalogService {
-
-    @Inject
-    Logger log;
-
-    @Inject
-    private EntityManager em;
-
-    public CatalogService() {
-    }
-
-    public List<CatalogItemEntity> getCatalogItems() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
-        Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
+ 1  package com.redhat.coolstore.service;
+ 2  
+ 3  import java.util.List;
+ 4  import java.util.logging.Logger;
+ 5  
+ 6  import javax.inject.Inject;
+ 7  
+ 8  import javax.persistence.criteria.CriteriaBuilder;
+ 9  import javax.persistence.criteria.CriteriaQuery;
+10  import javax.persistence.criteria.Root;
+11  
+-12  import javax.ejb.Stateless;
++12  import javax.enterprise.context.ApplicationScoped;
+13  import javax.persistence.EntityManager;
+14  import javax.persistence.PersistenceContext;
+15  
+16  import com.redhat.coolstore.model.*;
+  
+-18  @Stateless
++18  @ApplicationScoped
+19  public class CatalogService {
+  
+20      @Inject
+21      Logger log;
+  
+22      @PersistenceContext
+23      private EntityManager em;
+  
+24      public CatalogService() {
+25      }
+  
+26      public List<CatalogItemEntity> getCatalogItems() {
+27          CriteriaBuilder cb = em.getCriteriaBuilder();
+28          CriteriaQuery<CatalogItemEntity> criteria = cb.createQuery(CatalogItemEntity.class);
+29          Root<CatalogItemEntity> member = criteria.from(CatalogItemEntity.class);
+30          criteria.select(member);
+31          return em.createQuery(criteria).getResultList();
+32      }
+  
+33      public CatalogItemEntity getCatalogItemById(String itemId) {
+34          return em.find(CatalogItemEntity.class, itemId);
+35      }
+  
+36      public void updateInventoryItems(String itemId, int deducts) {
+37          InventoryEntity inventoryEntity = getCatalogItemById(itemId).getInventory();
+38          int currentQuantity = inventoryEntity.getQuantity();
+39          inventoryEntity.setQuantity(currentQuantity-deducts);
+40          em.merge(inventoryEntity);
+41      }
+42  
+43  }
