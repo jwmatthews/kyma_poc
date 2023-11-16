@@ -1,0 +1,6 @@
+- fileURI: file:///opt/input/source/pom.xml
+  provider: java
+  dependencies:
+  - name: org.jboss.bom.jboss-eap-jakartaee8-with-tools
+    version: 7.4.0.GA
+    prefix: /root/.m2/repository/org/jboss/bom/jboss-eap-jakartaee8-with-tools/7.4.0.GA

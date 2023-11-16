@@ -40,6 +40,8 @@ All in pure Python. No front‑end experience required."
 * https://openrouter.ai/docs#models
 * https://typer.tiangolo.com/
     * "Typer is a library for building CLI applications that users will love using and developers will love creating. Based on Python 3.6+ type hints"
+* https://fastapi.tiangolo.com/python-types/
+
 # Reference Projects to consult
 * https://github.com/smol-ai/developer
 
