@@ -36,26 +36,43 @@ Slides: [Konveyor KymaML: GenAI Code Migration](https://docs.google.com/presenta
     * Follow that example to analyze other sample applications
 
 ### Generate a Markdown version of a given analysis report
+* This will take the YAML output and convert to Markdown for an easier view
 1. Start in the project root and execute
-    * `./kyma.py report data/example_reports/coolstuff-javaee/output.yaml ./data/markdown_reports  `
+    * `./kyma.py report data/example_reports/coolstuff-javaee/output.yaml example_output/coolstuff-quarkus`
         * This is assuming that a Kantra analyis report in YAML exists at [data/example_reports/coolstuff-javaee/output.yaml](data/example_reports/coolstuff-javaee/output.yaml)
         * Sample output run:
 
+                $ time ./kyma.py report data/example_reports/coolstuff-javaee/output.yaml example_output/coolstuff-quarkus
                 We have results from 4 RuleSet(s) in data/example_reports/coolstuff-javaee/output.yaml
 
-                Writing eap7/websphere to ./data/markdown_reports/eap7_websphere.md
-                Writing eap8/eap7 to ./data/markdown_reports/eap8_eap7.md
-                Writing openshift to ./data/markdown_reports/openshift.md
-                Writing quarkus/springboot to ./data/markdown_reports/quarkus_springboot.md
-                ./kyma.py report data/example_reports/coolstuff-javaee/output.yaml   0.33s user 0.02s system 93% cpu 0.376 total
+                Writing eap7/websphere to example_output/coolstuff-quarkus/eap7_websphere.md
+                Writing eap8/eap7 to example_output/coolstuff-quarkus/eap8_eap7.md
+                Writing openshift to example_output/coolstuff-quarkus/openshift.md
+                Writing quarkus/springboot to example_output/coolstuff-quarkus/quarkus_springboot.md
+                ./kyma.py report data/example_reports/coolstuff-javaee/output.yaml   1.28s user 2.12s system 337% cpu 1.007 total
         * Example outputs can be viewed from github for [data/example_reports/coolstuff-javaee/output.yaml](data/example_reports/coolstuff-javaee/output.yaml)
-            * [data/markdown_reports/eap7_websphere.md](data/markdown_reports/eap7_websphere.md)
-            * [data/markdown_reports/eap8_eap7.md](data/markdown_reports/eap8_eap7.md)
-            * [data/markdown_reports/openshift.md](data/markdown_reports/openshift.md)
-            * [data/markdown_reports/quarkus_springboot.md](data/markdown_reports/quarkus_springboot.md)
+            * [example_output/coolstuff-quarkus/eap7_websphere.md](example_output/coolstuff-quarkus/eap7_websphere.md)
+            * [example_output/coolstuff-quarkus/eap8_eap7.md](example_output/coolstuff-quarkus/eap8_eap7.md)
+            * [example_output/coolstuff-quarkus/openshift.md](example_output/coolstuff-quarkus/openshift.md)
+            * [example_output/coolstuff-quarkus/quarkus_springboot.md](example_output/coolstuff-quarkus/quarkus_springboot.md)
 
 ### Generate result from LLM interaction
 1. `export OPENAI_API_KEY="mysecretkey"`
     * See https://platform.openai.com/api-keys to create an API Key
 2.  `./generate_coolstuff.sh`
     * See [generate_coolstuff.sh](generate_coolstuff.sh) as an example of how to invoke
+3. View the results for the above at [example_output/coolstuff-quarkus](example_output/coolstuff-quarkus)
+    * 2 kinds of files are produced as output for the first Incident of each Violation (we are only working on the first incident at present)
+        * '*_full_run.md' A markdown file that shows the Prompt which was sent to the LLM and the full Result
+        * ".diff" - A diff which is produced for the first incident of each violation
+    * Note we are breaking out the output based on model to look for:
+        * [example_output/coolstuff-quarkus/gpt-3.5-turbo-16k](example_output/coolstuff-quarkus/gpt-3.5-turbo-16k)
+        * [example_output/coolstuff-quarkus/gpt-4-1106-preview](example_output/coolstuff-quarkus/gpt-4-1106-preview)
+
+#### Notes
+* Idea of running times when we are processing [coolstuff-store](https://github.com/deewhyweb/eap-coolstore-monolith/tree/main) for:
+    * `-t "quarkus" -t "jakarta-ee" -t "jakarta-ee8+" -t "jakarta-ee9+" -t "cloud-readiness" `
+        * 'gpt-3.5-turbo-16k'
+            * `time ./generate_coolstuff.sh  5.12s user 3.46s system 1% cpu 11:02.25 total`
+        * 'gpt-4-1106-preview'
+            * `./generate_coolstuff.sh  4.86s user 3.73s system 0% cpu 15:52.24 total`

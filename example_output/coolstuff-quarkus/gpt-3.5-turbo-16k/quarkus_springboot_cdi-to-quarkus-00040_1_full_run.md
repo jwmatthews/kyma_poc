@@ -12,23 +12,23 @@ You will be give:
 ## 'Source Code to Update'
 Source code filename ``` src/main/java/com/redhat/coolstore/utils/Producers.java ``` is:
 ```
-  1  package com.redhat.coolstore.utils;
-  2  
-  3  import javax.enterprise.inject.Produces;
-  4  import javax.enterprise.inject.spi.InjectionPoint;
-  5  import java.util.logging.Logger;
-  6  
-  7  
-  8  public class Producers {
-  9  
- 10      Logger log = Logger.getLogger(Producers.class.getName());
- 11  
- 12      @Produces
- 13      public Logger produceLog(InjectionPoint injectionPoint) {
- 14          return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
- 15      }
- 16  
- 17  }
+package com.redhat.coolstore.utils;
+
+import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.InjectionPoint;
+import java.util.logging.Logger;
+
+
+public class Producers {
+
+    Logger log = Logger.getLogger(Producers.class.getName());
+
+    @Produces
+    public Logger produceLog(InjectionPoint injectionPoint) {
+        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+    }
+
+}
 
 ```
 
@@ -94,33 +94,69 @@ Ensure that you begin the result with the markdown header of: ## Result
 ## Result:
 ## Result
 ```diff
- 1  package com.redhat.coolstore.utils;
- 2  
- 3  import javax.enterprise.context.ApplicationScoped;
- 4  import javax.inject.Named;
- 5  import java.util.logging.Logger;
- 6  
- 7  
- 8  @ApplicationScoped
- 9  public class Producers {
-10  
-11      @Named("logger")
-12      public Logger produceLog() {
-13          return Logger.getLogger(Producers.class.getName());
-14      }
-15  
-16  }
+ package com.redhat.coolstore.utils;
+
+-import javax.enterprise.inject.Produces;
+-import javax.enterprise.inject.spi.InjectionPoint;
+-import java.util.logging.Logger;
++import javax.inject.Named;
++import javax.inject.Singleton;
++import java.util.logging.Logger;
+ 
+ public class Producers {
+ 
+-    Logger log = Logger.getLogger(Producers.class.getName());
++    @Named
++    @Singleton
++    public Logger produceLog() {
++        return Logger.getLogger(Producers.class.getName());
++    }
+ 
+-    @Produces
+-    public Logger produceLog(InjectionPoint injectionPoint) {
+-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+-    }
+ 
+ }
 ```
 
-## Explanation
-The static code analysis information states that in Quarkus, the `@Produces` annotation is no longer required if the producer method is annotated with a scope annotation, a stereotype, or a qualifier. It suggests using a `@Named` getter method instead.
+## Reasoning
+The static code analysis tool has identified that the `@Produces` annotation is no longer required in Quarkus if the producer method is annotated with a scope annotation, a stereotype, or a qualifier. In this case, the producer method `produceLog` is not annotated with any of these annotations, so we can remove the `@Produces` annotation.
 
-Based on this information, the following changes were made to the original code:
+To update the code to Quarkus, we need to make the following changes:
 
-1. Added the `@ApplicationScoped` annotation to the class. This annotation serves as a scope annotation and allows the producer method to be used without the `@Produces` annotation.
-2. Added the `@Named("logger")` annotation to the `produceLog()` method. This annotation acts as a qualifier and allows the method to be used as a producer method without the `@Produces` annotation.
-3. Removed the `@Produces` annotation from the `produceLog()` method.
-4. Changed the return type of the `produceLog()` method to `Logger.getLogger(Producers.class.getName())` to match the original code.
+1. Remove the `@Produces` annotation from the `produceLog` method.
+2. Add the `@Named` annotation to the `produceLog` method to indicate that it is a named producer.
+3. Add the `@Singleton` annotation to the `produceLog` method to indicate that it should be a singleton instance.
 
-These changes ensure that the code is updated to use Quarkus and follows the best practices suggested by the static code analysis information.
+The updated code snippet in the form of a diff is as follows:
+
+```diff
+ package com.redhat.coolstore.utils;
+
+-import javax.enterprise.inject.Produces;
+-import javax.enterprise.inject.spi.InjectionPoint;
+-import java.util.logging.Logger;
++import javax.inject.Named;
++import javax.inject.Singleton;
++import java.util.logging.Logger;
+ 
+ public class Producers {
+ 
+-    Logger log = Logger.getLogger(Producers.class.getName());
++    @Named
++    @Singleton
++    public Logger produceLog() {
++        return Logger.getLogger(Producers.class.getName());
++    }
+ 
+-    @Produces
+-    public Logger produceLog(InjectionPoint injectionPoint) {
+-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+-    }
+ 
+ }
+```
+
+By making these changes, we have updated the code to use Quarkus and removed the unnecessary `@Produces` annotation. The `produceLog` method is now a named producer and a singleton instance.
 

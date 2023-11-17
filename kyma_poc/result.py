@@ -66,8 +66,11 @@ class LLMResult:
         print(f"{len(incidents)} incidents:  {description}\n")
 
     def _update_uri(self, uri):
-        return uri.replace("file:///opt/input/source/", "")
-     
+        f = uri.replace("file:///opt/input/source/", "")
+        # Skip any incident that begins with 'target/'
+        # Related to: https://github.com/konveyor/analyzer-lsp/issues/358
+        return f if not f.startswith("target/") else None
+
     def _ensure_output_dir_exists(self, output_dir):
         try:
             os.makedirs(output_dir, exist_ok=True)
@@ -85,8 +88,15 @@ class LLMResult:
         if self.report is None:
             raise Exception("No report to process.  Please parse a report first")
 
+        # We want to be able to pass in either '[]' or 'None' to signify we want to run all
+        if limit_to_rulesets == []:
+            limit_to_rulesets = None
+        if limit_to_violations == []:
+            limit_to_violations = None
+
         # Create result directory 
         self._ensure_output_dir_exists(path_to_output)
+        gd = GitDiff(self.example_source_dir)
 
         for ruleset_name in self.report.keys():
             if limit_to_rulesets is not None and ruleset_name not in limit_to_rulesets:
@@ -100,7 +110,6 @@ class LLMResult:
                     print(f"Skipping {key} as it is not in {limit_to_violations}")
                     continue
                 
-
                 ###############################################################
                 # For each violation, we will form only 1 prompt
                 # If we have 2 incidents, we will use second as a 'solved' example, looking at the 
@@ -117,10 +126,18 @@ class LLMResult:
                     continue
                 
                 description = items['description']
-                current_issue_original_code =  items['incidents'][0].get('codeSnip', None)    
+                # TODO
+                # Don't use the codeSnip from the report, get the code from Git and use the linenumber
+                # We want to avoide the line number printed on each line of code snip, worried it will impact
+                # the diff we get back from LLM
+                #current_issue_original_code =  items['incidents'][0].get('codeSnip', None)
                 lineNumber = items['incidents'][0].get('lineNumber', None)
                 current_issue_filename = self._update_uri(items['incidents'][0]['uri'])
-                current_issue_message = items['incidents'][0].get('message', None)  
+                if current_issue_filename is None:
+                    continue
+                current_issue_message = items['incidents'][0].get('message', None)
+                print(f"Fetching original code for {current_issue_filename} in branch {self.example_initial_branch}")
+                current_issue_original_code = gd.get_file_contents(current_issue_filename, self.example_initial_branch)
 
                 solved_example_filename = ""
                 solved_example_diff = "" 
@@ -132,8 +149,9 @@ class LLMResult:
                     ###
                     example_lineNumber = items['incidents'][1].get('lineNumber', None)
                     solved_example_filename = self._update_uri(items['incidents'][1]['uri'])
+                    if solved_example_filename is None:
+                        continue
                     try:
-                        gd = GitDiff(self.example_source_dir)
                         commit_initial = gd.get_commit_from_branch(self.example_initial_branch)
                         commit_solved = gd.get_commit_from_branch(self.example_solved_branch)
                         solved_example_diff = gd.get_patch_for_file(commit_initial.hexsha, commit_solved.hexsha, solved_example_filename)

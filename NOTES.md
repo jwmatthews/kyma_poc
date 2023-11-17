@@ -1,5 +1,8 @@
 # TODOs
+* Clearly break out examples where we have a 'solved' incident, right now I see a number of results which lacked a solved example in the prompt.  Perhaps use a different prompt when there is no solved incident available
+* Explore generating rules from the LLM walking the diff between initial/solved branches and summarizing/iterating and look to discover common themes in files.
 * Use structured data via [pydantic](https://docs.pydantic.dev/latest/) for our interaction with the LLM
+
 
 # Notes related to learning and exploring this space
 
