@@ -1,3 +1,6 @@
+# TODOs
+* Use structured data via [pydantic](https://docs.pydantic.dev/latest/) for our interaction with the LLM
+
 # Notes related to learning and exploring this space
 
 ## NBDev

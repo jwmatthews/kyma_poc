@@ -203,9 +203,13 @@ Ensure that you begin the result with the markdown header of: ## Result
 ```
 
 ## Reasoning
-The static code analysis tool has identified that the `@Stateless` annotation can be replaced with a CDI scope annotation, such as `@ApplicationScoped`. This is because Quarkus uses CDI for dependency injection and does not support EJBs.
+The static code analysis tool suggests replacing the `@Stateless` annotation with a scope annotation, such as `@ApplicationScoped`. This is because Quarkus uses CDI (Contexts and Dependency Injection) for managing beans, and the `@Stateless` annotation is specific to Java EE and EJBs.
 
-To update the `CatalogService` class to use Quarkus, we need to replace the `@Stateless` annotation with `@ApplicationScoped`. This will ensure that the class is managed as a CDI bean and can be injected into other components.
+To update the code to use Quarkus, we need to replace the `@Stateless` annotation with `@ApplicationScoped`. This ensures that the bean is managed by CDI and can be injected into other components.
 
-The updated code snippet reflects this change by replacing `@Stateless` with `@ApplicationScoped` on line 18.
+In the updated code, we replace `import javax.ejb.Stateless;` with `import javax.enterprise.context.ApplicationScoped;` to import the correct annotation.
+
+We also need to update the `@Stateless` annotation on line 19 to `@ApplicationScoped` to apply the correct scope to the `CatalogService` class.
+
+The rest of the code remains unchanged as it is not affected by the switch from Java EE to Quarkus.
 

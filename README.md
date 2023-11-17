@@ -55,4 +55,7 @@ Slides: [Konveyor KymaML: GenAI Code Migration](https://docs.google.com/presenta
             * [data/markdown_reports/quarkus_springboot.md](data/markdown_reports/quarkus_springboot.md)
 
 ### Generate result from LLM interaction
-1. T.B.D
+1. `export OPENAI_API_KEY="mysecretkey"`
+    * See https://platform.openai.com/api-keys to create an API Key
+2.  `./generate_coolstuff.sh`
+    * See [generate_coolstuff.sh](generate_coolstuff.sh) as an example of how to invoke

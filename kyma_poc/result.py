@@ -1,6 +1,6 @@
 __all__ = ['LLMResult']
 
-from langchain import PromptTemplate
+from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 
@@ -14,28 +14,41 @@ class LLMResult:
         which we have already migrated.  We are using this single application and picking a few 
         violations our analyzer finds and then will construct a few prompt examples to assess the
         quality of response from a LLM
+
+        We are assuming for the sample application that it is:
+        - In a single git repo
+        - It has 2 branches
+            - One of which is the original state (Java EE) and
+            - the other is the solved state (Quarkus)
+
+        We will begin with the 'JavaEE' branch and if we find a violation that has
+        2 or more incidents we will generate a patch for the first incident and use the
+        2nd incident as the 'solved' example.  This is done to simulate what we can
+        accomplish in Konveyor when we have access to the entire application portfolio
+        whereby we will have a larger number of solved incidents we can find from other
+        applications which have been migrated.
     """
-    def __init__(self):
-        """ We expect to have 2 directories that represent the same example application
-            path_original_source is the original state of the application
-            path_solved_source is the solved state of the application (after it has been migrated)
+    def __init__(self, source_dir, initial_branch, solved_branch):
+        """ We expect to have 1 directory that represents the example application and 2 branches
+
+        - source_dir:       path to git repo for example
+        - initial_branch    branch name for initial state of example
+        - solved_branch     branch name for solved state of example
         """
-        self.path_original_source = None
-        self.path_solved_source = None
+        self.example_source_dir = source_dir
+        self.example_initial_branch = initial_branch
+        self.example_solved_branch = solved_branch
         self.path_to_report = None
         self.report = None 
-
-    def set_path_original_source(self, example_initial_git_path):
-        self.path_original_source = example_initial_git_path
-    
-    def set_path_solved_source(self, example_solved_git_path):
-        self.path_solved_source = example_solved_git_path
 
     def parse_report(self, path_to_report):
         self.report = Report(path_to_report).get_report()
 
     def get_prompt_template(self):
-        with open("./templates/template_01.txt", 'r') as f:
+        rel_dir = os.path.dirname(__file__)
+        template_file = os.path.join(rel_dir, "data/templates/template_02.txt")
+        print(f"Loading template from {template_file}")
+        with open(template_file, 'r') as f:
             template = f.read()
         return PromptTemplate.from_template(template)
     
@@ -68,16 +81,12 @@ class LLMResult:
             f.truncate(0)
             f.write(content)
 
-    def process(self, model_name="", limit_to_rulesets=None, limit_to_violations=None):
+    def process(self, path_to_output, model_name="", limit_to_rulesets=None, limit_to_violations=None):
         if self.report is None:
             raise Exception("No report to process.  Please parse a report first")
-        if self.path_original_source is None:
-            raise Exception("No 'path_original_source'.  Please use set_path_original_source()")
-        if self.path_solved_source is None:
-            raise Exception("No 'path_solved_source'.  Please use set_path_solved_source()")
 
         # Create result directory 
-        self._ensure_output_dir_exists("./results")
+        self._ensure_output_dir_exists(path_to_output)
 
         for ruleset_name in self.report.keys():
             if limit_to_rulesets is not None and ruleset_name not in limit_to_rulesets:
@@ -112,36 +121,35 @@ class LLMResult:
                 lineNumber = items['incidents'][0].get('lineNumber', None)
                 current_issue_filename = self._update_uri(items['incidents'][0]['uri'])
                 current_issue_message = items['incidents'][0].get('message', None)  
-               
-                example_original_code = ""
-                example_updated_code = ""
-                example_original_filename = ""
-                example_updated_filename = ""
+
+                solved_example_filename = ""
+                solved_example_diff = "" 
                 if len(items['incidents']) > 1:
+                    ###
+                    # NOTE:  We are skipping the lineNumber at present, we aren't actually
+                    # using it to adjust what what we pass into the prompt.
+                    # We are experimenting with the diff for right now
+                    ###
                     example_lineNumber = items['incidents'][1].get('lineNumber', None)
-                    example_original_filename = self._update_uri(items['incidents'][1]['uri'])
-                    example_updated_filename = example_original_filename
+                    solved_example_filename = self._update_uri(items['incidents'][1]['uri'])
                     try:
-                        example_original_code = GitDiff(self.path_original_source).get_file_contents(example_original_filename)
+                        gd = GitDiff(self.example_source_dir)
+                        commit_initial = gd.get_commit_from_branch(self.example_initial_branch)
+                        commit_solved = gd.get_commit_from_branch(self.example_solved_branch)
+                        solved_example_diff = gd.get_patch_for_file(commit_initial.hexsha, commit_solved.hexsha, solved_example_filename)
+                        #example_original_code = GitDiff(self.path_original_source).get_file_contents(example_original_filename)
                     except Exception as e:
-                        print(f"Error: {e}")
-                        example_original_code = ""
-                    try:
-                        example_updated_code = GitDiff(self.path_solved_source).get_file_contents(example_updated_filename)
-                    except Exception as e:
-                        print(f"Error: {e}")
-                        example_updated_code = ""
-                        
+                        print(f"Unable to find a solved_example_diff.  Error: {e}")
+                        solved_example_diff = ""
+                print(f"Processing {ruleset_name} {key} {count}")
                 prompt = self.get_prompt_template()
                 template_args = {
                     "description": description,
                     "current_issue_filename": current_issue_filename,
                     "current_issue_message": current_issue_message,
                     "current_issue_original_code": current_issue_original_code,
-                    "example_original_code": example_original_code,
-                    "example_updated_code": example_updated_code,
-                    "example_updated_filename":  example_updated_filename,
-                    "example_original_filename": example_original_filename,
+                    "solved_example_filename": solved_example_filename,
+                    "solved_example_diff": solved_example_diff,
                 }
                 formatted_prompt = prompt.format(**template_args)
                 #self._write_output(f"./results/{ruleset_name_display}_{key}_{count}_template.txt", formatted_prompt)
@@ -152,15 +160,17 @@ class LLMResult:
                 result_diff = self._extract_diff(result)
                 
                 # Create result directory 
-                self._ensure_output_dir_exists(f"./results/{model_name}")
-                with open(f"./results/{model_name}/{ruleset_name_display}_{key}_{count}_full_run.md", "w") as f:
+                self._ensure_output_dir_exists(os.path.join(path_to_output, model_name))
+                f_name = os.path.join(path_to_output, model_name, f"{ruleset_name_display}_{key}_{count}_full_run.md")
+                with open(f_name, "w") as f:
                     f.truncate(0)
                     f.write(f"## Prompt:\n")
                     f.write(f"{formatted_prompt}\n")
                     f.write(f"\n\n## Result:\n")
                     f.write(f"{result}\n\n")
 
-                with open(f"./results/{model_name}/{ruleset_name_display}_{key}_{count}.diff", "w") as f:
+                d_name = f_name = os.path.join(path_to_output, model_name, f"{ruleset_name_display}_{key}_{count}.diff")
+                with open(d_name, "w") as f:
                     f.truncate(0)
                     f.write(result_diff)
 

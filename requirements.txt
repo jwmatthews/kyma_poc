@@ -60,7 +60,7 @@ jupyterlab-pygments==0.2.2
 jupyterlab-quarto==0.2.8
 jupyterlab-widgets==3.0.9
 jupyterlab_server==2.25.0
--e git+https://github.com/jwmatthews/kyma_poc.git@4274d8e52dab6adc82ba44a60baad781726ac8a9#egg=kyma_poc
+-e git+https://github.com/jwmatthews/kyma_poc.git@42c58ebda76e3839384b08fe78a4f18a80bbe553#egg=kyma_poc
 langchain==0.0.324
 langchain-experimental==0.0.35
 langsmith==0.0.52
