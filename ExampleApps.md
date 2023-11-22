@@ -49,6 +49,7 @@
     * Various updates to move to Quarkus and remove Java EE specifics
 
 # Helloworld-mdb App
+source code: https://github.com/savitharaghunathan/helloworld-mdb/compare/main...quarkus
 ## What was changed from EAP to Quarkus?
 * javax -> jakarata
 * java.util.logging.Logger -> org.jboss.logging.Logger
