@@ -47,5 +47,40 @@
 * pom.xml
     * Removed: <packaging>war</packaging>
     * Various updates to move to Quarkus and remove Java EE specifics
+
+# Helloworld-mdb App
+## What was changed from EAP to Quarkus?
+* javax -> jakarata
+* java.util.logging.Logger -> org.jboss.logging.Logger
+* mdb
+     * HelloWorldQueueMDB.java
+          * javax -> jakarta
+          * java logging -> jboss logging
+          * javax jms changes -> eclipse microprofile smallrye changes
+          * removed mdb config
+          * Added @ApplicationScoped annotation
+     * HelloWorldTopicMDB.java
+          * same as above
+
+* servlet
+     * HelloWorldMDBServletClient.java
+          * javax -> jakarta import changes
+          * webservlet annotation -> path
+          * removed jms destination config
+          * replaced @Resource(lookup = "java:/queue/HELLOWORLDMDBQueue") -> Incoming and Channel annotation with the queue name
+          * refactored doGet function
+               * logic change for obtaining the url paramater
+               * rewrote templating using string builder
+               * Added a function that generates messages, prints them on console, sends them to the queue/topic
+         * removed doPost func (I wasnt sure if it did anything and removing it, did not alter the application behavior)
+* Moved index.html to /src/main/resources/META-INF
+* application.properties
+     * Added config for AMQP
+* pom.xml
+    * Removed <packaging>war</packaging>
+    * JMS dependency changes
+    * java ee -> quarkus lib changes
+
     
-        
+
+            
