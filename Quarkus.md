@@ -15,3 +15,8 @@
 
 ## MicroProfile
 * https://microprofile.io/
+
+
+## JMS
+* Quarkus doesn't have a MDB (Message Driven Bean) message consumption can be simulated using a CDI Bean. Below example shows a JMSConsumer Bean scheduling an event every 5 seconds that will check for incoming messages in the JMS Queue:
+    * https://www.mastertheboss.com/soa-cloud/quarkus/messaging-with-quarkus-part-one/
