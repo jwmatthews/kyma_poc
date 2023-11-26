@@ -4,6 +4,8 @@
 ## Quarkus
 * https://quarkus.io/
 * Installing Quarkus via https://sdkman.io/
+### Reactive principles
+* https://quarkus.io/guides/getting-started-reactive
 
 ### Java EE to Quarkus Modernization
 #### Blogs
