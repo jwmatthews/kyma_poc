@@ -4,8 +4,12 @@
 ## Quarkus
 * https://quarkus.io/
 * Installing Quarkus via https://sdkman.io/
+### Background
+* https://developers.redhat.com/blog/2020/09/11/quarkus-and-jakarta-ee-together-or-not
 ### Reactive principles
 * https://quarkus.io/guides/getting-started-reactive
+### Workshops
+* https://github.com/RedHat-Middleware-Workshops/quarkus-workshop-m1m2/tree/ocp-4.14
 
 ### Java EE to Quarkus Modernization
 #### Blogs
