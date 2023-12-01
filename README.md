@@ -68,6 +68,9 @@ Slides: [Konveyor KymaML: GenAI Code Migration](https://docs.google.com/presenta
     * Note we are breaking out the output based on model to look for:
         * [example_output/coolstuff-quarkus/gpt-3.5-turbo-16k](example_output/coolstuff-quarkus/gpt-3.5-turbo-16k)
         * [example_output/coolstuff-quarkus/gpt-4-1106-preview](example_output/coolstuff-quarkus/gpt-4-1106-preview)
+    * Example of a specific problem and result:
+        * [example_output/coolstuff-quarkus/gpt-4-1106-preview/quarkus_springboot_cdi-to-quarkus-00050_2_full_run.md](example_output/coolstuff-quarkus/gpt-4-1106-preview/quarkus_springboot_cdi-to-quarkus-00050_2_full_run.md)
+
 
 #### Notes
 * Idea of running times when we are processing [coolstuff-store](https://github.com/deewhyweb/eap-coolstore-monolith/tree/main) for:
