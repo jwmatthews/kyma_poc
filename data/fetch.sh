@@ -22,6 +22,11 @@ git clone https://github.com/jboss-developer/jboss-eap-quickstarts.git jboss-eap
 ## https://github.com/tqvarnst/jboss-eap-quickstarts/tree/quarkus-3.2
 git clone https://github.com/tqvarnst/jboss-eap-quickstarts.git jboss-eap-quickstarts-quarkus
 
+# Ticket Monster
+# 'master' is original Java EE
+# 'quarkus' is quarkus migration
+git clone https://github.com/jmle/monolith.git ticket-monster
+
 
 ### Spring to Quarkus
 #  Spring Music isn't able to be analyzed by Kantra as of today
