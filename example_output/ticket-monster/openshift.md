@@ -2,7 +2,6 @@
 ## Description
 This ruleset detects the Java Mail API, which may be problematic when migrating an application to a cloud environment.
 * Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated
-* Sample application: https://github.com/deewhyweb/eap-coolstore-monolith
 ## Violations
 Number of Violations: 2
 ### #0 - localhost-http-00001

@@ -63,7 +63,6 @@ class Report:
         f.write(f"## Description\n")
         f.write(f"{ruleset.get('description', '')}\n")
         f.write(f"* Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated\n")
-        f.write(f"* Sample application: https://github.com/deewhyweb/eap-coolstore-monolith\n")
         f.write(f"## Violations\n")
         f.write(f"Number of Violations: {len(ruleset['violations'])}\n")
         counter = 0

@@ -2,7 +2,6 @@
 ## Description
 Provides analysis of WebSphere proprietary classes and constructs that may require individual attention when migrating to JBoss EAP 7+.
 * Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated
-* Sample application: https://github.com/deewhyweb/eap-coolstore-monolith
 ## Violations
 Number of Violations: 5
 ### #0 - maven-javax-to-jakarta-00002
