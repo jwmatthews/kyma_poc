@@ -1,5 +1,6 @@
 __all__ = ['GitDiff']
 
+import logging
 from git import BadName, Repo
 class GitDiff:
     def __init__(self, repo_path):
@@ -26,9 +27,13 @@ class GitDiff:
         return patch
     
     def get_file_contents(self, file_path, commit_id="HEAD"):
+        logging.debug(f"Getting file contents for {file_path} in {commit_id}")
         commit = self.repo.commit(commit_id)
+        logging.debug(f"Commit: {commit}")
         tree = self.repo.tree(commit)
+        logging.debug(f"Tree: {tree}")
         blob = tree[file_path]
+        logging.debug(f"Blob: {blob}")
         return blob.data_stream.read().decode()
     
     def get_commits_for_file(self, file_path, max_count=10):

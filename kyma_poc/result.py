@@ -1,5 +1,6 @@
 __all__ = ['LLMResult']
 
+import logging
 from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
@@ -66,7 +67,9 @@ class LLMResult:
         print(f"{len(incidents)} incidents:  {description}\n")
 
     def _update_uri(self, uri):
-        f = uri.replace("file:///opt/input/source/", "")
+        logging.debug(f"Updating uri {uri}")
+        f = uri.replace("file:///tmp/source-code/", "")
+        logging.debug(f"Updated uri {f}")
         # Skip any incident that begins with 'target/'
         # Related to: https://github.com/konveyor/analyzer-lsp/issues/358
         return f if not f.startswith("target/") else None
