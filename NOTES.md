@@ -23,7 +23,9 @@ Using langchain for our interaction with LLMs
     * [LangChain Crash Course: Build a AutoGPT app in 25 minutes!](https://www.youtube.com/watch?v=MlK6SIjcjE8)
 * Tutorials/Examples
     * https://python.langchain.com/docs/expression_language/cookbook/code_writing
-
+* Langchain Expression Language
+    * https://github.com/pinecone-io/examples/blob/master/learn/generation/langchain/handbook/11-langchain-expression-language.ipynb  
+        * Related YouTube: [LangChain Expression Language (LCEL) Explained!](https://www.youtube.com/watch?v=O0dUOtOIrfs)
 
 ## Agents
 * https://agentprotocol.ai/
@@ -34,6 +36,8 @@ Using langchain for our interaction with LLMs
 * [ReAct: SYNERGIZING REASONING AND ACTING IN LANGUAGE MODELS(https://arxiv.org/pdf/2210.03629.pdf)
 
 ## Interestig Blog Posts/Examples/Tutorials
+* [ReAct: Synergizing Reasoning and Acting in Language Models](https://react-lm.github.io/)
+* [CodePlan: Repository-level Coding using LLMs and Planning](https://arxiv.org/pdf/2309.12499.pdf)
 * [Fine-Tune LLaMA 2 with QLoRA](https://colab.research.google.com/drive/1Zmaceu65d7w4Tcd-cfnZRb6k_Tcv2b8g?usp=sharing)
     * From: https://github.com/smol-ai/llama-fine-tuning-hackameetup/tree/main#getting-started
 * [Codebase Analysis: Langchain Agents](https://carbonated-yacht-2c5.notion.site/Codebase-Analysis-Langchain-Agents-0b0587acd50647ca88aaae7cff5df1f2)
