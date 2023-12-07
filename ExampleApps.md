@@ -1,3 +1,15 @@
+# General
+## EJBs -> CDI
+A general pattern with moving away from an EJB and embracing CDI is to:
+1. Replace @Stateless and @Remote with @ApplicationScoped from CDI.
+2. Add @Transactional to manage transactions declaratively from JTA (if needed).
+3. Remove the remote interface, as CDI doesn't require separate interfaces for bean implementation.
+### Background reading
+* https://quarkus.io/guides/cdi
+
+## Servlets
+* Quarkus has a compatibility module `quarkus-undertow` which allows using Servlets and JSPs
+
 # CoolStuff Store
 ## What was changed from EAP to Quarkus?
 * javax -> jakarata
