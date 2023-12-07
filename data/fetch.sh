@@ -12,7 +12,6 @@ cd ..
 ### Simpler example app
 git clone https://github.com/konveyor/example-applications.git konveyor-examples
 
-
 ### KitchenSink
 ##### https://github.com/konveyor/example-applications/issues/19
 ########## https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.4.x/kitchensink
@@ -27,6 +26,9 @@ git clone https://github.com/tqvarnst/jboss-eap-quickstarts.git jboss-eap-quicks
 # 'quarkus' is quarkus migration
 git clone https://github.com/jmle/monolith.git ticket-monster
 
+# HelloWorld MDB
+#  This started from: https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.4.x/helloworld-mdb/src/main/java/org/jboss/as/quickstarts/mdb
+git clone https://github.com/savitharaghunathan/helloworld-mdb.git
 
 ### Spring to Quarkus
 #  Spring Music isn't able to be analyzed by Kantra as of today

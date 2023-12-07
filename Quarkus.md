@@ -12,6 +12,7 @@
 * https://jakarta.ee/specifications/cdi/4.0/jakarta-cdi-spec-4.0.html#introduction
 * EJB related
     * https://www.oracle.com/technical-resources/articles/java/cdi-javaee-bien.html
+* https://quarkus.io/blog/on-the-road-to-cdi-compatibility/
 
 ### Reactive principles
 * https://quarkus.io/guides/getting-started-reactive

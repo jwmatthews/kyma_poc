@@ -1,0 +1,3 @@
+time="2023-12-07T21:37:14Z" level=error msg="grpc unable to get info" error="rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing: dial tcp [::1]:45537: connect: connection refused\"" logger=go provider=grpc
+time="2023-12-07T21:37:25Z" level=info msg="provider does not have dependency capability" provider=builtin
+time="2023-12-07T21:37:25Z" level=error msg="failed to get list of dependencies for provider" error="exit status 1" provider=go

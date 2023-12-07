@@ -1,3 +1,16 @@
+# What Examples do we have?
+* For the below examples we have branches with 'Java EE' and 'Quarkus', so we can tell the differences required to migrate from Java EE to Quarkus
+* We have a script at [data/fetch.sh](data/fetch.sh) which will fetch the sample apps we know about
+## From JBoss EAP QuickStarts
+### HelloWorld MDB
+* 
+### KitchenSink
+* https://github.com/tqvarnst/jboss-eap-quickstarts/tree/quarkus-3.2/kitchensink
+## CoolStuff Store
+*  https://github.com/mathianasj/eap-coolstore-monolith.git
+## TicketMonster
+* https://github.com/jmle/monolith.git
+
 # General
 ## EJBs -> CDI
 A general pattern with moving away from an EJB and embracing CDI is to:
