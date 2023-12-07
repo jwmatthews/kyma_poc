@@ -105,6 +105,7 @@ Think through the changes you will make and explain each step of the process and
 If you are unsure of what changes is needed please state you are unsure and ask 
 for clarification to help you.
 
+
 When you are done explaining the reasoning for each change, write the updated 
 Quarkus source code for the 'Source Code to Update' in the form of a diff
 in Markdown format as the below:
@@ -114,61 +115,68 @@ in Markdown format as the below:
  ...
 ```
 
-Ensure that you begin the result with the markdown header of: ## Result
+Write the reasoning you have for each change in the Markdown header for '##Reasoning'
+Write the source code changes you have made in the form of a 'diff' under the Markdown header for '##Result'
+
 
 
 ## Result:
+## Reasoning
+The static code analysis tool has identified that the `@Produces` annotation is no longer required in Quarkus if the producer method is annotated with a scope annotation, a stereotype, or a qualifier. In our case, the `@Produces` annotation is used on the `EntityManager` field in the `Resources` class. Since the field is not directly referenced, we can remove the `@Produces` annotation and use a `@Named` getter method to access the field instead.
+
 ## Result
 ```diff
-package org.jboss.examples.ticketmonster.util;
-
-import java.util.logging.Logger;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-/**
- * This class uses CDI to alias Java EE resources, such as the persistence context, to CDI beans
- * 
- * <p>
- * Example injection on a managed bean field:
- * </p>
- * 
- * <pre>
- * &#064;Inject
- * private EntityManager em;
- * </pre>
- */
-@ApplicationScoped
-public class Resources {
-
-    /**
-     * Alias the persistence context
-     */
-   @PersistenceContext
-   private EntityManager em;
-   
-   /**
-    * Provider injectable loggers based around Java Util Logging.
-    * @param injectionPoint
-    * @return
-    */
-   @Produces
-   @Named
-   public Logger produceLog(InjectionPoint injectionPoint) {
-      return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-   }
+ package org.jboss.examples.ticketmonster.util;
  
-}
+ import java.util.logging.Logger;
+ 
+-import javax.enterprise.inject.Produces;
+ import javax.enterprise.inject.spi.InjectionPoint;
+ import javax.inject.Inject;
+ import javax.inject.Named;
+ import javax.persistence.EntityManager;
+ import javax.persistence.PersistenceContext;
+ 
+ /**
+  * This class uses CDI to alias Java EE resources, such as the persistence context, to CDI beans
+  * 
+  * <p>
+  * Example injection on a managed bean field:
+  * </p>
+  * 
+  * <pre>
+  * &#064;Inject
+  * private EntityManager em;
+  * </pre>
+  */
+ public class Resources {
+ 
+     /**
+      * Alias the persistence context
+      */
+-    // use @SuppressWarnings to tell IDE to ignore warnings about field not being referenced directly
+-   @SuppressWarnings("unused")
+-   @Produces
+     @PersistenceContext
+-   private EntityManager em;
++    private EntityManager em;
++    
++    @Named("entityManager")
++    @Produces
++    public EntityManager getEntityManager() {
++        return em;
++    }
+    
+    /**
+     * Provider injectable loggers based around Java Util Logging.
+     * @param injectionPoint
+     * @return
+     */
+    @Produces
+    public Logger produceLog(InjectionPoint injectionPoint) {
+       return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+    }
+  
+ }
 ```
-
-## Reasoning
-1. Remove the `@SuppressWarnings("unused")` annotation as it is not required in Quarkus.
-2. Add the `@ApplicationScoped` annotation to the class to specify the scope of the bean.
-3. Remove the `@Produces` annotation from the `EntityManager` field as it is no longer required in Quarkus. The field can be accessed using a `@Named` getter method instead.
-4. Add the `@Named` annotation to the `produceLog` method to specify that it is a producer method.
 

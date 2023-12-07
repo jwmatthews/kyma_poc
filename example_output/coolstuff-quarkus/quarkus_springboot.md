@@ -1,8 +1,7 @@
 # quarkus/springboot
 ## Description
-This ruleset gives hints to migrate from Spring Scheduled to Quarkus spring-scheduled extension
+This ruleset gives hints to migrate from SpringBoot devtools to Quarkus
 * Source of rules: https://github.com/konveyor/rulesets/tree/main/default/generated
-* Sample application: https://github.com/deewhyweb/eap-coolstore-monolith
 ## Violations
 Number of Violations: 13
 ### #0 - cdi-to-quarkus-00030
@@ -12,7 +11,7 @@ Number of Violations: 13
 `beans.xml` descriptor content is ignored and it could be removed from the application.. Refer to the guide referenced below to check the supported CDI feature in Quarkus.
 * Labels: konveyor.io/source=java-ee, konveyor.io/target=quarkus
 * Incidents
-  * file:///opt/input/source/src/main/webapp/WEB-INF/beans.xml
+  * file:///tmp/source-code/src/main/webapp/WEB-INF/beans.xml
       * `beans.xml` descriptor content is ignored and it could be removed from the application.. Refer to the guide referenced below to check the supported CDI feature in Quarkus.
 ### #1 - cdi-to-quarkus-00040
 * Category: potential
@@ -23,7 +22,7 @@ In Quarkus, you can skip the @Produces annotation completely if the producer met
 * Links
   * Quarkus Simplified Producer Method Declaration: https://quarkus.io/guides/cdi-reference#simplified-producer-method-declaration
 * Incidents
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/utils/Producers.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/utils/Producers.java
       * In Quarkus, you can skip the @Produces annotation completely if the producer method is annotated with a scope annotation, a stereotype or a qualifier... This field could be accessed using a `@Named` getter method instead.
       * Code Snippet:
 ```java
@@ -55,7 +54,7 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
 * Links
   * Quarkus CDI reference: https://quarkus.io/guides/cdi-reference
 * Incidents
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/service/CatalogService.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/service/CatalogService.java
       * Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` annotation with a scope eg `@ApplicationScoped`
       * Code Snippet:
 ```java
@@ -110,7 +109,7 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
  49  }
 
 ```
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/service/OrderService.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/service/OrderService.java
       * Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` annotation with a scope eg `@ApplicationScoped`
       * Code Snippet:
 ```java
@@ -149,7 +148,7 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
  33  }
 
 ```
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/service/ProductService.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/service/ProductService.java
       * Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` annotation with a scope eg `@ApplicationScoped`
       * Code Snippet:
 ```java
@@ -191,7 +190,7 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
  36  }
 
 ```
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/service/ShippingService.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/service/ShippingService.java
       * Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` annotation with a scope eg `@ApplicationScoped`
       * Code Snippet:
 ```java
@@ -237,7 +236,7 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
  40  }
 
 ```
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/service/ShoppingCartOrderProcessor.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/service/ShoppingCartOrderProcessor.java
       * Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` annotation with a scope eg `@ApplicationScoped`
       * Code Snippet:
 ```java
@@ -287,8 +286,75 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * The project artifact's current extension (i.e. `<packaging>` tag value) is `` but the expected value should be `jar`
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #4 - javaee-pom-to-quarkus-00010
 * Category: mandatory
 * Effort: 1
@@ -299,8 +365,75 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
   * Quarkus - Releases: https://quarkus.io/blog/tag/release/
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Use the Quarkus BOM to omit the version of the different Quarkus dependencies.. Add the following sections to the `pom.xml` file:. ```xml. <properties>. <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>. <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>. <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>. </properties>. <dependencyManagement>. <dependencies>. <dependency>. <groupId>$</groupId>. <artifactId>$</artifactId>. <version>$</version>. <type>pom</type>. <scope>import</scope>. </dependency>. </dependencies>. </dependencyManagement>. ```. Check the latest Quarkus version available from the `Quarkus - Releases` link below.
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #5 - javaee-pom-to-quarkus-00020
 * Category: mandatory
 * Effort: 1
@@ -310,8 +443,75 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Use the Quarkus Maven plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>. <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>. </properties>. <build>. <plugins>. <plugin>. <groupId>$</groupId>. <artifactId>quarkus-maven-plugin</artifactId>. <version>$</version>. <extensions>true</extensions>. <executions>. <execution>. <goals>. <goal>build</goal>. <goal>generate-code</goal>. <goal>generate-code-tests</goal>. </goals>. </execution>. </executions>. </plugin>. </plugins>. </build>. ```
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #6 - javaee-pom-to-quarkus-00030
 * Category: mandatory
 * Effort: 1
@@ -321,8 +521,75 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Use the Maven Compiler plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <compiler-plugin.version>3.10.1</compiler-plugin.version>. <maven.compiler.release>11</maven.compiler.release>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-compiler-plugin</artifactId>. <version>$</version>. <configuration>. <compilerArgs>. <arg>-parameters</arg>. </compilerArgs>. </configuration>. </plugin>. </plugins>. </build>. ```
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #7 - javaee-pom-to-quarkus-00040
 * Category: mandatory
 * Effort: 1
@@ -332,8 +599,75 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Use the Maven Surefire plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <surefire-plugin.version>3.0.0</compiler-plugin.version>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-surefire-plugin</artifactId>. <version>$</version>. <configuration>. <systemPropertyVariables>. <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>. <maven.home>$</maven.home>. </systemPropertyVariables>. </configuration>. </plugin>. </plugins>. </build>. ```
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #8 - javaee-pom-to-quarkus-00050
 * Category: mandatory
 * Effort: 1
@@ -343,8 +677,75 @@ Stateless EJBs can be converted to a cdi bean by replacing the `@Stateless` anno
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Use the Maven Failsafe plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <surefire-plugin.version>3.0.0</compiler-plugin.version>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-failsafe-plugin</artifactId>. <version>$</version>. <executions>. <execution>. <goals>. <goals>integration-test</goal>. <goals>verify</goal>. </goals>. <configuration>. <systemPropertyVariables>. <native.image.path>$/$-runner</native.image.path>. <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>. <maven.home>$</maven.home>. </systemPropertyVariables>. </configuration>. </execution>. </executions>. </plugin>. </plugins>. </build>. ```
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #9 - javaee-pom-to-quarkus-00060
 * Category: mandatory
 * Effort: 1
@@ -354,8 +755,75 @@ Leverage a Maven profile to run the Quarkus native build adding the following se
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Leverage a Maven profile to run the Quarkus native build adding the following section to the `pom.xml` file:. ```xml. <profiles>. <profile>. <id>native</id>. <activation>. <property>. <name>native</name>. </property>. </activation>. <properties>. <skipITs>false</skipITs>. <quarkus.package.type>native</quarkus.package.type>. </properties>. </profile>. </profiles>. ```
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #10 - jaxrs-to-quarkus-00020
 * Category: optional
 * Effort: 1
@@ -365,7 +833,7 @@ JAX-RS activation is no longer necessary. You can set a root path like this but 
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/resteasy-reactive#declaring-endpoints-uri-mapping
 * Incidents
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/rest/RestApplication.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/rest/RestApplication.java
       * JAX-RS activation is no longer necessary. You can set a root path like this but you don't have to.
       * Code Snippet:
 ```java
@@ -381,7 +849,7 @@ JAX-RS activation is no longer necessary. You can set a root path like this but 
  10  }
 
 ```
-  * file:///opt/input/source/src/main/java/com/redhat/coolstore/rest/RestApplication.java
+  * file:///tmp/source-code/src/main/java/com/redhat/coolstore/rest/RestApplication.java
       * JAX-RS activation is no longer necessary. You can set a root path like this but you don't have to.
       * Code Snippet:
 ```java
@@ -404,8 +872,75 @@ JAX-RS activation is no longer necessary. You can set a root path like this but 
 Replace the `org.flywaydb:flyway-core` dependency with the Quarkus dependency `io.quarkus:quarkus-flyway`. Further information in the link below.
 * Labels: konveyor.io/source=flyway, konveyor.io/target=quarkus
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Replace the `org.flywaydb:flyway-core` dependency with the Quarkus dependency `io.quarkus:quarkus-flyway`. Further information in the link below.
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```
 ### #12 - quarkus-flyway-00010
 * Category: mandatory
 * Effort: 1
@@ -415,5 +950,72 @@ Replace the `org.flywaydb:flyway-core` dependency with the Quarkus dependency `i
 * Links
   * Quarkus - Guide: https://quarkus.io/guides/flyway
 * Incidents
-  * file:///opt/input/source/pom.xml
+  * file:///tmp/source-code/pom.xml
       * Replace the `org.flywaydb:flyway-core` dependency with the Quarkus dependency `io.quarkus:quarkus-flyway`. Further information in the link below.
+      * Code Snippet:
+```java
+  1  <?xml version="1.0" encoding="UTF-8"?>
+  2  <project 
+  3      xmlns="http://maven.apache.org/POM/4.0.0" 
+  4      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  5      <modelVersion>4.0.0</modelVersion>
+  6      <groupId>com.redhat.coolstore</groupId>
+  7      <artifactId>monolith</artifactId>
+  8      <version>1.0.0-SNAPSHOT</version>
+  9      <packaging>war</packaging>
+ 10      <name>coolstore-monolith</name>
+ 11      <properties>
+ 12          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 13          <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+ 14          <project.encoding>UTF-8</project.encoding>
+ 15          <maven.test.skip>true</maven.test.skip>
+ 16      </properties>
+ 17      <dependencies>
+ 18          <dependency>
+ 19              <groupId>javax</groupId>
+ 20              <artifactId>javaee-web-api</artifactId>
+ 21              <version>7.0</version>
+ 22              <scope>provided</scope>
+ 23          </dependency>
+ 24          <dependency>
+ 25              <groupId>javax</groupId>
+ 26              <artifactId>javaee-api</artifactId>
+ 27              <version>7.0</version>
+ 28              <scope>provided</scope>
+ 29          </dependency>
+ 30          <dependency>
+ 31              <groupId>org.flywaydb</groupId>
+ 32              <artifactId>flyway-core</artifactId>
+ 33              <version>4.1.2</version>
+ 34          </dependency>
+ 35          <dependency>
+ 36              <groupId>org.jboss.spec.javax.rmi</groupId>
+ 37              <artifactId>jboss-rmi-api_1.0_spec</artifactId>
+ 38              <version>1.0.2.Final</version>
+ 39          </dependency>
+ 40      </dependencies>
+ 41      <build>
+ 42          <finalName>ROOT</finalName>
+ 43          <plugins>
+ 44              <plugin>
+ 45                  <artifactId>maven-compiler-plugin</artifactId>
+ 46                  <version>3.0</version>
+ 47                  <configuration>
+ 48                      <encoding>${project.encoding}</encoding>
+ 49                      <source>1.8</source>
+ 50                      <target>1.8</target>
+ 51                  </configuration>
+ 52              </plugin>
+ 53              <plugin>
+ 54                  <groupId>org.apache.maven.plugins</groupId>
+ 55                  <artifactId>maven-war-plugin</artifactId>
+ 56                  <version>3.2.0</version>
+ 57              </plugin>
+ 58          </plugins>
+ 59      </build>
+ 60      <profiles>
+ 61  <!-- TODO: Add OpenShift profile here -->
+ 62      </profiles>
+ 63  </project>
+
+```

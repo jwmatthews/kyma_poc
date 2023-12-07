@@ -1,0 +1,1414 @@
++ cp -r /opt/input/source /tmp/source-code
++ sed -i 's|/opt/input/source|/tmp/source-code|g' /opt/input/config/settings.json
++ /usr/bin/konveyor-analyzer --provider-settings=/opt/input/config/settings.json --rules=/opt/rulesets/ --output-file=/opt/output/output.yaml --context-lines=100 '--dep-label-selector=(!konveyor.io/dep-source=open-source)' --verbose=4 '--label-selector=((konveyor.io/target=quarkus || konveyor.io/target=jakarta-ee || konveyor.io/target=jakarta-ee8+ || konveyor.io/target=jakarta-ee9+ || konveyor.io/target=cloud-readiness) && konveyor.io/source) || (discovery)'
+time="2023-12-07T17:42:45Z" level=error msg="grpc unable to get info" error="rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing: dial tcp [::1]:40551: connect: connection refused\"" logger=go provider=grpc
+time="2023-12-07T17:42:49Z" level=error msg="unable to parse all the rules for ruleset" error="unable to find ruleset.yaml\nunable to find ruleset.yaml\nunable to find ruleset.yaml" fileName=/opt/rulesets/
+time="2023-12-07T17:43:38Z" level=error msg="unable to create tags" error="unexpected tag string License=Apache License 2.0" ruleID=discover-license
+time="2023-12-07T17:43:38Z" level=info msg="info rule not matched" rule=discover-properties-file
+time="2023-12-07T17:43:38Z" level=info msg="info rule not matched" rule=discover-manifest-file
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-01000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-02000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-03000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-04000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-05000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-06000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-07000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-08000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-09000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-10000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-11000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-12000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-13000
+time="2023-12-07T17:43:39Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-14000
+time="2023-12-07T17:43:48Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-15000
+time="2023-12-07T17:43:48Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-16000
+time="2023-12-07T17:43:49Z" level=info msg="info rule not matched" rule=java-rmi-00000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=java-rmi-00001
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=logging-0000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=logging-0001
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-01000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-02000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-03000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-04000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-05000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-06000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-07000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-08000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-09000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-10000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-11000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-12000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-13000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-14000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=embedded-cache-libraries-15000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=java-rmi-00000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=java-rmi-00001
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=logging-0000
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=logging-0001
+time="2023-12-07T17:43:50Z" level=info msg="info rule not matched" rule=technology-usage-web-01000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-01900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-02000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-02100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-02200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-02300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-web-02400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00010
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00020
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00030
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00040
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00050
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00060
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00070
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00080
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00090
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00110
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00120
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00130
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00140
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00150
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00160
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00170
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00180
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00190
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00210
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00220
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00230
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00240
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00250
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00260
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00270
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00280
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00290
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00310
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00320
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00330
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00340
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00350
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00360
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-test-frameworks-00370
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-01900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-02900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-03000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-03100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-03200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-03300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-03400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-security-03500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=observability-technology-usage-0100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=observability-technology-usage-0200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-05000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-06000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-12000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-13000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-14000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-18000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-19000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-20000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-21000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-22000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-23000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-24000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-25000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-26000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=non-xml-technology-usage-27000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-01900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-02900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-03900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-0x4200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-04900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05400
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05500
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05600
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05700
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05800
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-05900
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-mvc-06000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-markup-01300
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00010
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00020
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00030
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00040
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00050
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00060
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00070
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00080
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-00090
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000110
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000120
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000130
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000140
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000150
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000160
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000170
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000180
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000190
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000210
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000220
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000230
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000240
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000250
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000260
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000270
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000280
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-logging-000290
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00020
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00030
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00040
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00050
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00060
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00070
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00080
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00090
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00110
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00120
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00130
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00140
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00150
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00160
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00170
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00180
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00190
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=technology-usage-jta-00210
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-01000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-02000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-03000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-04000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-05000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-06000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-07000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-08000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-09000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-10000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-11000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-12000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-13000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-14000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-15000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-16000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-17000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-18000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=3rd-party-19000
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=clustering-00001
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=configuration-management-0100
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=configuration-management-0200
+time="2023-12-07T17:43:51Z" level=info msg="info rule not matched" rule=configuration-management-0300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=configuration-management-0400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=configuration-management-0500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-01400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-01500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-01600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-01700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-01800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-01900
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=connect-02800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-01400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-01500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-01600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-01700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-01800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-01900
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-02900
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-03100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=database-03200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=ejb-01000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=javase-technology-usage-01000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01010
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-01700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-02000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-02200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-02300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-02400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-03000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-03100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-03200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-03300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-03400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-04700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-05900
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-06900
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-07900
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08400
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08500
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08600
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08700
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08800
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-08900
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-09100
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-09000
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-09200
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=embedded-framework-09300
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00001
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00002
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00003
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00004
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00005
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00006
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00007
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00008
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00009
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00010
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00011
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00012
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00013
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00014
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00015
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00016
+time="2023-12-07T17:43:52Z" level=info msg="info rule not matched" rule=integration-00017
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=javase-01000
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=javase-01100
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00020
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00030
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00040
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00050
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00060
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00070
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00080
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00090
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00100
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00110
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00120
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00130
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00140
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00150
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00160
+time="2023-12-07T17:43:53Z" level=info msg="info rule not matched" rule=jta-00170
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=jta-00180
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=jta-00190
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=jta-00200
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=jta-00210
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00010
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00011
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00012
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00013
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00020-jakarta
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00040
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00050
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00060
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00070
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00080
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00090
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00100
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00110
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00120
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00130
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00140
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00150
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00160
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00170
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00180
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00190
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00200
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00210
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00220
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00230
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00902
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00903
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00905
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00906
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00910
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00911
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00912
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00913
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00914
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00915
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00916
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00917
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00918
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00926
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00927
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00928
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00930
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00931
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00932
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00950
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00951
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00952
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00953
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00954
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00955
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00956
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00957
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=javaee-technology-usage-00958
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00010
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00020
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00030
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00040
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00050
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00080
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00090
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00100
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00110
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00120
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00130
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00140
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00150
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00160
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00170
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00180
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00190
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00200
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00210
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00220
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00230
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00240
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00250
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00260
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00270
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00280
+time="2023-12-07T17:43:54Z" level=info msg="info rule not matched" rule=logging-usage-00290
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01210
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01220
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-01900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-02900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-03900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-04900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-05900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=mvc-06000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=observability-0100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=observability-0200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-01900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-02900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-03000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-03100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-03200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-03300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-03400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-03500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=security-03600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=spring-catchall-00001
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00010
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00020
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00030
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00040
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00050
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00060
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00070
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00080
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00090
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00110
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00120
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00130
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00140
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00150
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00160
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00170
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00180
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00190
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00210
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00220
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00230
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00240
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00560
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00260
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00270
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00280
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00290
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00310
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00320
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00330
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00340
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00350
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00360
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=test-frameworks-sauge-00370
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00001
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00002
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00003
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00004
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00005
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00006
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00007
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00008
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00009
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00010
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00011
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00012
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00013
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00014
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-integration-00015
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01010
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-01700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-02000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-02100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-02200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-02300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-02400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-02700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-02800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-02900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-03900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-04000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-04100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-04200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-04300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-04400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-04500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-04600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-04700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-05900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-06900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-07900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-08900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-09000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-embedded-framework-09100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-09200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=embedded-framework-embedded-framework-09300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-ejb-01400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-01400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-01500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-01600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-01700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-01800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-01900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02000
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02300
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02400
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02500
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02600
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02700
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02800
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-02900
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-03100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-database-03200
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-connect-01100
+time="2023-12-07T17:43:55Z" level=info msg="info rule not matched" rule=technology-usage-connect-01101
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01200
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01300
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01400
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01500
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01600
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01700
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01800
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-01900
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02100
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02200
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02300
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02400
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02500
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02600
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02700
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-connect-02800
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=configuration-management-technology-usage-0100
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=configuration-management-technology-usage-0200
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=configuration-management-technology-usage-0300
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-clustering-02000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-01000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-02000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-03000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-04000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-05000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-06000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-08000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-09000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-10000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-11000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-12000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-13000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-14000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-15000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-16000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-17000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-18000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-19000
+time="2023-12-07T17:43:56Z" level=info msg="info rule not matched" rule=technology-usage-3rd-party-20000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-09000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-04000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-03000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-05000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-02000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-01000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-06000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-10000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-12000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-15000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-13000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-07000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-11000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=jca-00000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-16000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-14000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=embedded-cache-libraries-08000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=java-rmi-00000
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=hardcoded-ip-address
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=local-storage-00003
+time="2023-12-07T17:43:56Z" level=info msg="rule returned" rule=local-storage-00004
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=java-rmi-00001
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=localhost-http-00001
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=localhost-jdbc-00002
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=local-storage-00002
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=logging-0001
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=localhost-ws-00003
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=session-00000
+time="2023-12-07T17:43:57Z" level=error msg="unable to get code location" error="<nil>"
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=local-storage-00006
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=local-storage-00005
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=session-00001
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-01000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=socket-communication-00001
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-03000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-02000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-05000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-04000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-06000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-07000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-08000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-09000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=java-rpc-00000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-11000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-10000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-12000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-15000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-13000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=embedded-cache-libraries-14000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=java-rmi-00000
+time="2023-12-07T17:43:57Z" level=info msg="rule returned" rule=jca-00000
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=java-rmi-00001
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=socket-communication-00000
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=logging-0000
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=mail-00000
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=local-storage-00002
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=jni-native-code-00000
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=local-storage-00003
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=local-storage-00004
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=logging-0001
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=session-00000
+time="2023-12-07T17:43:58Z" level=error msg="unable to get code location" error="<nil>"
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=jni-native-code-00001
+time="2023-12-07T17:43:58Z" level=info msg="rule returned" rule=java-rpc-00000
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=socket-communication-00001
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=session-00001
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=local-storage-00005
+time="2023-12-07T17:43:59Z" level=error msg="failed to get location for dependency" dep=javax.activation.activation error="unable to get location for dep javax.activation.activation, search error - %!w(<nil>)" worker=2
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00002
+time="2023-12-07T17:43:59Z" level=error msg="unable to get code location" error="<nil>"
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=logging-0000
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=java-corba-00000
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=socket-communication-00000
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=jni-native-code-00000
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00001
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00003
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00005
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00004
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00006
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00007
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=mail-00000
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00008
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00013
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00012
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00014
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00010
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00015
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00011
+time="2023-12-07T17:43:59Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00017
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00005
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00002
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00003
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=maven-javax-to-jakarta-00016
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00004
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00001
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00006
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00007
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00008
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00009
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00011
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00010
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00013
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00014
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00012
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00015
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00016
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00017
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00019
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00018
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00022
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00020
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00021
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00023
+time="2023-12-07T17:44:00Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00024
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00028
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00026
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00025
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=local-storage-00001
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00027
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00029
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00030
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00032
+time="2023-12-07T17:44:01Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00031
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00033
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00034
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00036
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00035
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00038
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00037
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00040
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00039
+time="2023-12-07T17:44:02Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00041
+time="2023-12-07T17:44:03Z" level=info msg="rule returned" rule=local-storage-00001
+time="2023-12-07T17:44:03Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00045
+time="2023-12-07T17:44:03Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00042
+time="2023-12-07T17:44:03Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00043
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00046
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00047
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00048
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-bootstrapping-files-00001
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00050
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00044
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00049
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00004
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00002
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00001
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00003
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00005
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00006
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00007
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00010
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-dependencies-00008
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00020
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00030
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00051
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00041
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00042
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00040
+time="2023-12-07T17:44:04Z" level=error msg="unable to ask for tackle rule entry" error="Cannot invoke \"org.eclipse.jdt.core.search.SearchPattern.getMatchRule()\" because \"leftPattern\" is null" provider=java
+time="2023-12-07T17:44:04Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00043
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javax-to-jakarta-properties-00001
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00052
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00050
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00054
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00055
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00070
+time="2023-12-07T17:44:05Z" level=error msg="unable to ask for tackle rule entry" error="begin 35, end -1, length 57" provider=java
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00071
+time="2023-12-07T17:44:05Z" level=error msg="unable to ask for tackle rule entry" error="begin 35, end -1, length 62" provider=java
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00072
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00056
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javaee-to-jakarta-namespaces-00053
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00080
+time="2023-12-07T17:44:05Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00090
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00060
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00100
+time="2023-12-07T17:44:06Z" level=error msg="unable to ask for tackle rule entry" error="Cannot invoke \"org.eclipse.jdt.core.search.SearchPattern.getMatchRule()\" because \"leftPattern\" is null" provider=java
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00102
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-agroal-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-agroal-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-dynamodb-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-dynamodb-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-iam-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-iam-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-kms-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-kms-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-lambda-http-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-lambda-http-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-lambda-rest-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-lambda-rest-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-lambda-xray-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-lambda-xray-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-s3-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-s3-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-ses-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-ses-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-sns-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-sns-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-sqs-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-sqs-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-ssm-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-amazon-ssm-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-apicurio-registry-avro-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-apicurio-registry-avro-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-artemis-jms-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-artemis-jms-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-avro-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-avro-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-config-yaml-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-config-yaml-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-elytron-security-jdbc-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-elytron-security-jdbc-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-elytron-security-ldap-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-elytron-security-ldap-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-elytron-security-oauth2-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-elytron-security-oauth2-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-flyway-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-flyway-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-envers-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-envers-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-reactive-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-reactive-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-search-orm-elasticsearch-aws-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-search-orm-elasticsearch-aws-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-validator-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-hibernate-validator-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-db2-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-db2-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-derby-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-derby-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-mariadb-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-mariadb-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-mysql-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-mysql-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-oracle-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-oracle-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-postgresql-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jdbc-postgresql-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jsonb-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jsonb-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jsonp-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-jsonp-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-kafka-client-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-kafka-client-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-kafka-streams-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-kafka-streams-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-keycloak-admin-client-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-keycloak-admin-client-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-kubernetes-client-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-kubernetes-client-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-liquibase-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-liquibase-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-liquibase-mongodb-00000
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=quarkus-liquibase-mongodb-00010
+time="2023-12-07T17:44:06Z" level=info msg="rule returned" rule=springboot-actuator-to-quarkus-0100
+time="2023-12-07T17:44:07Z" level=info msg="rule returned" rule=springboot-actuator-to-quarkus-0200
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00101
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-cache-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-cloud-config-client-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-logging-gelf-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-logging-gelf-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-logging-sentry-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-logging-sentry-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-jpa-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-devtools-to-quarkus-0000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-di-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-di-to-quarkus-00001
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-import-00001
+time="2023-12-07T17:44:08Z" level=error msg="unable to ask for tackle rule entry" error="Cannot invoke \"org.eclipse.jdt.core.search.SearchPattern.getMatchRule()\" because \"leftPattern\" is null" provider=java
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-generic-catchall-00100
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00112
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-integration-to-quarkus-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-jmx-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00110
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-metrics-to-quarkus-0100
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-metrics-to-quarkus-0200
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00121
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00122
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-parent-pom-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-properties-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-plugins-to-quarkus-0000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-properties-to-quarkus-00001
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00123
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-annotations-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00120
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-integration-to-quarkus-00020
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-micrometer-registry-prometheus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-micrometer-registry-prometheus-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-jmx-to-quarkus-00001
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-security-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-shell-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-web-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-web-to-quarkus-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-webmvc-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-webmvc-to-quarkus-01000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-scheduled-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-narayana-jta-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-narayana-jta-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-narayana-lra-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-narayana-lra-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-narayana-stm-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-narayana-stm-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-openshift-client-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=quarkus-openshift-client-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=cdi-to-quarkus-00020
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=cdi-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-di-to-quarkus-00002
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=cdi-to-quarkus-00030
+time="2023-12-07T17:44:08Z" level=error msg="unable to get code location" error="<nil>"
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=dependency-removal-for-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-faces-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00010
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00020
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=springboot-metrics-to-quarkus-0300
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00030
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00050
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00060
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00070
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00080
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=jaxrs-to-quarkus-00000
+time="2023-12-07T17:44:08Z" level=info msg="rule returned" rule=jaxrs-to-quarkus-00010
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=javaee-pom-to-quarkus-00040
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-opentelemetry-exporter-jaeger-00000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-opentelemetry-exporter-jaeger-00010
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-opentelemetry-exporter-otlp-00000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-opentelemetry-exporter-otlp-00010
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-picocli-00000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-picocli-00010
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-resteasy-multipart-00000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=quarkus-resteasy-multipart-00010
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-01000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-02000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-03000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-04000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=cdi-to-quarkus-00050
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-05000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=springboot-properties-to-quarkus-00006
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=cdi-to-quarkus-00040
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-07000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-06000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-09000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-11000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-08000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-10000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-14000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-12000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-13000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=springboot-properties-to-quarkus-00003
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-15000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=configuration-management-0100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-18000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=springboot-properties-to-quarkus-00005
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-19000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jaxrs-to-quarkus-00020
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-17000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=3rd-party-16000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-01400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=configuration-management-0200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=configuration-management-0500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-01600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=springboot-properties-to-quarkus-00004
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-01500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-01700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-01900
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=springboot-properties-to-quarkus-00002
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-01400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-02700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-01700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-01800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-01600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-01500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-01900
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=connect-01800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-03200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-03100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02900
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01010
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=configuration-management-0400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-02000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-02200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-01400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-03000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=database-02500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-02300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-03300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-02400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-03100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-03200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-04700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-03400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05900
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-05700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=configuration-management-0300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-06900
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08400
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08800
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08700
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07900
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-07500
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-09200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00002
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-09300
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00004
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-09000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-09100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00005
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00001
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00007
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08900
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00009
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00003
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00006
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00010
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00008
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00012
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00015
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00011
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00014
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00020
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00040
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00013
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00050
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00017
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00060
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=integration-00016
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00030
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00070
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00080
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00090
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00120
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00100
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00110
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00140
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00130
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00160
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00150
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00180
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00190
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00210
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00200
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=javaee-technology-usage-00060
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=jta-00170
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=embedded-framework-08600
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=ejb-01000
+time="2023-12-07T17:44:09Z" level=info msg="rule returned" rule=javase-01100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00040
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00050
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00010
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00020
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00070
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00040
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00080
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00030
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00050
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00080
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00090
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00110
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00120
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00130
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00140
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00150
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00160
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00170
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00180
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00190
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00210
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00220
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00230
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00240
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00250
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00260
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00270
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00090
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00280
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=logging-usage-00290
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01220
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01900
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01800
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01700
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00110
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02700
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02900
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-02800
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03700
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03900
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-03800
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04700
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04800
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-04900
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05700
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-06000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=observability-0100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05900
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-05800
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01700
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01800
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-01900
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02700
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02800
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02900
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-03000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-03100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-03200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-03300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-03600
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=spring-catchall-00001
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-03400
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00010
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00020
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-03500
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00030
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=security-02000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00040
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00080
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00050
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00060
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00070
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00090
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00100
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00110
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00120
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00150
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00130
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00140
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00160
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00190
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00170
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00180
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00210
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00230
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00240
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00220
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00560
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00260
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00280
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00270
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00310
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00300
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00290
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00330
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00320
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00360
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00340
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00350
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=test-frameworks-sauge-00370
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00120
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=mvc-01210
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=observability-0200
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javaee-technology-usage-00130
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javase-01000
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=javax-to-jakarta-servlet-00111
+time="2023-12-07T17:44:10Z" level=info msg="rule returned" rule=technology-usage-connect-01101
+time="2023-12-07T17:44:11Z" level=info msg="rule returned" rule=technology-usage-connect-01300
+time="2023-12-07T17:44:11Z" level=info msg="rule returned" rule=technology-usage-connect-01200
++ sed -i 's|/tmp/source-code|/opt/input/source|g' /opt/input/config/settings.json

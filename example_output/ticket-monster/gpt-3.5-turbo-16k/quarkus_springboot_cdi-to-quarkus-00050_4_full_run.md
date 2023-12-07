@@ -195,6 +195,7 @@ Think through the changes you will make and explain each step of the process and
 If you are unsure of what changes is needed please state you are unsure and ask 
 for clarification to help you.
 
+
 When you are done explaining the reasoning for each change, write the updated 
 Quarkus source code for the 'Source Code to Update' in the form of a diff
 in Markdown format as the below:
@@ -204,10 +205,15 @@ in Markdown format as the below:
  ...
 ```
 
-Ensure that you begin the result with the markdown header of: ## Result
+Write the reasoning you have for each change in the Markdown header for '##Reasoning'
+Write the source code changes you have made in the form of a 'diff' under the Markdown header for '##Result'
+
 
 
 ## Result:
+## Reasoning
+The static code analysis tool has identified that the `@Stateless` annotation can be replaced with a CDI scope annotation, such as `@ApplicationScoped`. This is because Quarkus uses CDI for managing beans and does not support EJBs. By replacing the `@Stateless` annotation with a CDI scope annotation, we can ensure that the bean is managed by CDI and can be used in a Quarkus application.
+
 ## Result
 ```diff
  package org.jboss.examples.ticketmonster.rest;
@@ -343,50 +349,4 @@ Ensure that you begin the result with the markdown header of: ## Result
     }
  }
 ```
-
-## Reasoning
-The `@Stateless` annotation is used in Java EE applications to define a stateless session bean. In Quarkus, we can replace this annotation with a CDI scope annotation, such as `@ApplicationScoped`, to define a CDI bean with a similar behavior.
-
-In the given code snippet, the `BookingEndpoint` class is annotated with `@Stateless`. To update it to use Quarkus, we need to replace the `@Stateless` annotation with `@ApplicationScoped`.
-
-The updated code snippet will look like this:
-
-```diff
- package org.jboss.examples.ticketmonster.rest;
-
--import javax.ejb.Stateless;
-+import javax.enterprise.context.ApplicationScoped;
- import javax.persistence.EntityManager;
- import javax.persistence.NoResultException;
- import javax.persistence.OptimisticLockException;
- import javax.persistence.PersistenceContext;
- import javax.persistence.TypedQuery;
- import javax.ws.rs.Consumes;
- import javax.ws.rs.DELETE;
- import javax.ws.rs.GET;
- import javax.ws.rs.POST;
- import javax.ws.rs.PUT;
- import javax.ws.rs.Path;
- import javax.ws.rs.PathParam;
- import javax.ws.rs.Produces;
- import javax.ws.rs.QueryParam;
- import javax.ws.rs.core.Response;
- import javax.ws.rs.core.Response.Status;
- import javax.ws.rs.core.UriBuilder;
- import org.jboss.examples.ticketmonster.rest.dto.BookingDTO;
- import org.jboss.examples.ticketmonster.model.Booking;
- 
- /**
-  * 
-  */
--@Stateless
-+@ApplicationScoped
- @Path("forge/bookings")
- public class BookingEndpoint
- {
-    // ...
- }
-```
-
-By replacing `@Stateless` with `@ApplicationScoped`, we ensure that the `BookingEndpoint` class is treated as a CDI bean with the same scope as a stateless session bean.
 

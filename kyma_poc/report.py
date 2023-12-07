@@ -10,6 +10,7 @@ class Report:
     def __init__(self, path_to_report):
         self.path_to_report = path_to_report
         self.report = None 
+        self.workaround_counter_for_missing_ruleset_name = 0
 
     def get_report(self):
         if self.report is None:
@@ -22,7 +23,8 @@ class Report:
         for item in report:
             if "violations" in item.keys():
                 # Only add entries that have Violations
-                new_report[item['name']] = item
+                ruleset_name = self._get_ruleset_name(item)
+                new_report[ruleset_name] = item
             # We dropped all rulesests with empty violations
         return new_report
     
@@ -32,6 +34,20 @@ class Report:
         report = self._reformat_report(report)
         return report
     
+    def _get_ruleset_name(self, item):
+        # The 'name' of a ruleset is not guaranteed from what I'm seeing in our
+        # rulesets.  We need a way to distinguish rulesets if no name is present
+        # hence this workaround.
+        # See https://github.com/konveyor/rulesets/issues/36 for what motivated
+        # this workaround
+        name = ""
+        if 'name' not in item.keys():
+            self.workaround_counter_for_missing_ruleset_name += 1
+            name = f"mising_ruleset_name_{self.workaround_counter_for_missing_ruleset_name}"
+        else:
+            name = item['name']
+        return name
+
     def write_markdown(self, output_dir):
         # We will create a single directory per source app 
         # Where each ruleset with data is in its own file
