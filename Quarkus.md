@@ -13,6 +13,7 @@
 * EJB related
     * https://www.oracle.com/technical-resources/articles/java/cdi-javaee-bien.html
 * https://quarkus.io/blog/on-the-road-to-cdi-compatibility/
+* https://openliberty.io/guides/cdi-intro.html
 
 ### Reactive principles
 * https://quarkus.io/guides/getting-started-reactive
