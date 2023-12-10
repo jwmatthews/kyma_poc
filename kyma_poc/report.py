@@ -17,6 +17,33 @@ class Report:
             self.report = self._read_report()  
         return self.report
 
+    def get_impacted_files(self):
+        """
+        Return a dictionary of impacted files:
+            key = file path
+            value = list of violations
+        """
+        report = self.get_report()
+        impacted_files = dict()
+        for ruleset_name in report.keys():
+            ruleset = report[ruleset_name]
+            for violation_name in ruleset['violations'].keys():
+                violation = ruleset['violations'][violation_name]
+                for incid in violation['incidents']:
+                    if 'uri' in incid:
+                        if not self.should_we_skip_incident(incid):
+                            file_path = self.get_cleaned_file_path(incid['uri'])
+                            impacted_files[file_path] = {
+                                'ruleset_name': ruleset_name,
+                                'violation_name': violation_name,
+                                'rulset_description': ruleset.get('description', ''),
+                                'violation_description': violation.get('description', ''),
+                                'message': incid.get('message', ""),
+                                'codeSnip': incid.get('codeSnip', ""),
+                                'lineNumber': incid.get('lineNumber', ""),
+                            }
+        return impacted_files
+    
     def _reformat_report(self, report):
         new_report = {}
         # Reformat from a List to a Dict where the key is the name
@@ -29,6 +56,7 @@ class Report:
         return new_report
     
     def _read_report(self):
+        print(f"Reading report from {self.path_to_report}")
         with open(self.path_to_report, 'r') as f:
             report = yaml.safe_load(f)
         report = self._reformat_report(report)
@@ -106,9 +134,11 @@ class Report:
                 for incid in items['incidents']:
                     #Possible keys of 'uri', 'message', 'codeSnip'
                     if 'uri' in incid:
-                        f.write(f"  * {incid['uri']}\n")    
-                    if 'message' in incid:
-                        f.write(f"      * {incid['message']}\n")
+                        f.write(f"  * {incid['uri']}\n")
+                    if 'lineNumber' in incid:
+                        f.write(f"      * Line Number: {incid['lineNumber']}\n")
+                    if 'message' in incid and incid['message'].strip() != "":
+                        f.write(f"      * Message: '{incid['message'].strip()}'\n")
                     if 'codeSnip' in incid:
                         f.write(f"      * Code Snippet:\n")
                         f.write(f"```java\n")
@@ -124,4 +154,18 @@ class Report:
         buffer.write(f"## Description\n")
         buffer.write(f"{ruleset['description']}\n")
         buffer.write(f"* Source of rules:")
+
+    def get_cleaned_file_path(self, uri):
+        file_path = uri.replace("file:///tmp/source-code/", "")
+        return file_path
      
+    def should_we_skip_incident(self, incid):
+        # Filter out known issues
+        file_path = self.get_cleaned_file_path(incid['uri'])
+        if file_path.startswith("target/"):
+            # Skip any incident that begins with 'target/'
+            # Related to: https://github.com/konveyor/analyzer-lsp/issues/358
+            return True
+        if file_path.endswith(".svg"):
+            # See https://github.com/konveyor/rulesets/issues/41
+            return True
