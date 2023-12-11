@@ -1,0 +1,70 @@
+## Updated File
+```java
+package org.jboss.as.quickstarts.mdb;
+
+import org.jboss.logging.Logger;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+
+import io.quarkus.runtime.Startup;
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+
+/**
+ * <p>
+ * A simple bean that asynchronously receives and processes the messages that are sent to the queue.
+ * </p>
+ *
+ * This has been updated to use Quarkus' reactive messaging approach.
+ * 
+ * Note: Make sure to configure the application.properties file with the correct messaging system properties.
+ * 
+ * Example for application.properties:
+ * 
+ * mp.messaging.incoming.hello-world-queue.connector=smallrye-jms
+ * mp.messaging.incoming.hello-world-queue.destination=queue/HELLOWORLDMDBQueue
+ * mp.messaging.incoming.hello-world-queue.ack=auto-acknowledge
+ * 
+ * You will also need to add the SmallRye Reactive Messaging JMS connector dependency to your pom.xml:
+ * 
+ * <dependency>
+ *     <groupId>io.smallrye.reactive</groupId>
+ *     <artifactId>smallrye-reactive-messaging-jms</artifactId>
+ * </dependency>
+ * 
+ * For more information, please refer to the Quarkus documentation on Reactive Messaging.
+ * 
+ * @author Serge Pagop (spagop@redhat.com)
+ * Updated for Quarkus by <Your Name>
+ */
+@ApplicationScoped
+@Startup
+public class HelloWorldQueueMDB {
+
+    private static final Logger LOGGER = Logger.getLogger(HelloWorldQueueMDB.class);
+
+    /**
+     * The method that will be called when a message is received.
+     * We use the `@Incoming` annotation to denote the channel from which we read messages.
+     */
+    @Incoming("hello-world-queue")
+    public void onMessage(Message rcvMessage) {
+        TextMessage msg = null;
+        try {
+            if (rcvMessage instanceof TextMessage) {
+                msg = (TextMessage) rcvMessage;
+                LOGGER.info("Received Message from queue: " + msg.getText());
+            } else {
+                LOGGER.warning("Message of wrong type: " + rcvMessage.getClass().getName());
+            }
+        } catch (JMSException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+Please note that the above code assumes that you have set up the necessary configuration in your `application.properties` file and included the required dependencies in your `pom.xml` for Quarkus with SmallRye Reactive Messaging. The `@Startup` annotation is used to ensure that the bean is created at application startup. The `@Incoming` annotation is used to specify the channel that the method will consume messages from. The channel name should match the name specified in the `application.properties` file.

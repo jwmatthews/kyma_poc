@@ -1,0 +1,58 @@
+## Reasoning
+
+To migrate the Java EE Message Driven Bean (MDB) to Quarkus, we need to follow these steps:
+
+1. **Replace `@MessageDriven` with Quarkus JMS annotations**: Quarkus does not support the `@MessageDriven` annotation. Instead, we use the `@Incoming` annotation from the SmallRye Reactive Messaging library, which is the Quarkus way to handle message-driven beans.
+
+2. **Update the Maven dependencies**: Ensure that the Quarkus JMS and SmallRye Reactive Messaging dependencies are included in the `pom.xml` file.
+
+3. **Configuration changes**: In Quarkus, the configuration properties are typically set in the `application.properties` file instead of using `@ActivationConfigProperty` annotations.
+
+4. **Logging**: Quarkus uses JBoss Logging, so we will use `org.jboss.logging.Logger` instead of `java.util.logging.Logger`.
+
+5. **Exception Handling**: The exception handling can remain the same, but we should be aware that Quarkus might have different best practices or utilities for error handling.
+
+6. **Message Processing**: The method signature for processing messages will change. Instead of implementing `MessageListener` and overriding `onMessage`, we will create a method annotated with `@Incoming` that takes the message type as a parameter.
+
+7. **Acknowledgment**: Quarkus handles acknowledgment through the `@Acknowledgment` annotation or through the Reactive Messaging API. Since the original MDB uses auto-acknowledge, we will configure this behavior in the `application.properties`.
+
+Now, let's update the file.
+
+## Updated File
+
+```java
+package org.jboss.as.quickstarts.mdb;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.jboss.logging.Logger;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.jms.JMSException;
+import javax.jms.TextMessage;
+
+@ApplicationScoped
+public class HelloWorldQueueMDB {
+
+    private static final Logger LOGGER = Logger.getLogger(HelloWorldQueueMDB.class);
+
+    @Incoming("helloworld-queue")
+    public void onMessage(TextMessage rcvMessage) {
+        try {
+            LOGGER.info("Received Message from queue: " + rcvMessage.getText());
+        } catch (JMSException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+In the `application.properties` file, you would add the following configuration to match the original MDB configuration:
+
+```properties
+# Configure the SmallRye Reactive Messaging connector for the 'helloworld-queue' channel
+mp.messaging.incoming.helloworld-queue.connector=smallrye-jms
+mp.messaging.incoming.helloworld-queue.destination=queue/HELLOWORLDMDBQueue
+mp.messaging.incoming.helloworld-queue.acknowledge-mode=AUTO_ACKNOWLEDGE
+```
+
+Please note that the actual connector name (`smallrye-jms`) and other configuration properties might differ based on the JMS broker you are using and the version of Quarkus. You should refer to the Quarkus documentation and the SmallRye Reactive Messaging documentation for the exact configuration details.

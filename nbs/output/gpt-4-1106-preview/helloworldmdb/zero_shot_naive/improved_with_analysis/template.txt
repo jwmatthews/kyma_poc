@@ -1,0 +1,215 @@
+
+    # Java EE to Quarkus Migration
+    You are an AI Assistant trained on migrating enterprise JavaEE code to Quarkus.
+    I will give you an example of a JavaEE file and you will give me the Quarkus equivalent.
+    Pay attention to changes you make and impacts to external dependencies in the pom.xml.  
+    As you make changes that impact the pom.xml be sure you explain what needs to be updated in pom.xml.
+    
+    In addition, I will provide you with a list of issues that were found in the JavaEE code which
+    we believe need to be addressed before being migrated to Quarkus.  Be sure to address these 
+    issues or explain why you do not think the issue is relevant.
+
+    Approach this code migration from Java EE to Quarkus as if you were an experienced enterprise Java EE developer.
+    Before attempting to migrate the code to Quarkus, explain each step that is required and why.
+    After you have shared your step by step thinking, provide a full output of the updated file:
+
+    ## Original input file in Java EE to update to Quarkus
+    Filename: "src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java"
+
+    ### Source code
+    ```java 
+    /*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
+ * contributors by the @authors tag. See the copyright.txt in the
+ * distribution for a full listing of individual contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.jboss.as.quickstarts.mdb;
+
+import java.util.logging.Logger;
+import javax.ejb.ActivationConfigProperty;
+import javax.ejb.MessageDriven;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
+/**
+ * <p>
+ * A simple Message Driven Bean that asynchronously receives and processes the messages that are sent to the queue.
+ * </p>
+ *
+ * @author Serge Pagop (spagop@redhat.com)
+ */
+@MessageDriven(name = "HelloWorldQueueMDB", activationConfig = {
+        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/HELLOWORLDMDBQueue"),
+        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
+        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")})
+public class HelloWorldQueueMDB implements MessageListener {
+
+    private static final Logger LOGGER = Logger.getLogger(HelloWorldQueueMDB.class.toString());
+
+    /**
+     * @see MessageListener#onMessage(Message)
+     */
+    public void onMessage(Message rcvMessage) {
+        TextMessage msg = null;
+        try {
+            if (rcvMessage instanceof TextMessage) {
+                msg = (TextMessage) rcvMessage;
+                LOGGER.info("Received Message from queue: " + msg.getText());
+            } else {
+                LOGGER.warning("Message of wrong type: " + rcvMessage.getClass().getName());
+            }
+        } catch (JMSException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+
+    ```
+
+    ## Issues found from static code analysis of the Java EE code
+    We have identified the following issues which should be considered when migrating the source code to Quarkus
+Issue #1:
+    Replace the `javax.ejb` import statement with `jakarta.ejb` 
+    javax.{renamed} has been replaced by jakarta.{renamed}
+Issue #2:
+    Replace the `javax.ejb` import statement with `jakarta.ejb` 
+    javax.{renamed} has been replaced by jakarta.{renamed}
+Issue #3:
+    Replace the `javax.jms` import statement with `jakarta.jms` 
+    javax.{renamed} has been replaced by jakarta.{renamed}
+Issue #4:
+    Replace the `javax.jms` import statement with `jakarta.jms` 
+    javax.{renamed} has been replaced by jakarta.{renamed}
+Issue #5:
+    Replace the `javax.jms` import statement with `jakarta.jms` 
+    javax.{renamed} has been replaced by jakarta.{renamed}
+Issue #6:
+    Replace the `javax.jms` import statement with `jakarta.jms` 
+    javax.{renamed} has been replaced by jakarta.{renamed}
+Issue #7:
+    
+ 
+ Enterprise Java Beans (EJBs) are not supported in Quarkus. CDI must be used.
+ Please replace the `@MessageDriven` annotation with a CDI scope annotation like `@ApplicationScoped`.
+ 
+ 
+    @MessageDriven - EJBs are not supported in Quarkus
+Issue #8:
+    
+ 
+ The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+ `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
+ 
+ Before:
+ ```
+ @MessageDriven(name = "HelloWorldQueueMDB", activationConfig = 
+ public class MessageListenerImpl implements MessageListener 
+ }}
+ ```
+ 
+ After:
+ ```
+ public class MessageListenerImpl implements MessageListener 
+ }}
+ ```
+ 
+ 
+    Configure message listener method with @Incoming
+Issue #9:
+    
+ 
+ The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+ `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
+ 
+ Before:
+ ```
+ @MessageDriven(name = "HelloWorldQueueMDB", activationConfig = 
+ public class MessageListenerImpl implements MessageListener 
+ }}
+ ```
+ 
+ After:
+ ```
+ public class MessageListenerImpl implements MessageListener 
+ }}
+ ```
+ 
+ 
+    Configure message listener method with @Incoming
+Issue #10:
+    
+ 
+ The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+ `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
+ 
+ Before:
+ ```
+ @MessageDriven(name = "HelloWorldQueueMDB", activationConfig = 
+ public class MessageListenerImpl implements MessageListener 
+ }}
+ ```
+ 
+ After:
+ ```
+ public class MessageListenerImpl implements MessageListener 
+ }}
+ ```
+ 
+ 
+    Configure message listener method with @Incoming
+Issue #11:
+    
+ 
+ References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
+ 
+ 
+    JMS is not supported in Quarkus
+Issue #12:
+    
+ 
+ References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
+ 
+ 
+    JMS is not supported in Quarkus
+Issue #13:
+    
+ 
+ References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
+ 
+ 
+    JMS is not supported in Quarkus
+Issue #14:
+    
+ 
+ References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
+ 
+ 
+    JMS is not supported in Quarkus
+
+
+    # Output Instructions
+    Structure your ouput in Markdown format such as:
+
+    ## Reasoning
+    Write the step by step reasoning in this markdown section.
+    If you are unsure of a step or reasoning, clearly state you are unsure and why.
+
+    ## Updated File
+    ```java
+        Write the updated file for Quarkus in this section
+    ```
+   
+    

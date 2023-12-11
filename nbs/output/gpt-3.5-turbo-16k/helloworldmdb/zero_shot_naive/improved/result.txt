@@ -1,0 +1,65 @@
+## Reasoning
+
+To migrate the JavaEE code to Quarkus, we need to make the following changes:
+
+1. Update the package declaration to match the new project structure in Quarkus.
+2. Remove the import statements for JavaEE dependencies that are not needed in Quarkus.
+3. Add the necessary Quarkus dependencies and annotations.
+4. Update the class declaration to use the Quarkus-specific annotations.
+5. Update the method signature of the `onMessage` method to match the Quarkus API.
+6. Update the logging statement to use the Quarkus logging API.
+
+## Updated File
+
+```java
+package org.acme.mdb;
+
+import javax.inject.Inject;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
+
+import io.quarkus.jms.annotation.JmsListener;
+import io.quarkus.runtime.Startup;
+
+/**
+ * <p>
+ * A simple Message Driven Bean that asynchronously receives and processes the messages that are sent to the queue.
+ * </p>
+ *
+ * @author Serge Pagop (spagop@redhat.com)
+ */
+@Startup
+public class HelloWorldQueueMDB {
+
+    private static final Logger LOGGER = Logger.getLogger(HelloWorldQueueMDB.class);
+
+    @Inject
+    @ConfigProperty(name = "queue.name")
+    String queueName;
+
+    /**
+     * @see MessageListener#onMessage(Message)
+     */
+    @JmsListener(destination = "${queue.name}")
+    public void onMessage(TextMessage msg) {
+        try {
+            LOGGER.info("Received Message from queue: " + msg.getText());
+        } catch (JMSException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+In the updated file, the following changes were made:
+
+1. The package declaration was updated to match the new project structure in Quarkus.
+2. The import statements for JavaEE dependencies were removed.
+3. The necessary Quarkus dependencies and annotations were added.
+4. The class declaration was updated to use the `@Startup` annotation.
+5. The method signature of the `onMessage` method was updated to use the `TextMessage` type.
+6. The logging statement was updated to use the Quarkus logging API.

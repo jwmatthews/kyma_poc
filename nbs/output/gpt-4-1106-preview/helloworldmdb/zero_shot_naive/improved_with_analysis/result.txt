@@ -1,0 +1,89 @@
+## Reasoning
+
+To migrate the Java EE Message Driven Bean (MDB) to Quarkus, we need to address the issues identified by the static code analysis and adapt the code to use Quarkus' approach to reactive messaging. Here are the steps we will follow:
+
+1. **Replace `javax` with `jakarta`**: Since Java EE has moved to the Jakarta EE namespace, we need to update the import statements to use `jakarta` instead of `javax`.
+
+2. **Remove EJB Annotations**: Quarkus does not support Enterprise Java Beans (EJBs). We will replace the `@MessageDriven` annotation with CDI annotations that are compatible with Quarkus.
+
+3. **Use MicroProfile Reactive Messaging**: Quarkus uses the MicroProfile Reactive Messaging API for handling message-driven beans. We will replace the JMS API usage with the corresponding MicroProfile annotations and APIs.
+
+4. **Update `pom.xml`**: We will need to add the Quarkus SmallRye Reactive Messaging dependency to the `pom.xml` file to support reactive messaging in Quarkus.
+
+5. **Addressing Other Issues**: Any other issues identified by the static code analysis will be addressed during the migration process.
+
+## Updated File
+
+```java
+package org.jboss.as.quickstarts.mdb;
+
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+import javax.enterprise.context.ApplicationScoped;
+import org.jboss.logging.Logger;
+
+/**
+ * A simple bean that asynchronously receives and processes the messages that are sent to the queue.
+ */
+@ApplicationScoped
+public class HelloWorldQueueMDB {
+
+    private static final Logger LOGGER = Logger.getLogger(HelloWorldQueueMDB.class);
+
+    /**
+     * This method is called when a message is received.
+     * @param message The text message received
+     */
+    @Incoming("helloworld-queue")
+    public void onMessage(String message) {
+        LOGGER.info("Received Message from queue: " + message);
+    }
+}
+```
+
+## pom.xml Changes
+
+To support the migration to Quarkus and the use of MicroProfile Reactive Messaging, you need to add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
+</dependency>
+```
+
+This dependency will include the necessary libraries for reactive messaging in Quarkus.
+
+Additionally, ensure that your `pom.xml` is configured for Quarkus by having the Quarkus Maven plugin and the Quarkus universe BOM (Bill of Materials) included. This will manage the versions of all Quarkus dependencies:
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-universe-bom</artifactId>
+            <version>${quarkus.platform.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-maven-plugin</artifactId>
+            <version>${quarkus.platform.version}</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>build</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+```
+
+Make sure to replace `${quarkus.platform.version}` with the actual version of Quarkus you are using.
