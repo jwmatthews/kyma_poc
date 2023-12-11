@@ -13,12 +13,9 @@ Number of Violations: 5
   * Quarkus - Guide: https://quarkus.io/guides
 * Incidents
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- Enterprise Java Beans (EJBs) are not supported in Quarkus. CDI must be used.
- Please replace the `@MessageDriven` annotation with a CDI scope annotation like `@ApplicationScoped`.
- 
- 
+      * Line Number: 34
+      * Message: 'Enterprise Java Beans (EJBs) are not supported in Quarkus. CDI must be used.
+ Please replace the `@MessageDriven` annotation with a CDI scope annotation like `@ApplicationScoped`.'
       * Code Snippet:
 ```java
   1  /*
@@ -82,12 +79,9 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- Enterprise Java Beans (EJBs) are not supported in Quarkus. CDI must be used.
- Please replace the `@MessageDriven` annotation with a CDI scope annotation like `@ApplicationScoped`.
- 
- 
+      * Line Number: 34
+      * Message: 'Enterprise Java Beans (EJBs) are not supported in Quarkus. CDI must be used.
+ Please replace the `@MessageDriven` annotation with a CDI scope annotation like `@ApplicationScoped`.'
       * Code Snippet:
 ```java
   1  /*
@@ -159,9 +153,8 @@ Number of Violations: 5
   * Quarkus - Guide: https://quarkus.io/guides
 * Incidents
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+      * Line Number: 35
+      * Message: 'The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
  `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
  
  Before:
@@ -175,9 +168,7 @@ Number of Violations: 5
  ```
  public class MessageListenerImpl implements MessageListener 
  }}
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -241,9 +232,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+      * Line Number: 36
+      * Message: 'The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
  `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
  
  Before:
@@ -257,9 +247,7 @@ Number of Violations: 5
  ```
  public class MessageListenerImpl implements MessageListener 
  }}
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -323,9 +311,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+      * Line Number: 37
+      * Message: 'The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
  `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
  
  Before:
@@ -339,9 +326,7 @@ Number of Violations: 5
  ```
  public class MessageListenerImpl implements MessageListener 
  }}
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -405,9 +390,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+      * Line Number: 35
+      * Message: 'The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
  `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
  
  Before:
@@ -421,9 +405,7 @@ Number of Violations: 5
  ```
  public class MessageListenerImpl implements MessageListener 
  }}
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -487,9 +469,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+      * Line Number: 36
+      * Message: 'The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
  `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
  
  Before:
@@ -503,9 +484,7 @@ Number of Violations: 5
  ```
  public class MessageListenerImpl implements MessageListener 
  }}
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -569,9 +548,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
+      * Line Number: 37
+      * Message: 'The `destinationLookup` property can be migrated by annotating a message handler method (potentially `onMessage`) with the
  `org.eclipse.microprofile.reactive.messaging.Incoming` annotation, indicating the name of the queue as a value:
  
  Before:
@@ -585,9 +563,7 @@ Number of Violations: 5
  ```
  public class MessageListenerImpl implements MessageListener 
  }}
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -660,9 +636,8 @@ Number of Violations: 5
   * Quarkus - Guide: https://quarkus.io/guides
 * Incidents
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- JMS `Queue`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
+      * Line Number: 28
+      * Message: 'JMS `Queue`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
  a Queue to an Emitter:
  
  Before:
@@ -676,9 +651,7 @@ Number of Violations: 5
  @Inject
  @Channel("HELLOWORLDMDBQueue")
  Emitter<String> queueEmitter;
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -795,9 +768,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- JMS `Queue`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
+      * Line Number: 79
+      * Message: 'JMS `Queue`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
  a Queue to an Emitter:
  
  Before:
@@ -811,9 +783,7 @@ Number of Violations: 5
  @Inject
  @Channel("HELLOWORLDMDBQueue")
  Emitter<String> queueEmitter;
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -939,9 +909,8 @@ Number of Violations: 5
   * Quarkus - Guide: https://quarkus.io/guides
 * Incidents
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- JMS `Topic`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
+      * Line Number: 29
+      * Message: 'JMS `Topic`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
  a Topic to an Emitter:
  
  Before:
@@ -955,9 +924,7 @@ Number of Violations: 5
  @Inject
  @Channel("HELLOWORLDMDBTopic")
  Emitter<String> topicEmitter;
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -1074,9 +1041,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- JMS `Topic`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
+      * Line Number: 82
+      * Message: 'JMS `Topic`s should be replaced with Micrometer `Emitter`s feeding a Channel. See the following example of migrating
  a Topic to an Emitter:
  
  Before:
@@ -1090,9 +1056,7 @@ Number of Violations: 5
  @Inject
  @Channel("HELLOWORLDMDBTopic")
  Emitter<String> topicEmitter;
- ```
- 
- 
+ ```'
       * Code Snippet:
 ```java
   1  /*
@@ -1217,11 +1181,8 @@ Number of Violations: 5
   * Quarkus - Guide: https://quarkus.io/guides
 * Incidents
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 22
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1285,11 +1246,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 23
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1353,11 +1311,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 24
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1421,11 +1376,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 25
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1489,11 +1441,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 22
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1557,11 +1506,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 23
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1625,11 +1571,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 24
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1693,11 +1636,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 25
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1761,11 +1701,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 24
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -1882,11 +1819,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 25
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -2003,11 +1937,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 26
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -2124,11 +2055,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 27
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -2245,11 +2173,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 28
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*
@@ -2366,11 +2291,8 @@ Number of Violations: 5
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * 
- 
- References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.
- 
- 
+      * Line Number: 29
+      * Message: 'References to JavaEE/JakartaEE JMS elements should be removed and replaced with their Quarkus SmallRye/Microprofile equivalents.'
       * Code Snippet:
 ```java
   1  /*

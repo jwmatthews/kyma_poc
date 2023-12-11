@@ -10,7 +10,8 @@ Number of Violations: 1
 * Labels: konveyor.io/include=always
 * Incidents
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * The application uses Java Servlets
+      * Line Number: 30
+      * Message: 'The application uses Java Servlets'
       * Code Snippet:
 ```java
   1  /*
@@ -127,7 +128,8 @@ Number of Violations: 1
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * The application uses Java Servlets
+      * Line Number: 31
+      * Message: 'The application uses Java Servlets'
       * Code Snippet:
 ```java
   1  /*
@@ -244,7 +246,8 @@ Number of Violations: 1
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * The application uses Java Servlets
+      * Line Number: 32
+      * Message: 'The application uses Java Servlets'
       * Code Snippet:
 ```java
   1  /*
@@ -361,7 +364,8 @@ Number of Violations: 1
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * The application uses Java Servlets
+      * Line Number: 33
+      * Message: 'The application uses Java Servlets'
       * Code Snippet:
 ```java
   1  /*
@@ -478,7 +482,8 @@ Number of Violations: 1
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * The application uses Java Servlets
+      * Line Number: 34
+      * Message: 'The application uses Java Servlets'
       * Code Snippet:
 ```java
   1  /*

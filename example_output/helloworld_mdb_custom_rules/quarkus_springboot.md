@@ -12,7 +12,7 @@ Number of Violations: 9
 * Labels: konveyor.io/source=java-ee, konveyor.io/target=quarkus
 * Incidents
   * file:///tmp/source-code/src/main/webapp/WEB-INF/beans.xml
-      * `beans.xml` descriptor content is ignored and it could be removed from the application.. Refer to the guide referenced below to check the supported CDI feature in Quarkus.
+      * Message: '`beans.xml` descriptor content is ignored and it could be removed from the application.. Refer to the guide referenced below to check the supported CDI feature in Quarkus.'
 ### #1 - dependency-removal-for-quarkus-00000
 * Category: mandatory
 * Effort: 1
@@ -23,7 +23,8 @@ Non-quarkus dependencies are no longer required and can be removed.
   * Quarkus - Guide: https://quarkus.io/guides
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * Non-quarkus dependencies are no longer required and can be removed.
+      * Line Number: 140
+      * Message: 'Non-quarkus dependencies are no longer required and can be removed.'
       * Code Snippet:
 ```java
  41  		<product.name>JBoss EAP</product.name>
@@ -208,7 +209,8 @@ Non-quarkus dependencies are no longer required and can be removed.
 
 ```
   * file:///tmp/source-code/pom.xml
-      * Non-quarkus dependencies are no longer required and can be removed.
+      * Line Number: 157
+      * Message: 'Non-quarkus dependencies are no longer required and can be removed.'
       * Code Snippet:
 ```java
  58  		<!-- Protocol to use for communication with remote maven repositories.
@@ -385,7 +387,8 @@ Non-quarkus dependencies are no longer required and can be removed.
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * The project artifact's current extension (i.e. `<packaging>` tag value) is `` but the expected value should be `jar`
+      * Line Number: 12
+      * Message: 'The project artifact's current extension (i.e. `<packaging>` tag value) is `` but the expected value should be `jar`'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -513,7 +516,8 @@ Non-quarkus dependencies are no longer required and can be removed.
   * Quarkus - Releases: https://quarkus.io/blog/tag/release/
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * Use the Quarkus BOM to omit the version of the different Quarkus dependencies.. Add the following sections to the `pom.xml` file:. ```xml. <properties>. <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>. <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>. <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>. </properties>. <dependencyManagement>. <dependencies>. <dependency>. <groupId>$</groupId>. <artifactId>$</artifactId>. <version>$</version>. <type>pom</type>. <scope>import</scope>. </dependency>. </dependencies>. </dependencyManagement>. ```. Check the latest Quarkus version available from the `Quarkus - Releases` link below.
+      * Line Number: 19
+      * Message: 'Use the Quarkus BOM to omit the version of the different Quarkus dependencies.. Add the following sections to the `pom.xml` file:. ```xml. <properties>. <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>. <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>. <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>. </properties>. <dependencyManagement>. <dependencies>. <dependency>. <groupId>$</groupId>. <artifactId>$</artifactId>. <version>$</version>. <type>pom</type>. <scope>import</scope>. </dependency>. </dependencies>. </dependencyManagement>. ```. Check the latest Quarkus version available from the `Quarkus - Releases` link below.'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -647,7 +651,8 @@ Non-quarkus dependencies are no longer required and can be removed.
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * Use the Quarkus Maven plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>. <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>. </properties>. <build>. <plugins>. <plugin>. <groupId>$</groupId>. <artifactId>quarkus-maven-plugin</artifactId>. <version>$</version>. <extensions>true</extensions>. <executions>. <execution>. <goals>. <goal>build</goal>. <goal>generate-code</goal>. <goal>generate-code-tests</goal>. </goals>. </execution>. </executions>. </plugin>. </plugins>. </build>. ```
+      * Line Number: 19
+      * Message: 'Use the Quarkus Maven plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>. <quarkus.platform.version>3.1.0.Final</quarkus.platform.version>. </properties>. <build>. <plugins>. <plugin>. <groupId>$</groupId>. <artifactId>quarkus-maven-plugin</artifactId>. <version>$</version>. <extensions>true</extensions>. <executions>. <execution>. <goals>. <goal>build</goal>. <goal>generate-code</goal>. <goal>generate-code-tests</goal>. </goals>. </execution>. </executions>. </plugin>. </plugins>. </build>. ```'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -781,7 +786,8 @@ Non-quarkus dependencies are no longer required and can be removed.
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * Use the Maven Compiler plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <compiler-plugin.version>3.10.1</compiler-plugin.version>. <maven.compiler.release>11</maven.compiler.release>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-compiler-plugin</artifactId>. <version>$</version>. <configuration>. <compilerArgs>. <arg>-parameters</arg>. </compilerArgs>. </configuration>. </plugin>. </plugins>. </build>. ```
+      * Line Number: 19
+      * Message: 'Use the Maven Compiler plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <compiler-plugin.version>3.10.1</compiler-plugin.version>. <maven.compiler.release>11</maven.compiler.release>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-compiler-plugin</artifactId>. <version>$</version>. <configuration>. <compilerArgs>. <arg>-parameters</arg>. </compilerArgs>. </configuration>. </plugin>. </plugins>. </build>. ```'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -915,7 +921,8 @@ Non-quarkus dependencies are no longer required and can be removed.
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * Use the Maven Surefire plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <surefire-plugin.version>3.0.0</compiler-plugin.version>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-surefire-plugin</artifactId>. <version>$</version>. <configuration>. <systemPropertyVariables>. <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>. <maven.home>$</maven.home>. </systemPropertyVariables>. </configuration>. </plugin>. </plugins>. </build>. ```
+      * Line Number: 19
+      * Message: 'Use the Maven Surefire plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <surefire-plugin.version>3.0.0</compiler-plugin.version>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-surefire-plugin</artifactId>. <version>$</version>. <configuration>. <systemPropertyVariables>. <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>. <maven.home>$</maven.home>. </systemPropertyVariables>. </configuration>. </plugin>. </plugins>. </build>. ```'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -1049,7 +1056,8 @@ Non-quarkus dependencies are no longer required and can be removed.
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * Use the Maven Failsafe plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <surefire-plugin.version>3.0.0</compiler-plugin.version>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-failsafe-plugin</artifactId>. <version>$</version>. <executions>. <execution>. <goals>. <goals>integration-test</goal>. <goals>verify</goal>. </goals>. <configuration>. <systemPropertyVariables>. <native.image.path>$/$-runner</native.image.path>. <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>. <maven.home>$</maven.home>. </systemPropertyVariables>. </configuration>. </execution>. </executions>. </plugin>. </plugins>. </build>. ```
+      * Line Number: 19
+      * Message: 'Use the Maven Failsafe plugin adding the following sections to the `pom.xml` file:. ```xml. <properties>. <surefire-plugin.version>3.0.0</compiler-plugin.version>. </properties>. <build>. <plugins>. <plugin>. <artifactId>maven-failsafe-plugin</artifactId>. <version>$</version>. <executions>. <execution>. <goals>. <goals>integration-test</goal>. <goals>verify</goal>. </goals>. <configuration>. <systemPropertyVariables>. <native.image.path>$/$-runner</native.image.path>. <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>. <maven.home>$</maven.home>. </systemPropertyVariables>. </configuration>. </execution>. </executions>. </plugin>. </plugins>. </build>. ```'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -1183,7 +1191,8 @@ Leverage a Maven profile to run the Quarkus native build adding the following se
   * Quarkus - Guide: https://quarkus.io/guides/maven-tooling#build-tool-maven
 * Incidents
   * file:///tmp/source-code/pom.xml
-      * Leverage a Maven profile to run the Quarkus native build adding the following section to the `pom.xml` file:. ```xml. <profiles>. <profile>. <id>native</id>. <activation>. <property>. <name>native</name>. </property>. </activation>. <properties>. <skipITs>false</skipITs>. <quarkus.package.type>native</quarkus.package.type>. </properties>. </profile>. </profiles>. ```
+      * Line Number: 19
+      * Message: 'Leverage a Maven profile to run the Quarkus native build adding the following section to the `pom.xml` file:. ```xml. <profiles>. <profile>. <id>native</id>. <activation>. <property>. <name>native</name>. </property>. </activation>. <properties>. <skipITs>false</skipITs>. <quarkus.package.type>native</quarkus.package.type>. </properties>. </profile>. </profiles>. ```'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>

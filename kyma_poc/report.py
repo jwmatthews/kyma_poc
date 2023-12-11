@@ -9,8 +9,10 @@ from io import StringIO
 class Report:
     def __init__(self, path_to_report):
         self.path_to_report = path_to_report
-        self.report = None 
         self.workaround_counter_for_missing_ruleset_name = 0
+        ## We expect that self._read_report() will be the last statement
+        ## to invoke in this constructor
+        self.report = self._read_report()
 
     def get_report(self):
         if self.report is None:
@@ -25,23 +27,30 @@ class Report:
         """
         report = self.get_report()
         impacted_files = dict()
+        # key = file_path
+        # value = list of violations
         for ruleset_name in report.keys():
             ruleset = report[ruleset_name]
+            # We iterate over each ruleset
             for violation_name in ruleset['violations'].keys():
                 violation = ruleset['violations'][violation_name]
+                # We look at each violation 
                 for incid in violation['incidents']:
                     if 'uri' in incid:
                         if not self.should_we_skip_incident(incid):
                             file_path = self.get_cleaned_file_path(incid['uri'])
-                            impacted_files[file_path] = {
+                            current_entry = {
                                 'ruleset_name': ruleset_name,
                                 'violation_name': violation_name,
-                                'rulset_description': ruleset.get('description', ''),
+                                'ruleset_description': ruleset.get('description', ''),
                                 'violation_description': violation.get('description', ''),
                                 'message': incid.get('message', ""),
                                 'codeSnip': incid.get('codeSnip', ""),
                                 'lineNumber': incid.get('lineNumber', ""),
                             }
+                            if impacted_files.get(file_path) is None:
+                                impacted_files[file_path] = []
+                            impacted_files[file_path].append(current_entry) 
         return impacted_files
     
     def _reformat_report(self, report):

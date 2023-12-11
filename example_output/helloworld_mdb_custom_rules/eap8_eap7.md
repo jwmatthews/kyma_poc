@@ -13,7 +13,8 @@ Number of Violations: 3
   * Jakarta EE XML Schemas: https://jakarta.ee/xml/ns/jakartaee/#10
 * Incidents
   * file:///tmp/source-code/src/main/webapp/WEB-INF/beans.xml
-      * Replace `http://xmlns.jcp.org/xml/ns/javaee` with `https://jakarta.ee/xml/ns/jakartaee` and change the schema version number 
+      * Line Number: 19
+      * Message: 'Replace `http://xmlns.jcp.org/xml/ns/javaee` with `https://jakarta.ee/xml/ns/jakartaee` and change the schema version number'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -43,7 +44,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/webapp/WEB-INF/beans.xml
-      * Replace `http://xmlns.jcp.org/xml/ns/javaee` with `https://jakarta.ee/xml/ns/jakartaee` and change the schema version number 
+      * Line Number: 21
+      * Message: 'Replace `http://xmlns.jcp.org/xml/ns/javaee` with `https://jakarta.ee/xml/ns/jakartaee` and change the schema version number'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -73,7 +75,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/webapp/WEB-INF/beans.xml
-      * Replace `http://xmlns.jcp.org/xml/ns/javaee` with `https://jakarta.ee/xml/ns/jakartaee` and change the schema version number 
+      * Line Number: 22
+      * Message: 'Replace `http://xmlns.jcp.org/xml/ns/javaee` with `https://jakarta.ee/xml/ns/jakartaee` and change the schema version number'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -111,7 +114,8 @@ Number of Violations: 3
   * Jakarta XML Schemas: https://jakarta.ee/xml/ns/jakartaee/#9
 * Incidents
   * file:///tmp/source-code/src/main/webapp/WEB-INF/beans.xml
-      * Replace `beans_1_1.xsd` with `beans_3_0.xsd` and update the version attribute to `"3.0"`
+      * Line Number: 22
+      * Message: 'Replace `beans_1_1.xsd` with `beans_3_0.xsd` and update the version attribute to `"3.0"`'
       * Code Snippet:
 ```java
   1  <?xml version="1.0" encoding="UTF-8"?>
@@ -147,7 +151,8 @@ Number of Violations: 3
 * Labels: konveyor.io/source, konveyor.io/target=eap, konveyor.io/target=eap8, konveyor.io/target=jakarta-ee, konveyor.io/target=jakarta-ee9+
 * Incidents
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * Replace the `javax.ejb` import statement with `jakarta.ejb` 
+      * Line Number: 20
+      * Message: 'Replace the `javax.ejb` import statement with `jakarta.ejb`'
       * Code Snippet:
 ```java
   1  /*
@@ -211,7 +216,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * Replace the `javax.ejb` import statement with `jakarta.ejb` 
+      * Line Number: 21
+      * Message: 'Replace the `javax.ejb` import statement with `jakarta.ejb`'
       * Code Snippet:
 ```java
   1  /*
@@ -275,7 +281,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 22
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -339,7 +346,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 23
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -403,7 +411,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 24
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -467,7 +476,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldQueueMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 25
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -531,7 +541,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * Replace the `javax.ejb` import statement with `jakarta.ejb` 
+      * Line Number: 20
+      * Message: 'Replace the `javax.ejb` import statement with `jakarta.ejb`'
       * Code Snippet:
 ```java
   1  /*
@@ -595,7 +606,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * Replace the `javax.ejb` import statement with `jakarta.ejb` 
+      * Line Number: 21
+      * Message: 'Replace the `javax.ejb` import statement with `jakarta.ejb`'
       * Code Snippet:
 ```java
   1  /*
@@ -659,7 +671,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 22
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -723,7 +736,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 23
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -787,7 +801,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 24
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -851,7 +866,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/mdb/HelloWorldTopicMDB.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 25
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -915,7 +931,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.annotation` import statement with `jakarta.annotation` 
+      * Line Number: 22
+      * Message: 'Replace the `javax.annotation` import statement with `jakarta.annotation`'
       * Code Snippet:
 ```java
   1  /*
@@ -1032,7 +1049,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.inject` import statement with `jakarta.inject` 
+      * Line Number: 23
+      * Message: 'Replace the `javax.inject` import statement with `jakarta.inject`'
       * Code Snippet:
 ```java
   1  /*
@@ -1149,7 +1167,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 24
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -1266,7 +1285,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 25
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -1383,7 +1403,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 26
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -1500,7 +1521,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 27
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -1617,7 +1639,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 28
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -1734,7 +1757,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.jms` import statement with `jakarta.jms` 
+      * Line Number: 29
+      * Message: 'Replace the `javax.jms` import statement with `jakarta.jms`'
       * Code Snippet:
 ```java
   1  /*
@@ -1851,7 +1875,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.servlet` import statement with `jakarta.servlet` 
+      * Line Number: 30
+      * Message: 'Replace the `javax.servlet` import statement with `jakarta.servlet`'
       * Code Snippet:
 ```java
   1  /*
@@ -1968,7 +1993,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.servlet` import statement with `jakarta.servlet` 
+      * Line Number: 31
+      * Message: 'Replace the `javax.servlet` import statement with `jakarta.servlet`'
       * Code Snippet:
 ```java
   1  /*
@@ -2085,7 +2111,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.servlet` import statement with `jakarta.servlet` 
+      * Line Number: 32
+      * Message: 'Replace the `javax.servlet` import statement with `jakarta.servlet`'
       * Code Snippet:
 ```java
   1  /*
@@ -2202,7 +2229,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.servlet` import statement with `jakarta.servlet` 
+      * Line Number: 33
+      * Message: 'Replace the `javax.servlet` import statement with `jakarta.servlet`'
       * Code Snippet:
 ```java
   1  /*
@@ -2319,7 +2347,8 @@ Number of Violations: 3
 
 ```
   * file:///tmp/source-code/src/main/java/org/jboss/as/quickstarts/servlet/HelloWorldMDBServletClient.java
-      * Replace the `javax.servlet` import statement with `jakarta.servlet` 
+      * Line Number: 34
+      * Message: 'Replace the `javax.servlet` import statement with `jakarta.servlet`'
       * Code Snippet:
 ```java
   1  /*

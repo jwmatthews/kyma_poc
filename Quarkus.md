@@ -31,6 +31,8 @@ https://vertx.io/get-started/
 ### Java EE to Quarkus Modernization
 #### Blogs
 * https://developers.redhat.com/blog/2019/11/07/quarkus-modernize-helloworld-jboss-eap-quickstart-part-1?source=sso
+* https://developers.redhat.com/blog/2019/04/12/migrating-java-applications-to-quarkus-lessons-learned
+
 
 ## JDK
 * Installing JDK via https://sdkman.io/
@@ -45,3 +47,5 @@ https://vertx.io/get-started/
     * https://www.mastertheboss.com/soa-cloud/quarkus/messaging-with-quarkus-part-one/
 
 
+## Java EE / Jakarta EE
+*  Jakarta EE 9 is mostly a rename of Java EE 8 to Jakarta, so the bulk of changes will be import changes to `jakarta.*` without additional features
