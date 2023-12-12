@@ -34,6 +34,14 @@ Using langchain for our interaction with LLMs
 
 ## Interesting Papers
 * [ReAct: SYNERGIZING REASONING AND ACTING IN LANGUAGE MODELS(https://arxiv.org/pdf/2210.03629.pdf)
+* [Repository-Level Prompt Generation for Large Language Models of Code](https://arxiv.org/abs/2206.12839v2)
+* [CodePlan: Repository-level Coding using LLMs and Planning](https://arxiv.org/pdf/2309.12499.pdf)
+* [Guiding Language Models of Code with Global Context using Monitors](https://arxiv.org/abs/2306.10763)
+    * https://github.com/microsoft/monitors4codegen
+    * Highlights: 
+            Some recent approaches use static analysis (Shrivastava et al., 2022; Ding et al., 2022; Pei et al., 2023)
+            or retrieval (Zhang et al., 2023) to extract relevant code fragments from the global context. These approaches expand the prompt (Shrivastava et al., 2022; Pei et al., 2023; Zhang et al., 2023) or require architecture modifications (Ding et al., 2022) and additional training (Ding et al., 2022; Pei et al.,
+            2023). In comparison, we provide token-level guidance to a frozen LM by invoking static analysis on demand. Our method is complementary to these approaches as they condition the generation by modifying the input to the LM, whereas we apply output-side constraints by reshaping the logits.
 
 ## Interestig Blog Posts/Examples/Tutorials
 * [ReAct: Synergizing Reasoning and Acting in Language Models](https://react-lm.github.io/)
