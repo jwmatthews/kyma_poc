@@ -2,10 +2,18 @@
 * For the below examples we have branches with 'Java EE' and 'Quarkus', so we can tell the differences required to migrate from Java EE to Quarkus
 * We have a script at [data/fetch.sh](data/fetch.sh) which will fetch the sample apps we know about
 ## From JBoss EAP QuickStarts
-### HelloWorld MDB
-* 
 ### KitchenSink
 * https://github.com/tqvarnst/jboss-eap-quickstarts/tree/quarkus-3.2/kitchensink
+### HelloWorld MDB
+* This example started from JBoss EAP Quickstarts: https://github.com/jboss-developer/jboss-eap-quickstarts/tree/7.4.x/helloworld-mdb/src/main/java/org/jboss/as/quickstarts/mdb
+* Our team then ported 'HelloWorld MDB' to Quarkus:https://github.com/savitharaghunathan/helloworld-mdb/tree/quarkus
+    * Note these blog posts from prior work of modernizing this same HelloWorld app, the difference with our latest work and the below is the change our team did to also address JMS to Reactive changes:
+        * https://developers.redhat.com/blog/2019/11/07/quarkus-modernize-helloworld-jboss-eap-quickstart-part-1#let_s_modernize_helloworld
+        * https://developers.redhat.com/blog/2019/11/08/quarkus-modernize-helloworld-jboss-eap-quickstart-part-2
+    * We also created some new rules for JMS to Reactive here:
+        * https://github.com/windup/windup-rulesets/pull/1043
+    * https://github.com/jmle/rulesets/blob/jms-rule/default/generated/quarkus/05-jms-to-reactive-quarkus.windup.yaml
+
 ## CoolStuff Store
 *  https://github.com/mathianasj/eap-coolstore-monolith.git
 ## TicketMonster
