@@ -1,11 +1,12 @@
 import unittest
 import os 
+import pprint 
 
 from git.exc import NoSuchPathError
 
 
-
-from kyma_poc.application_hub import ApplicationHub 
+from kyma_poc.report import Report
+from kyma_poc.application_hub import ApplicationHub, Application 
 
 class TestReports(unittest.TestCase):
 
@@ -32,7 +33,7 @@ class TestReports(unittest.TestCase):
         app = hub.get_application("coolstuff")
         self.assertTrue(app is not None)
         self.assertTrue(app.name == "coolstuff")
-        self.assertTrue(app.yaml == self.get_coolstuff_yaml())
+        self.assertTrue(app.report is not None)
         self.assertTrue(app.repo == self.get_coolstuff_repo())
         self.assertTrue(app.initial_branch == "main")
         self.assertTrue(app.solved_branch == "quarkus-migration")
@@ -71,3 +72,41 @@ class TestReports(unittest.TestCase):
         hub = ApplicationHub()
         with self.assertRaises(FileNotFoundError):
             hub.add_application("coolstuff", self.get_coolstuff_yaml(), self.get_coolstuff_repo(), None, "quarkus-migration")
+
+    def test_update_cached_violations(self):
+        hub = ApplicationHub()
+        app_name = "coolstuff"
+        yaml = self.get_coolstuff_yaml()
+        repo = self.get_coolstuff_repo()
+
+        r = Report(yaml).get_report()
+        a = Application(app_name, r, None, "unused", "unused")
+        hub._update_cached_violations(a)
+        #pp = pprint.PrettyPrinter(indent=2)
+        #pp.pprint(hub.cached_violations)
+        # Check that the length of keys matches the length of rulesets we had in test data
+        self.assertEqual(len(hub.cached_violations.keys()),  len(r.keys()))
+        for ruleset_name in r.keys():
+            self.assertIn(ruleset_name, hub.cached_violations.keys()) 
+            for violation_name in r[ruleset_name]["violations"].keys():
+                # Looping over each violation_name in the Report  
+                self.assertIn(violation_name, hub.cached_violations[ruleset_name])
+                self.assertEquals(len(hub.cached_violations[ruleset_name][violation_name]), 1)  
+                self.assertIn(app_name, hub.cached_violations[ruleset_name][violation_name]) 
+
+        ## Add a second app and verify
+        app_name2 = "second_app_name"
+        r2 = Report(yaml).get_report()
+        a2 = Application(app_name2, r, None, "unused", "unused")
+        hub._update_cached_violations(a2)
+        # Ruleset names should be the same as before
+        self.assertEqual(len(hub.cached_violations.keys()),  len(r.keys()))
+        for ruleset_name in r.keys():
+            self.assertIn(ruleset_name, hub.cached_violations.keys()) 
+            for violation_name in r[ruleset_name]["violations"].keys():
+                # Looping over each violation_name in the Report  
+                self.assertIn(violation_name, hub.cached_violations[ruleset_name])
+                self.assertEquals(len(hub.cached_violations[ruleset_name][violation_name]), 2)  
+                self.assertIn(app_name, hub.cached_violations[ruleset_name][violation_name])     
+                self.assertIn(app_name2, hub.cached_violations[ruleset_name][violation_name])     
+       
