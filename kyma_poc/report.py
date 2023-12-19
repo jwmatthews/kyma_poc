@@ -14,6 +14,11 @@ class Report:
         ## to invoke in this constructor
         self.report = self._read_report()
 
+    @staticmethod
+    def get_cleaned_file_path(uri):
+        file_path = uri.replace("file:///tmp/source-code/", "")
+        return file_path
+    
     def get_report(self):
         if self.report is None:
             self.report = self._read_report()  
@@ -38,7 +43,7 @@ class Report:
                 for incid in violation['incidents']:
                     if 'uri' in incid:
                         if not self.should_we_skip_incident(incid):
-                            file_path = self.get_cleaned_file_path(incid['uri'])
+                            file_path = Report.get_cleaned_file_path(incid['uri'])
                             current_entry = {
                                 'ruleset_name': ruleset_name,
                                 'violation_name': violation_name,
@@ -163,14 +168,10 @@ class Report:
         buffer.write(f"## Description\n")
         buffer.write(f"{ruleset['description']}\n")
         buffer.write(f"* Source of rules:")
-
-    def get_cleaned_file_path(self, uri):
-        file_path = uri.replace("file:///tmp/source-code/", "")
-        return file_path
      
     def should_we_skip_incident(self, incid):
         # Filter out known issues
-        file_path = self.get_cleaned_file_path(incid['uri'])
+        file_path = Report.get_cleaned_file_path(incid['uri'])
         if file_path.startswith("target/"):
             # Skip any incident that begins with 'target/'
             # Related to: https://github.com/konveyor/analyzer-lsp/issues/358

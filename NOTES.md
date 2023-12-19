@@ -3,8 +3,10 @@
 * Explore generating rules from the LLM walking the diff between initial/solved branches and summarizing/iterating and look to discover common themes in files.
 * Use structured data via [pydantic](https://docs.pydantic.dev/latest/) for our interaction with the LLM
 
-
 # Notes related to learning and exploring this space
+
+## Prompt Engineering
+* https://platform.openai.com/docs/guides/prompt-engineering/six-strategies-for-getting-better-results
 
 ## NBDev
 nbdev is a tool/approach for developing python code in jupyter notebooks and then exporting that to it's own files for later reuse.  We are experimenting with using it to aid prototyping by communicating to others our thinking process as we explore new libraries/code and capturing the interaction/output for later reading
