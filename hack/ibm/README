@@ -1,0 +1,19 @@
+# Example to run against IBM Models
+* We are using this just to check for basic connectivity to models via API
+
+## Setup
+
+### Step 1: Create a `.env` file
+
+```
+GENAI_KEY=<your-genai-key>
+GENAI_API=<genai-api-endpoint> #optional
+```
+
+### Step 2: Install deps
+1. python3 -m venv env
+2. source env/bin/activate
+
+## Run
+`./simple_run.py`
+
